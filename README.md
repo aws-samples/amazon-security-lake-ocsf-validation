@@ -11,7 +11,7 @@ This repo is a collection of resources which are supplemental to Amazon Security
 
 The resources currently available within this repo are as follows:
 
-1. OCSF Parquet Data Validation 
+1. [OCSF Parquet Data Validation](https://github.com/aws-samples/amazon-security-lake/tree/main/validate_1.0.0-rc.2)
 
 We welcome contributions to this repo in the form of fixes to existing examples or addition of new examples. For more information on contributing, please see the [CONTRIBUTING](https://github.com/aws-samples/amazon-security-lake/blob/main/CONTRIBUTING.md) guide.
 
