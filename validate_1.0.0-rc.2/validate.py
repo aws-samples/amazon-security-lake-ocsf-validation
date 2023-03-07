@@ -38,7 +38,7 @@ args = vars(parser.parse_args())
 if not args['version']:
     questions = [
           inquirer.List('version',
-                        choices=['ocsf_schema_1.0.0-rc.2', 'ocsf_schema_0.9.9-rc.2'],
+                        choices=['ocsf_schema_1.0.0-rc.2'],
                     ),
 ]
     answers = inquirer.prompt(questions)
@@ -49,7 +49,7 @@ else:
 answers['path'] = args['input']
     
     #Check that input argument is a valid directory
-if answers['version'] not in ['ocsf_schema_1.0.0-rc.2', 'ocsf_schema_0.9.9-rc.2']:
+if answers['version'] not in ['ocsf_schema_1.0.0-rc.2']:
     print('\033[1;91m' + '\nThe input specified is not a valid OCSF version.' + '\033[0m')
     exit()
         
