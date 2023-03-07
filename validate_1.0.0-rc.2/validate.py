@@ -172,7 +172,7 @@ def main():
                 SCHEMA_CLASS = 'config_state'
 
             #if class_uid is not specified within the JSON exit script
-            if SCHEMA_CLASS == '':
+            else:
                 print ('No schema found for:', testData['class_uid']['0'
                        ])
                 exit()
