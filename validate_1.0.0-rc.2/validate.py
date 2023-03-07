@@ -13,6 +13,10 @@ from importlib.metadata import version
 import requests
 import argparse
 from argparse import ArgumentParser, RawTextHelpFormatter
+import inquirer
+
+
+answers = {}
 
 #Take in input arguments from CLI
 parser = argparse.ArgumentParser(add_help=False)
@@ -25,17 +29,40 @@ requiredNamed.add_argument('-i', '--input',
                            help='Path to directory containing parquet files.'
                            , required=True)
 
+requiredNamed.add_argument('-version',
+                           help='User Specified OCSF Version.'
+                           , required=False)
+                           
 args = vars(parser.parse_args())
 
+if not args['version']:
+    questions = [
+          inquirer.List('version',
+                        choices=['ocsf_schema_1.0.0-rc.2', 'ocsf_schema_0.9.9-rc.2'],
+                    ),
+]
+    answers = inquirer.prompt(questions)
+    answers['version'] = answers['version']
+else:
+    answers['version'] = args['version']
+
+answers['path'] = args['input']
+    
+    #Check that input argument is a valid directory
+if answers['version'] not in ['ocsf_schema_1.0.0-rc.2', 'ocsf_schema_0.9.9-rc.2']:
+    print('\033[1;91m' + '\nThe input specified is not a valid OCSF version.' + '\033[0m')
+    exit()
+        
 #Check that input argument is a valid directory
-if not os.path.isdir(args['input']):
-    print('\nThe input specified is not a valid directory.')
+if not os.path.isdir(answers['path']):
+    print('\033[1;91m' + '\nThe input specified is not a valid directory.' + '\033[0m')
     exit()
     
-if not bool(sorted(Path(args['input']).glob('*.parquet'))):
-    print('\nThe input directory contains no parquet files.')
+if not bool(sorted(Path(answers['path']).glob('*.parquet'))):
+    print('\033[1;91m' + '\nThe input directory contains no parquet files.' + '\033[0m')
     exit()
  
+print(answers)
 def main():
 
     """
@@ -72,7 +99,7 @@ def main():
     path = Path(os.path.abspath(__file__))
 
     #recursive search for all files with .parquet extension in input directory path 
-    pathlist = Path(args['input']).glob('*.parquet')
+    pathlist = Path(answers['path']).glob('*.parquet')
 
     #iterate through pathlist containing all of the .parquet files
     for file in pathlist:
@@ -173,7 +200,7 @@ def main():
 
             #if class_uid is not specified within the JSON exit script
             if str(testData['class_uid']['0']) == None:
-                print ('No schema found for:', testData['class_uid']['0'
+                print ('\033[1;91m' + 'No schema found for:', testData['class_uid']['0'
                        ])
                 exit()
 
@@ -181,7 +208,7 @@ def main():
                 + ' (' + str(testData['class_uid']['0']) + ')...\n')
 
             with open(str(path.parent).replace('\\', '/')
-                      + '/ocsf_schema_1.0.0-rc.2/' + SCHEMA_CLASS
+                      + '/'+answers['version']+'/' + SCHEMA_CLASS
                       + '.json', 'r') as ocsf_schema:
                 ocsf_schema = json.load(ocsf_schema)
 
@@ -223,20 +250,20 @@ def main():
                 
             #print event data and validation errors
             if output == []:
-                print('-----------------------------------FILE DATA-----------------------------------')
-                print(json.dumps(EVENT, indent=6) + '\n')
-                print('---------------------------------------------------------------------------\n')
-                print('\033[1;32m' + 'VALID OCSF.\n')
+                print('\033[1;32m' + '-----------------------------------FILE DATA-----------------------------------' + '\033[0m')
+                print('\033[1;32m' + json.dumps(EVENT, indent=6) + '\n' + '\033[0m')
+                print('\033[1;32m' + '---------------------------------------------------------------------------\n' + '\033[0m')
+                print('\033[1;32m' + 'VALID OCSF.\n' + '\033[0m')
             else:
-                print('-----------------------------------FILE DATA-----------------------------------')
-                print(json.dumps(EVENT, indent=6) + '\n')
-                print('---------------------------------------------------------------------------\n')
-                print('\033[1;91m' + 'INVALID OCSF.\n')
+                print('\033[1;91m' +'-----------------------------------FILE DATA-----------------------------------' + '\033[0m')
+                print('\033[1;91m' + json.dumps(EVENT, indent=6) + '\n' + '\033[0m')
+                print('\033[1;91m' + '---------------------------------------------------------------------------\n' + '\033[0m')
+                print('\033[1;91m' + 'INVALID OCSF.\n' + '\033[0m')
                 for i in output:
-                    print(i)
+                    print('\033[1;91m' + i + '\033[0m')
         except NameError:
 
-            print('Please place a parquet file in the input directory.')
+            print('\033[1;91m' + 'Please place a parquet file in the input directory.' + '\033[0m')
 
 
 if __name__ == '__main__':
