@@ -1,10 +1,22 @@
-Usage Guide
+AWS OCSF Validate
 ========================
+
+## Table of Contents
+1. [About this Repo](#About)
+2. [Usage Guide](#Usage)
+3. [Examples](#Examples)
+4. [License](#License)
+
+## About this Repo <a name="About"></a>
 
 The following is a simple program which can be used to ensure that user provided parquet data properly maps to the various schema definitions specified within the Open Cyber Security Framework (OCSF) - https://schema.ocsf.io/. 
 
-This validator was build as a supplementry tool for Amazon Security Lake, which requires data to be in OCSF Schema 1.0.0-rc.2. 
+This repo contains our official OCSF validator. This tool was build to provide supplementry validation for Amazon Security Lake which requires data to be in the format specified by OCSF Schema 1.0.0-rc.2. The usage and examples provided will demonstrate the functionality of this tool and may be useful in preperation for Security Lake adoption.
 
+We welcome contributions to this repo in the form of fixes to existing examples or addition of new examples. For more information on contributing, please see the [CONTRIBUTING](https://github.com/aws-samples/amazon-security-lake/blob/adplotzk-patch-2/CONTRIBUTING.md) guide.
+
+
+## Usage Guide <a name="Usage"></a>
 
 To get started with using this validator please follow the numbered steps below:
 
@@ -22,6 +34,7 @@ To get started with using this validator please follow the numbered steps below:
 
 
 
+## Examples <a name="Examples"></a>
 
 Below we can see an expected validation result by executing the script in the samples folder: path/to/samples/sample.py
 
@@ -53,3 +66,19 @@ The expected output from running the sample is as follows:
 		-------------------------------------------------------------------------------------
 
 		VALID OCSF.
+		
+### Official Resources
+- [Amazon Security Lake Overview](https://aws.amazon.com/security-lake/)
+- [Amazon Security Lake Custom Data](https://docs.aws.amazon.com/security-lake/latest/userguide/custom-sources.html)
+
+# License <a name="License"></a>
+
+This library is licensed under the MIT 1.0 License.
+		
+
+
+
+
+
+
+
