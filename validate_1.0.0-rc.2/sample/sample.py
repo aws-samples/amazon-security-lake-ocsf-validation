@@ -15,10 +15,14 @@ path = Path(os.path.abspath(__file__))
 
 args["input"] = Path(path.parent)
 
-if os.path.isdir(args["input"]):
-    print("\nRunning validation for files in: " + str(args["input"]) + "...")
-else:
-    print("\nThe input specified is not a valid directory.")
+#Check that input argument is a valid directory
+if not os.path.isdir(args['input']):
+    print('\nThe input specified is not a valid directory.')
+    exit()
+    
+if not bool(sorted(Path(args['input']).glob('*.parquet'))):
+    print('\nThe input directory contains no parquet files.')
+    exit()
 
 
 def main():
