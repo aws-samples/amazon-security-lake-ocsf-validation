@@ -1895,8 +1895,8 @@
 			"type": "integer"
 		},
 		"unmapped": {
-			"$ref": "#/$defs/object",
-			"title": "Unmapped Data"
+			"title": "Unmapped Data",
+			"type": "array"
 		},
 		"win_resource": {
 			"$ref": "#/$defs/win_resource",

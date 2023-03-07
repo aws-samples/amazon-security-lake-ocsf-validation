@@ -1870,8 +1870,8 @@
 			"type": "integer"
 		},
 		"unmapped": {
-			"$ref": "#/$defs/object",
-			"title": "Unmapped Data"
+			"title": "Unmapped Data",
+			"type": "array"
 		}
 	},
 	"required": [

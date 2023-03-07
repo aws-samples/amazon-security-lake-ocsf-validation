@@ -1866,8 +1866,8 @@
 			"type": "string"
 		},
 		"unmapped": {
-			"$ref": "#/$defs/object",
-			"title": "Unmapped Data"
+			"title": "Unmapped Data",
+			"type": "array"
 		},
 		"mfa": {
 			"title": "Multi Factor Authentication",

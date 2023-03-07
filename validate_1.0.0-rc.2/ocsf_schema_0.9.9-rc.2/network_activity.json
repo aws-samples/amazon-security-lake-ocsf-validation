@@ -2185,8 +2185,8 @@
 			"type": "string"
 		},
 		"unmapped": {
-			"$ref": "#/$defs/object",
-			"title": "Unmapped Data"
+			"title": "Unmapped Data",
+			"type": "array"
 		},
 		"type_name": {
 			"title": "Type Name",
