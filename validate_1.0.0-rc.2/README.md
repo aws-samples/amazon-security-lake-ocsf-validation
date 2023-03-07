@@ -9,16 +9,6 @@ This validator was build as a supplementry tool for Amazon Security Lake, which 
 To get started with using this validator please follow the numbered steps below:
 
 1. please place parquet files in: path/to/inputs
-
-2. depends on installation of following python packages:
-		path
-		jsonschema
-		pandas
-		urllib
-        requests
-        pathlib
-        importlib
-
     
 3. Install requirements using 
         pip install -r requirements.txt
