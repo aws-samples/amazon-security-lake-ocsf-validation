@@ -139,7 +139,7 @@ def main():
             if str(testData["class_uid"]["0"]) == "5002":
                 SCHEMA_CLASS = "config_state"
 
-            if SCHEMA_CLASS == "":
+            if SCHEMA_CLASS == None:
                 print("No schema found for:", testData["class_uid"]["0"])
                 exit()
 
