@@ -20,7 +20,7 @@ Usage Guide
 
 5. run python
 
-		validate.py -i "path/to/inputs" 
+		validate.py -i "path/to/inputs" -version ocsf_schema_1.0.0-rc.2
 		
 NOTE: See expected output by executing path/to/samples/sample.py
 
