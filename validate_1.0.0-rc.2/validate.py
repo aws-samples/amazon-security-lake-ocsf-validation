@@ -28,12 +28,14 @@ requiredNamed.add_argument('-i', '--input',
 args = vars(parser.parse_args())
 
 #Check that input argument is a valid directory
-if os.path.isdir(args['input']):
-    print('\nRunning validation for files in: ' + args['input'] + '...')
-else:
+if not os.path.isdir(args['input']):
     print('\nThe input specified is not a valid directory.')
-
-
+    exit()
+    
+if not bool(sorted(Path(args['input']).glob('*.parquet'))):
+    print('\nThe input directory contains no parquet files.')
+    exit()
+ 
 def main():
 
     """
@@ -70,7 +72,7 @@ def main():
     path = Path(os.path.abspath(__file__))
 
     #recursive search for all files with .parquet extension in input directory path 
-    pathlist = Path(args['input']).rglob('*.parquet')
+    pathlist = Path(args['input']).glob('*.parquet')
 
     #iterate through pathlist containing all of the .parquet files
     for file in pathlist:
