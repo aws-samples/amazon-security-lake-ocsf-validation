@@ -26,6 +26,7 @@ setup(
         'pandas',
         'urllib3',
         'importlib',
+        'inquirer',
         'requests'
     ],
     packages=find_packages(exclude=('tests', 'docs'))
