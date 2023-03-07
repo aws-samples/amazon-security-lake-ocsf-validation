@@ -38,7 +38,7 @@ def main():
             return result
         return item
 
-    pathlist = Path(args["input"]).rglob("*.parquet")
+    pathlist = Path(args["input"]).glob("*.parquet")
 
     for file in pathlist:
 
