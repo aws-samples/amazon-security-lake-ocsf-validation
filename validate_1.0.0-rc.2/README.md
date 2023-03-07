@@ -18,9 +18,9 @@ Usage Guide
 
 4. this script will throw error without installation of most current version of packages specified in step 2
 
-5. run python
+5. run
 
-		validate.py -i "path/to/inputs" -version ocsf_schema_1.0.0-rc.2
+		python validate.py -i "path/to/inputs" -version ocsf_schema_1.0.0-rc.2
 		
 NOTE: See expected output by executing path/to/samples/sample.py
 
