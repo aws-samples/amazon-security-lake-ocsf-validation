@@ -74,7 +74,7 @@ The expected output from running the sample is as follows:
 
 # License <a name="License"></a>
 
-This library is licensed under the MIT 1.0 License.
+This library is licensed under the MIT-0 License.
 		
 
 
