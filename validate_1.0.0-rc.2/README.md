@@ -1,6 +1,13 @@
 Usage Guide
 ========================
 
+The following is a simple program which can be used to ensure that user provided parquet data properly maps to the various schema definitions specified within the Open Cyber Security Framework (OCSF) - https://schema.ocsf.io/. 
+
+This validator was build as a supplementry tool for Amazon Security Lake, which requires data to be in OCSF Schema 1.0.0-rc.2. 
+
+
+To get started with using this validator please follow the numbered steps below:
+
 1. please place parquet files in: path/to/inputs
 
 2. depends on installation of following python packages:
@@ -22,13 +29,15 @@ Usage Guide
 
 		python validate.py -i "path/to/inputs" -version ocsf_schema_1.0.0-rc.2
 		
+
+
+
+
 NOTE: See expected output by executing path/to/samples/sample.py
-
-
 
 \C:\Users\adplotzk\Desktop\amazon-security-lake\validate_1.0.0-rc.2\sample>python sample.py
 
-The output from running the sample is as follows:
+The expected output from running the sample is as follows:
 
 		Validating Against Event Class: api_activity (3005)...
 
