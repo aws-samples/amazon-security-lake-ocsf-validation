@@ -1960,8 +1960,8 @@
 			"type": "string"
 		},
 		"unmapped": {
-			"$ref": "#/$defs/object",
-			"title": "Unmapped Data"
+			"title": "Unmapped Data",
+			"type": "array"
 		},
 		"direction_id": {
 			"enum": [
