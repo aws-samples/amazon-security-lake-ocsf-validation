@@ -23,9 +23,9 @@ To get started with using this validator please follow the numbered steps below:
 
 
 
-NOTE: See expected output by executing path/to/samples/sample.py
+Below we can see an expected validation result by executing the script in the samples folder: path/to/samples/sample.py
 
-\C:\Users\adplotzk\Desktop\amazon-security-lake\validate_1.0.0-rc.2\sample>python sample.py
+	C:\Users\adplotzk\Desktop\amazon-security-lake\validate_1.0.0-rc.2\sample>python sample.py
 
 The expected output from running the sample is as follows:
 
