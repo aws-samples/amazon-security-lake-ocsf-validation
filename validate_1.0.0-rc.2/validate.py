@@ -18,71 +18,61 @@ import inquirer
 
 answers = {}
 
-#Take in input arguments from CLI
+# Take in input arguments from CLI
 parser = argparse.ArgumentParser(add_help=False)
 
-parser.add_argument('-h', '--help', action='help',
-                    default=argparse.SUPPRESS, help='Show help.')
-
+parser.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS, help='Show help.')
 requiredNamed = parser.add_argument_group('required arguments')
-requiredNamed.add_argument('-i', '--input',
-                           help='Path to directory containing parquet files.'
-                           , required=True)
-
-requiredNamed.add_argument('-version',
-                           help='User Specified OCSF Version.'
-                           , required=False)
-                           
+requiredNamed.add_argument('-i', '--input', help='Path to directory containing parquet files.', required=True)
+requiredNamed.add_argument('-version', help='User Specified OCSF Version.', required=False)
 args = vars(parser.parse_args())
 
 if not args['version']:
-    questions = [
-          inquirer.List('version',
-                        choices=['ocsf_schema_1.0.0-rc.2'],
-                    ),
-]
+    questions = [inquirer.List('version', choices=['ocsf_schema_1.0.0-rc.2'])]
     answers = inquirer.prompt(questions)
     answers['version'] = answers['version']
 else:
     answers['version'] = args['version']
 
 answers['path'] = args['input']
-    
-    #Check that input argument is a valid directory
+
+# Check that input argument is a valid directory
 if answers['version'] not in ['ocsf_schema_1.0.0-rc.2']:
     print('\033[1;91m' + '\nThe input specified is not a valid OCSF version.' + '\033[0m')
     exit()
-        
-#Check that input argument is a valid directory
+
+# Check that input argument is a valid directory
 if not os.path.isdir(answers['path']):
     print('\033[1;91m' + '\nThe input specified is not a valid directory.' + '\033[0m')
     exit()
-    
+
 if not bool(sorted(Path(answers['path']).glob('*.parquet'))):
     print('\033[1;91m' + '\nThe input directory contains no parquet files.' + '\033[0m')
     exit()
- 
+
 print(answers)
+
+
 def main():
 
     """
-    The main function in this script will take a users input 
-    '-i /path/to/some/file/file.parquet' and search for parquet
-    files within this specified directory. These files will be
-    converted to JSON format, cleaned using symantic filters,
-    and finally the schema on that JSON will be validated against
-    the set of schema files in /ocsf_schema_1.0.0-rc.2 to determine
-    if the schema is valid OCSF
+    # The main function in this script will take a users input
+    # '-i /path/to/some/file/file.parquet' and search for parquet
+    # files within this specified directory. These files will be
+    # converted to JSON format, cleaned using symantic filters,
+    # and finally the schema on that JSON will be validated against
+    # the set of schema files in /ocsf_schema_1.0.0-rc.2 to determine
+    # if the schema is valid OCSF
     """
 
-    def recursive_filter(item, *forbidden): 
-        
+    def recursive_filter(item, *forbidden):
+
         """
         This is a function which takes in a JSON object
         and a filter key. The function will recursivly iterate
         though the JSON object and remove all instances of that key.
         """
-        
+
         if isinstance(item, list):
             return [recursive_filter(entry, *forbidden) for entry in
                     item if entry not in forbidden]
@@ -95,31 +85,31 @@ def main():
             return result
         return item
 
-    #store the absolute path of this script in path variable
+    # Store the absolute path of this script in path variable
     path = Path(os.path.abspath(__file__))
 
-    #recursive search for all files with .parquet extension in input directory path 
+    # Recursive search for all files with .parquet extension in input directory path
     pathlist = Path(answers['path']).glob('*.parquet')
 
-    #iterate through pathlist containing all of the .parquet files
+    # Iterate through pathlist containing all of the .parquet files
     for file in pathlist:
 
         key_vals = []
         EVENT = {}
         SCHEMA_CLASS = ''
-        
+
         (name, ext) = str(file).split('.parquet')
         new_path = '{}.{}'.format(name, 'json')
-        
-        #use pandas dataframes to convert the parquet file at each iter to a JSON object
+
+        # Use pandas dataframes to convert the parquet file at each iter to a JSON object
         df = pd.read_parquet(file)
         df.to_json(new_path)
 
-        #write JSON object data to empty json file
+        # Write JSON object data to empty json file
         with open(new_path, 'r') as testData:
             testData = json.load(testData)
 
-            #load schema definition file from ocsf_schema_1.0.0-rc.2 based on OCSF class_uid
+            # Load schema definition file from ocsf_schema_1.0.0-rc.2 based on OCSF class_uid
             if str(testData['class_uid']['0']) == '1001':
                 SCHEMA_CLASS = 'file_activity'
 
@@ -198,27 +188,25 @@ def main():
             if str(testData['class_uid']['0']) == '5002':
                 SCHEMA_CLASS = 'config_state'
 
-            #if class_uid is not specified within the JSON exit script
-            if str(testData['class_uid']['0']) == None:
-                print ('\033[1;91m' + 'No schema found for:', testData['class_uid']['0'
-                       ])
+            # If class_uid is not specified within the JSON exit script
+            if str(testData['class_uid']['0']) is None:
+                print('\033[1;91m' + 'No schema found for:', testData['class_uid']['0'])
                 exit()
 
-            print('\nValidating Against Event Class: ' + SCHEMA_CLASS \
-                + ' (' + str(testData['class_uid']['0']) + ')...\n')
+            print('\nValidating Against Event Class: ' + SCHEMA_CLASS + ' (' + str(testData['class_uid']['0']) + ')...\n')
 
             with open(str(path.parent).replace('\\', '/')
-                      + '/'+answers['version']+'/' + SCHEMA_CLASS
+                      + '/' + answers['version']+'/' + SCHEMA_CLASS
                       + '.json', 'r') as ocsf_schema:
                 ocsf_schema = json.load(ocsf_schema)
 
-            #instatiate JSON validator
+            # Instatiate JSON validator
             validator = jsonschema.Draft7Validator(ocsf_schema)
 
             for keys in testData.keys():
                 key_vals.append(keys)
-    
-            #get clean JSON data object by grabbing first event & correcting typing from .parquet 
+
+            # Get clean JSON data object by grabbing first event & correcting typing from .parquet
             for i in key_vals:
                 K = i
                 V = testData[i]['0']
@@ -228,34 +216,34 @@ def main():
                     V = str(V).replace('"', "'")
                 EVENT[K] = V
 
-            #remove None types from JSON object
+            # Remove None types from JSON object
             EVENT = json.dumps(EVENT)
             EVENT = json.loads(EVENT)
             EVENT = recursive_filter(EVENT, None)
             EVENT = recursive_filter(EVENT, 'None')
-            
-            #run iterative validation against EVENT
+
+            # Run iterative validation against EVENT
             errors = validator.iter_errors(EVENT)
-            
+
         output = []
 
         try:
-            
-            #clean JSON file
+
+            # Clean JSON file
             os.remove(new_path)
-            
-            #save errors from iterator
+
+            # Save errors from iterator
             for error in errors:
                 output.append(str(error))
-                
-            #print event data and validation errors
+
+            # Print event data and validation errors
             if output == []:
                 print('\033[1;32m' + '-----------------------------------FILE DATA-----------------------------------' + '\033[0m')
                 print('\033[1;32m' + json.dumps(EVENT, indent=6) + '\n' + '\033[0m')
                 print('\033[1;32m' + '---------------------------------------------------------------------------\n' + '\033[0m')
                 print('\033[1;32m' + 'VALID OCSF.\n' + '\033[0m')
             else:
-                print('\033[1;91m' +'-----------------------------------FILE DATA-----------------------------------' + '\033[0m')
+                print('\033[1;91m' + '-----------------------------------FILE DATA-----------------------------------' + '\033[0m')
                 print('\033[1;91m' + json.dumps(EVENT, indent=6) + '\n' + '\033[0m')
                 print('\033[1;91m' + '---------------------------------------------------------------------------\n' + '\033[0m')
                 print('\033[1;91m' + 'INVALID OCSF.\n' + '\033[0m')
@@ -267,4 +255,5 @@ def main():
 
 
 if __name__ == '__main__':
+
     main()
