@@ -23,7 +23,7 @@ parser.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS, he
 requiredNamed = parser.add_argument_group('required arguments')
 requiredNamed.add_argument('-i', '--input', help='Path to directory containing parquet files.', required=True)
 requiredNamed.add_argument('-version', help='User Specified OCSF Version.', required=False)
-requiredNamed.add_argument('-verbose', help='Verbose output.', required=False)
+requiredNamed.add_argument('-verbose', help='Set as true for verbose output.', required=False)
 args = vars(parser.parse_args())
 
 if not args['version']:
