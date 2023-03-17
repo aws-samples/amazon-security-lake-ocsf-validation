@@ -9,7 +9,6 @@ import json
 import os
 import sys
 import urllib.request
-from importlib.metadata import version
 import requests
 import argparse
 from argparse import ArgumentParser, RawTextHelpFormatter
