@@ -46,7 +46,7 @@ if answers['version'] not in ['ocsf_schema_1.0.0-rc.2']:
 
 # Check that input argument is a valid directory
 if answers['verbose'] not in ['true','']:
-    print('\033[1;91m' + '\nIf used, verbose flag must be set to true.' + '\033[0m')
+    print('\033[1;91m' + '\nWhen used, verbose flag must be set to true.' + '\033[0m')
     exit()
 
 # Check that input argument is a valid directory
