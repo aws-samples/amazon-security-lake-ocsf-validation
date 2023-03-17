@@ -39,7 +39,7 @@ if not args['verbose']:
 answers['verbose'] = args['verbose']
 answers['path'] = args['input']
 
-# Check that input argument is a valid directory
+# Check that version argument is set to expected value
 if answers['version'] not in ['ocsf_schema_1.0.0-rc.2']:
     print('\033[1;91m' + '\nThe input specified is not a valid OCSF version.' + '\033[0m')
     exit()
