@@ -23,6 +23,7 @@ parser.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS, he
 requiredNamed = parser.add_argument_group('required arguments')
 requiredNamed.add_argument('-i', '--input', help='Path to directory containing parquet files.', required=True)
 requiredNamed.add_argument('-version', help='User Specified OCSF Version.', required=False)
+requiredNamed.add_argument('-verbose', help='Verbose output.', required=False)
 args = vars(parser.parse_args())
 
 if not args['version']:
@@ -32,11 +33,20 @@ if not args['version']:
 else:
     answers['version'] = args['version']
 
+if not args['verbose']:
+    args['verbose'] = ''
+    
+answers['verbose'] = args['verbose']
 answers['path'] = args['input']
 
 # Check that input argument is a valid directory
 if answers['version'] not in ['ocsf_schema_1.0.0-rc.2']:
     print('\033[1;91m' + '\nThe input specified is not a valid OCSF version.' + '\033[0m')
+    exit()
+
+# Check that input argument is a valid directory
+if answers['verbose'] not in ['true','']:
+    print('\033[1;91m' + '\nVerbose flag must be set to either true or omitted.' + '\033[0m')
     exit()
 
 # Check that input argument is a valid directory
@@ -47,8 +57,6 @@ if not os.path.isdir(answers['path']):
 if not bool(sorted(Path(answers['path']).glob('*.parquet'))):
     print('\033[1;91m' + '\nThe input directory contains no parquet files.' + '\033[0m')
     exit()
-
-print(answers)
 
 
 def main():
@@ -236,14 +244,16 @@ def main():
 
             # Print event data and validation errors
             if output == []:
-                print('\033[1;32m' + '-----------------------------------FILE DATA-----------------------------------' + '\033[0m')
-                print('\033[1;32m' + json.dumps(EVENT, indent=6) + '\n' + '\033[0m')
-                print('\033[1;32m' + '---------------------------------------------------------------------------\n' + '\033[0m')
+                if answers['verbose'] == 'true':
+                    print('\033[1;32m' + '-----------------------------------FILE DATA-----------------------------------' + '\033[0m')
+                    print('\033[1;32m' + json.dumps(EVENT, indent=6) + '\n' + '\033[0m')
+                    print('\033[1;32m' + '---------------------------------------------------------------------------\n' + '\033[0m')
                 print('\033[1;32m' + 'VALID OCSF.\n' + '\033[0m')
             else:
-                print('\033[1;91m' + '-----------------------------------FILE DATA-----------------------------------' + '\033[0m')
-                print('\033[1;91m' + json.dumps(EVENT, indent=6) + '\n' + '\033[0m')
-                print('\033[1;91m' + '---------------------------------------------------------------------------\n' + '\033[0m')
+                if answers['verbose'] == 'true':
+                    print('\033[1;91m' + '-----------------------------------FILE DATA-----------------------------------' + '\033[0m')
+                    print('\033[1;91m' + json.dumps(EVENT, indent=6) + '\n' + '\033[0m')
+                    print('\033[1;91m' + '---------------------------------------------------------------------------\n' + '\033[0m')
                 print('\033[1;91m' + 'INVALID OCSF.\n' + '\033[0m')
                 for i in output:
                     print('\033[1;91m' + i + '\033[0m')
