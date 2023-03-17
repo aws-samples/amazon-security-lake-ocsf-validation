@@ -25,7 +25,7 @@ setup(
         'jsonschema',
         'pandas',
         'urllib3',
-        'importlib',
+        'pyarrow',
         'inquirer',
         'requests'
     ],
