@@ -164,6 +164,9 @@ def main():
             if str(testData['class_uid']['0']) == '3005':
                 SCHEMA_CLASS = 'api_activity'
 
+            if str(testData['class_uid']['0']) == '3006':
+                SCHEMA_CLASS = 'access_activity'
+           
             if str(testData['class_uid']['0']) == '4001':
                 SCHEMA_CLASS = 'network_activity'
 
@@ -187,6 +190,9 @@ def main():
 
             if str(testData['class_uid']['0']) == '4008':
                 SCHEMA_CLASS = 'ftp_activity'
+
+            if str(testData['class_uid']['0']) == '4009':
+                SCHEMA_CLASS = 'email_activity'
 
             if str(testData['class_uid']['0']) == '5001':
                 SCHEMA_CLASS = 'inventory_info'
