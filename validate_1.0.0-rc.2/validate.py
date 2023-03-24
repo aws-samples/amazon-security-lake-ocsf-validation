@@ -201,7 +201,34 @@ def main():
                 SCHEMA_CLASS = 'config_state'
 
             # If class_uid is not specified within the JSON exit script
-            if str(testData['class_uid']['0']) is None:
+            if str(testData['class_uid']['0']) not in [ '1001', 
+                                                        '1002', 
+                                                        '1003', 
+                                                        '1004', 
+                                                        '1005', 
+                                                        '1006', 
+                                                        '1007', 
+                                                        '1008', 
+                                                        '1009', 
+                                                        '1010', 
+                                                        '2001', 
+                                                        '3001', 
+                                                        '3002', 
+                                                        '3003', 
+                                                        '3004', 
+                                                        '3005', 
+                                                        '3006', 
+                                                        '4001', 
+                                                        '4002', 
+                                                        '4003', 
+                                                        '4004', 
+                                                        '4005', 
+                                                        '4006', 
+                                                        '4007', 
+                                                        '4008', 
+                                                        '4009', 
+                                                        '5001', 
+                                                        '5002']:
                 print('\033[1;91m' + 'No schema found for:', testData['class_uid']['0'])
                 exit()
 
