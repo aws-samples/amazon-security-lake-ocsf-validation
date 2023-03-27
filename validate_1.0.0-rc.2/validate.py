@@ -243,7 +243,7 @@ def main():
                       + '.json', 'r') as ocsf_schema:
                 ocsf_schema = json.load(ocsf_schema)
 
-            # Instatiate JSON validator
+            # Instantiate JSON validator
             validator = jsonschema.Draft7Validator(ocsf_schema)
 
             for keys in testData.keys():
