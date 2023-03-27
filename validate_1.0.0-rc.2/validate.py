@@ -229,7 +229,7 @@ def main():
                                                         '4009', 
                                                         '5001', 
                                                         '5002']:
-                print('\033[1;91m' + 'Please use data with a valid OCSF class_uid.', testData['class_uid']['0'])
+                print('\033[1;91m' + 'Please provide data with a valid OCSF class_uid: ', testData['class_uid']['0'])
                 exit()
 
             print('\nValidating Against Event Class: ' + SCHEMA_CLASS + ' (' + str(testData['class_uid']['0']) + ')...\n')
