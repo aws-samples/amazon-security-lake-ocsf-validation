@@ -118,6 +118,7 @@ def main():
             if str(testData['class_uid']['0']) is None:
                 print('\033[1;91m' + 'Data containing a valid class_uid is a required for OCSF validation')
                 exit()
+
             # Load schema definition file from ocsf_schema_1.0.0-rc.2 based on OCSF class_uid
             if str(testData['class_uid']['0']) == '1001':
                 SCHEMA_CLASS = 'file_activity'
