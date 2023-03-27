@@ -65,7 +65,7 @@ def main():
     # The main function in this script will take a users input
     # '-i /path/to/some/file/file.parquet' and search for parquet
     # files within this specified directory. These files will be
-    # converted to JSON format, cleaned using symantic filters,
+    # converted to JSON format, cleaned using semantic filters,
     # and finally the schema on that JSON will be validated against
     # the set of schema files in /ocsf_schema_1.0.0-rc.2 to determine
     # if the schema is valid OCSF
@@ -75,7 +75,7 @@ def main():
 
         """
         This is a function which takes in a JSON object
-        and a filter key. The function will recursivly iterate
+        and a filter key. The function will recursively iterate
         though the JSON object and remove all instances of that key.
         """
 
