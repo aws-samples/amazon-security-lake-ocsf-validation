@@ -258,6 +258,12 @@ def main():
                 if K == 'raw_data':
                     V = str(V).replace('"', "'")
                 EVENT[K] = V
+  
+            if type(EVENT['unmapped']) is list:
+                new_unmapped = {}
+                for i,j in EVENT['unmapped']:
+                    new_unmapped[i] = j
+                EVENT['unmapped'] = new_unmapped
 
             # Remove None types from JSON object
             EVENT = json.dumps(EVENT)
