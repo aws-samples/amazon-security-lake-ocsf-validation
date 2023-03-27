@@ -114,7 +114,10 @@ def main():
         # Write JSON object data to empty json file
         with open(new_path, 'r') as testData:
             testData = json.load(testData)
-
+            
+            if str(testData['class_uid']['0']) is None:
+                print('\033[1;91m' + 'Data containing a valid class_uid is a required for OCSF validation')
+                exit()
             # Load schema definition file from ocsf_schema_1.0.0-rc.2 based on OCSF class_uid
             if str(testData['class_uid']['0']) == '1001':
                 SCHEMA_CLASS = 'file_activity'
@@ -199,7 +202,7 @@ def main():
 
             if str(testData['class_uid']['0']) == '5002':
                 SCHEMA_CLASS = 'config_state'
-
+                
             # If class_uid is not specified within the JSON exit script
             if str(testData['class_uid']['0']) not in [ '1001', 
                                                         '1002', 
@@ -229,7 +232,7 @@ def main():
                                                         '4009', 
                                                         '5001', 
                                                         '5002']:
-                print('\033[1;91m' + 'No schema found for:', testData['class_uid']['0'])
+                print('\033[1;91m' + 'Please provide a valid class_uid for OCSF validation.')
                 exit()
 
             print('\nValidating Against Event Class: ' + SCHEMA_CLASS + ' (' + str(testData['class_uid']['0']) + ')...\n')
