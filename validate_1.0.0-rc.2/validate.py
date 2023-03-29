@@ -259,6 +259,15 @@ def main():
                     V = str(V).replace('"', "'")
                 EVENT[K] = V
 
+            '''
+            # The following is a simple algorithm that handles parquet 'Map' types.
+            # Pandas representation of parquet Map types is as an array of arrays.
+            # This algorithm checks if unmapped is both used and of type list.
+            # If unmapped satisfies these conditions these array of arrays is mapped
+            # to a standard dictionary type object so that the JSON representation of 
+            # of the OCSF parquet is compliant with the intended OCSF schema. 
+            '''
+
             if "unmapped" in testData and type(EVENT['unmapped']) is list:
                 new_unmapped = {}
                 for i,j in EVENT['unmapped']:
