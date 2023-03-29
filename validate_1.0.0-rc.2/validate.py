@@ -99,7 +99,7 @@ def main():
 
     # Iterate through pathlist containing all of the .parquet files
     for file in pathlist:
-
+        print('\033[96m' + "Attempting to Validate File:",os.path.basename(os.path.normpath(file))+"...\n" + '\033[0m')
         key_vals = []
         EVENT = {}
         SCHEMA_CLASS = ''
@@ -116,7 +116,7 @@ def main():
             testData = json.load(testData)
 
             if "class_uid" not in testData:
-                print('\033[1;91m' + 'Data containing a valid class_uid is a required for OCSF validation'+ '\033[0m')
+                print('\033[1;91m' + 'Data containing a valid class_uid is a required for OCSF validation\n' + '\033[0m')
                 exit()
 
             # Load schema definition file from ocsf_schema_1.0.0-rc.2 based on OCSF class_uid
@@ -203,7 +203,7 @@ def main():
 
             if str(testData['class_uid']['0']) == '5002':
                 SCHEMA_CLASS = 'config_state'
-                
+
             # If class_uid is not specified within the JSON exit script
             if str(testData['class_uid']['0']) not in [ '1001', 
                                                         '1002', 
@@ -236,7 +236,7 @@ def main():
                 print('\033[1;91m' + 'Please provide a valid class_uid for OCSF validation.' + '\033[0m')
                 exit()
 
-            print('\nValidating Against Event Class: ' + SCHEMA_CLASS + ' (' + str(testData['class_uid']['0']) + ')...\n')
+            print('\033[96m' + 'Validating Against Event Class: ' + SCHEMA_CLASS + ' (' + str(testData['class_uid']['0']) + ')...\n' + '\033[0m')
 
             with open(str(path.parent).replace('\\', '/')
                       + '/' + answers['version']+'/' + SCHEMA_CLASS
@@ -258,6 +258,21 @@ def main():
                 if K == 'raw_data':
                     V = str(V).replace('"', "'")
                 EVENT[K] = V
+
+            '''
+            # The following is a simple algorithm that handles parquet 'Map' types.
+            # Pandas representation of parquet Map types is as an array of arrays.
+            # This algorithm checks if unmapped is both used and of type list.
+            # If unmapped satisfies these conditions these array of arrays is mapped
+            # to a standard dictionary type object so that the JSON representation of 
+            # of the OCSF parquet is compliant with the intended OCSF schema. 
+            '''
+
+            if "unmapped" in testData and type(EVENT['unmapped']) is list:
+                new_unmapped = {}
+                for i,j in EVENT['unmapped']:
+                    new_unmapped[i] = j
+                EVENT['unmapped'] = new_unmapped
 
             # Remove None types from JSON object
             EVENT = json.dumps(EVENT)
