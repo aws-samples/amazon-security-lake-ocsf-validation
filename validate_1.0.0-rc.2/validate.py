@@ -203,7 +203,7 @@ def main():
 
             if str(testData['class_uid']['0']) == '5002':
                 SCHEMA_CLASS = 'config_state'
-                
+
             # If class_uid is not specified within the JSON exit script
             if str(testData['class_uid']['0']) not in [ '1001', 
                                                         '1002', 
@@ -258,7 +258,7 @@ def main():
                 if K == 'raw_data':
                     V = str(V).replace('"', "'")
                 EVENT[K] = V
-            
+
             if "unmapped" in testData and type(EVENT['unmapped']) is list:
                 new_unmapped = {}
                 for i,j in EVENT['unmapped']:
