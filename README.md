@@ -28,6 +28,8 @@ This tool was build to provide supplementry validation for Amazon Security Lake 
 
 In addition to the tool itself, several common  examples of AWS OCSF samples have been added to this repository under AWSLogs_OCSF_1.0.0-rc2_samples. These are pre-mapped OCSF compliant Amazon Security Lake supported log sources to provide as examples to users interested in mapping to OCSF.
 
+Running the validation tool using the provided samples will output the following:
+
 	Attempting to Validate File: AssumeRoleWithSAML.test.parquet...
 	Validating Against Event Class: authentication (3002)...
 
