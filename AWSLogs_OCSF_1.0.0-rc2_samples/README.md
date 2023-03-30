@@ -5,7 +5,7 @@ Amazon Security Lake Samples
 
 In addition to the tool itself, several common  examples of AWS OCSF samples have been added to this repository under AWSLogs_OCSF_1.0.0-rc2_samples. These are pre-mapped OCSF compliant Amazon Security Lake supported log sources to provide as examples to users interested in mapping to OCSF.
 
-Within the AWSLogs_OCSF_1.0.0-rc2_samples there are transformed parquet files and an inputs folder cotaining an original unmapped version for each respective parquet file.
+Within the AWSLogs_OCSF_1.0.0-rc2_samples there are transformed parquet files and an inputs folder containing an original log record for each respective parquet file.
 
 Running the validation tool using the provided samples will output the following:
 
