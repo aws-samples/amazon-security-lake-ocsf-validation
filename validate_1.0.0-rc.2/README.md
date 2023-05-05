@@ -67,7 +67,22 @@ The expected output from running the sample is as follows:
 		-------------------------------------------------------------------------------------
 
 		VALID OCSF.
-		
+
+## Checksum <a name="Checksum"></a>
+
+To ensure that soundness of the download, you may choose run a checksum against the files in this repository.
+
+In order to generate the expected hash target, and run the checksum please run the following - 
+
+	tar -czvf hash.tar.gz /path/to/validate_1.0.0-rc.2/ setup.py validate.py sample requirements.txt sample README.md ocsf_schema_1.0.0-rc.2 docs LICENSE
+	mv hash.tar.gz /path/to/validate_1.0.0-rc.2/checksum
+	python checksum.py
+	
+	46*************************************************************7
+	46*************************************************************7
+	Checksums are equal.
+	STATUS: ACCEPTED
+
 ### Official Resources
 - [Amazon Security Lake Overview](https://aws.amazon.com/security-lake/)
 - [Amazon Security Lake Custom Data](https://docs.aws.amazon.com/security-lake/latest/userguide/custom-sources.html)
