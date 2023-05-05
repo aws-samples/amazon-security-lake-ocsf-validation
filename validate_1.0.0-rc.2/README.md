@@ -74,8 +74,8 @@ To ensure the soundness of the download, you may choose run a checksum against t
 
 In order to generate the expected hash and run the checksum please run the following:
 
-	tar -czvf hash.tar.gz /path/to/validate_1.0.0-rc.2/ setup.py validate.py sample requirements.txt sample README.md ocsf_schema_1.0.0-rc.2 docs LICENSE
-	mv hash.tar.gz /path/to/validate_1.0.0-rc.2/checksum
+	tar -czvf hash.tar.gz setup.py validate.py sample requirements.txt sample README.md ocsf_schema_1.0.0-rc.2 docs LICENSE
+	mv hash.tar.gz checksum/
 	python checksum.py
 
 The expected output of the checksum is the following:
