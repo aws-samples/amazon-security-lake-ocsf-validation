@@ -70,18 +70,19 @@ The expected output from running the sample is as follows:
 
 ## Checksum <a name="Checksum"></a>
 
-To ensure that soundness of the download, you may choose run a checksum against the files in this repository.
+To ensure the soundness of the download, you may choose run a checksum against the files in this repository.
 
-In order to generate the expected hash target, and run the checksum please run the following - 
+In order to generate the expected hash and run the checksum please run the following:
 
 	tar -czvf hash.tar.gz /path/to/validate_1.0.0-rc.2/ setup.py validate.py sample requirements.txt sample README.md ocsf_schema_1.0.0-rc.2 docs LICENSE
 	mv hash.tar.gz /path/to/validate_1.0.0-rc.2/checksum
 	python checksum.py
-	
-	46*************************************************************7
+
+The expected output of the checksum is the following:
+	**46*************************************************************7
 	46*************************************************************7
 	Checksums are equal.
-	STATUS: ACCEPTED
+	STATUS: ACCEPTED**
 
 ### Official Resources
 - [Amazon Security Lake Overview](https://aws.amazon.com/security-lake/)
