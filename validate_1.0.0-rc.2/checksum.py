@@ -7,18 +7,7 @@ import os
 import shutil
 
 def get_checksum(filename, hash_function):
- 
-    Args:
-        filename (str): Path to file that will have the checksum generated.
-        hash_function (str):  Hash function name - supports MD5 or SHA256
- 
-    Returns:
-        str`: Checksum based on Hash function of choice.
- 
-    Raises:
-        Exception: Invalid hash function is entered.
- 
-    """
+
     hash_function = hash_function.lower()
  
     with open(filename, "rb") as f:
