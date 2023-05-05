@@ -73,6 +73,7 @@ The expected output from running the sample is as follows:
 To ensure the soundness of the download, you may choose run a checksum against the files in this repository.
 
 In order to generate the expected hash and run the checksum please run the following:
+
 	cd validate_1.0.0-rc.2/
 	tar -czvf hash.tar.gz
 	mv hash.tar.gz checksum/
