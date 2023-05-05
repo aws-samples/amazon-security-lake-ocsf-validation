@@ -79,8 +79,9 @@ In order to generate the expected hash and run the checksum please run the follo
 	python checksum.py
 
 The expected output of the checksum is the following:
-	46#############################################################7
-	46#############################################################7
+
+	46*************************************************************7
+	46*************************************************************7
 	Checksums are equal.
 	STATUS: ACCEPTED
 
