@@ -7,7 +7,6 @@ import os
 import shutil
 
 def get_checksum(filename, hash_function):
-    """Generate checksum for file baed on hash function (MD5 or SHA256).
  
     Args:
         filename (str): Path to file that will have the checksum generated.
@@ -33,9 +32,8 @@ def get_checksum(filename, hash_function):
 
 hashcode = "checksum/hash.tar.gz"
 hashtest = "59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2"
-
 sha256_result = get_checksum(hashcode, "sha256")
-#os.system("shasum -a 256 {}".format(hashcode))
+
 
 print(sha256_result)
 print(hashtest)
