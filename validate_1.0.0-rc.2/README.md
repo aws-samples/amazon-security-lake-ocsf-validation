@@ -74,8 +74,13 @@ To ensure the soundness of the download, you may choose run a checksum against t
 
 In order to generate the expected hash and run the checksum please run the following:
 
+Change directory to validate_1.0.0-rc.2 if you are not already in this directory
+
 	cd validate_1.0.0-rc.2/
-	tar --options '!timestamp' -cvzf hash.tar.gz .
+	
+Copy and paste the following commands into the command line:
+
+	tar cf . | gzip --no-name > hash.tar.gz
 	mkdir checksum
 	mv hash.tar.gz checksum/
 	python checksum.py
