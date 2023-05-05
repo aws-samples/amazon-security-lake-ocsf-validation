@@ -6,6 +6,7 @@ Amazon Security Lake Data Validation
 2. [Usage Guide](#Usage)
 3. [Examples](#Examples)
 4. [License](#License)
+5. [Checksum](#Checksum)
 
 ## About this Repo <a name="About"></a>
 
