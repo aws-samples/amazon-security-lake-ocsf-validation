@@ -76,7 +76,7 @@ In order to generate the expected hash and run the checksum please run the follo
 
 	cd validate_1.0.0-rc.2/
 	mkdir checksum
-	tar -czvf hash.tar.gz
+	tar -czvf hash.tar.gz *
 	mv hash.tar.gz checksum/
 	python checksum.py
 
