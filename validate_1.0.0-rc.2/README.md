@@ -70,7 +70,7 @@ The expected output from running the sample is as follows:
 
 ## Checksum <a name="Checksum"></a>
 
-To ensure the soundness of the download, you may choose run a checksum against the files in this repository. You can verify the integrity of the validate.py by ensuring the shasum matches the following:
+To ensure the soundness of the download, you may choose run a checksum against the files in this repository. You can verify the integrity of the validate.py by ensuring the shasum (SHA-256) matches the following:
 
 	cf67afaf295e74651f7de803fc96ee1cab3e5502a9896ceb835aabbf4e14af88
 
