@@ -19,7 +19,7 @@ def get_checksum(filename, hash_function):
  
     return readable_hash
 
-hashcode = "checksum/hash.tar.gz"
+hashcode = "validate.py"
 hashtest = "c0a489d7e931ded225b4eadf26ff73574ef7e001a850b016a8acb1018a85999a"
 sha256_result = get_checksum(hashcode, "sha256")
 
@@ -35,5 +35,3 @@ if str(sha256_result) == str(hashtest):
 else:
     print("Checksums are not equal.")
     print("STATUS: ERROR DETECTED")
-
-shutil.rmtree("checksum")
