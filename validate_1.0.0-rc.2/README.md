@@ -80,9 +80,6 @@ Change directory to validate_1.0.0-rc.2 if you are not already in this directory
 	
 Copy and paste the following commands into the command line:
 
-	tar -c --exclude='checksum.py' -f hash.tar.gz * 
-	mkdir checksum
-	mv hash.tar.gz checksum/
 	python checksum.py
 
 The expected output of the checksum is the following:
