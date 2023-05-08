@@ -80,7 +80,7 @@ Change directory to validate_1.0.0-rc.2 if you are not already in this directory
 	
 Copy and paste the following commands into the command line:
 
-	tar cf . | gzip --no-name > hash.tar.gz
+	tar -cf hash.tar.gz * --exclude checksum.py
 	mkdir checksum
 	mv hash.tar.gz checksum/
 	python checksum.py
