@@ -6,6 +6,7 @@ Amazon Security Lake Data Validation
 2. [Usage Guide](#Usage)
 3. [Examples](#Examples)
 4. [License](#License)
+5. [Checksum](#Checksum)
 
 ## About this Repo <a name="About"></a>
 
@@ -66,7 +67,13 @@ The expected output from running the sample is as follows:
 		-------------------------------------------------------------------------------------
 
 		VALID OCSF.
-		
+
+## Checksum <a name="Checksum"></a>
+
+To ensure the soundness of the download, you may choose run a checksum against the files in this repository. You can verify the integrity of the validate.py by ensuring the shasum matches the following:
+
+	cf67afaf295e74651f7de803fc96ee1cab3e5502a9896ceb835aabbf4e14af88
+
 ### Official Resources
 - [Amazon Security Lake Overview](https://aws.amazon.com/security-lake/)
 - [Amazon Security Lake Custom Data](https://docs.aws.amazon.com/security-lake/latest/userguide/custom-sources.html)
@@ -75,11 +82,3 @@ The expected output from running the sample is as follows:
 # License <a name="License"></a>
 
 This library is licensed under the MIT-0 License.
-		
-
-
-
-
-
-
-
