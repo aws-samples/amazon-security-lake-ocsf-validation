@@ -20,7 +20,7 @@ def get_checksum(filename, hash_function):
     return readable_hash
 
 hashcode = "checksum/hash.tar.gz"
-hashtest = "af348cf8a097126db2c3016b49c7bb174ad497b7152d0a06c34f034dc26c33be"
+hashtest = "c0a489d7e931ded225b4eadf26ff73574ef7e001a850b016a8acb1018a85999a"
 sha256_result = get_checksum(hashcode, "sha256")
 
 print(sha256_result)
