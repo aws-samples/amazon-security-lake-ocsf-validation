@@ -20,7 +20,7 @@ def get_checksum(filename, hash_function):
     return readable_hash
 
 hashcode = "validate.py"
-hashtest = "c0a489d7e931ded225b4eadf26ff73574ef7e001a850b016a8acb1018a85999a"
+hashtest = "34f9a1e8fba7023605c202493d9d60592739ff7a4ba3fc1f5b35bbea436e1d68"
 sha256_result = get_checksum(hashcode, "sha256")
 
 print(sha256_result)
