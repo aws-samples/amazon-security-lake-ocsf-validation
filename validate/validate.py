@@ -287,7 +287,7 @@ def main():
     
             output = []
 
-        #check if version is ocsf 1.1
+        # Check if version is ocsf 1.1
         if answers['version'] == 'ocsf_schema_1.1.0':
             # Write JSON object data to empty json file
             with open(new_path, 'r') as testData:
@@ -319,17 +319,17 @@ def main():
                 if str(testData['class_uid']['0']) == '1007':
                     SCHEMA_CLASS = 'process_activity'
     
-                if str(testData['class_uid']['0']) == '1008':
-                    SCHEMA_CLASS = 'registry_key_activity'
-    
-                if str(testData['class_uid']['0']) == '1009':
-                    SCHEMA_CLASS = 'registry_value_activity'
-    
                 if str(testData['class_uid']['0']) == '1010':
                     SCHEMA_CLASS = 'resource_activity'
     
                 if str(testData['class_uid']['0']) == '2001':
                     SCHEMA_CLASS = 'security_finding'
+
+                if str(testData['class_uid']['0']) == '2002':
+                    SCHEMA_CLASS = 'vulnerability_finding'
+                    
+                if str(testData['class_uid']['0']) == '2003':
+                    SCHEMA_CLASS = 'compliance_finding'
     
                 if str(testData['class_uid']['0']) == '3001':
                     SCHEMA_CLASS = 'account_change'
@@ -338,16 +338,16 @@ def main():
                     SCHEMA_CLASS = 'authentication'
     
                 if str(testData['class_uid']['0']) == '3003':
-                    SCHEMA_CLASS = 'authorization'
+                    SCHEMA_CLASS = 'authorize_session'
     
                 if str(testData['class_uid']['0']) == '3004':
                     SCHEMA_CLASS = 'entity_management'
     
                 if str(testData['class_uid']['0']) == '3005':
-                    SCHEMA_CLASS = 'api_activity'
+                    SCHEMA_CLASS = 'user_access'
     
                 if str(testData['class_uid']['0']) == '3006':
-                    SCHEMA_CLASS = 'access_activity'
+                    SCHEMA_CLASS = 'group_management'
                
                 if str(testData['class_uid']['0']) == '4001':
                     SCHEMA_CLASS = 'network_activity'
@@ -375,13 +375,40 @@ def main():
     
                 if str(testData['class_uid']['0']) == '4009':
                     SCHEMA_CLASS = 'email_activity'
-    
+
+                if str(testData['class_uid']['0']) == '4010':
+                    SCHEMA_CLASS = 'network_file_activity'
+
+                if str(testData['class_uid']['0']) == '4011':
+                    SCHEMA_CLASS = 'email_file_activity'
+
+                if str(testData['class_uid']['0']) == '4012':
+                    SCHEMA_CLASS = 'email_url_activity'
+
+                if str(testData['class_uid']['0']) == '4013':
+                    SCHEMA_CLASS = 'ntp_activity'
+                
                 if str(testData['class_uid']['0']) == '5001':
                     SCHEMA_CLASS = 'inventory_info'
     
                 if str(testData['class_uid']['0']) == '5002':
                     SCHEMA_CLASS = 'config_state'
-    
+
+                if str(testData['class_uid']['0']) == '5003':
+                    SCHEMA_CLASS = 'user_inventory'
+
+                if str(testData['class_uid']['0']) == '6001':
+                    SCHEMA_CLASS = 'web_resources_activity'
+
+                if str(testData['class_uid']['0']) == '6002':
+                    SCHEMA_CLASS = 'application_lifecycle'
+
+                if str(testData['class_uid']['0']) == '6003':
+                    SCHEMA_CLASS = 'api_activity'
+
+                if str(testData['class_uid']['0']) == '6004':
+                    SCHEMA_CLASS = 'web_resource_access_activity'
+                
                 # If class_uid is not specified within the JSON exit script
                 if str(testData['class_uid']['0']) not in [ '1001', 
                                                             '1002', 
@@ -390,10 +417,9 @@ def main():
                                                             '1005', 
                                                             '1006', 
                                                             '1007', 
-                                                            '1008', 
-                                                            '1009', 
-                                                            '1010', 
                                                             '2001', 
+                                                            '2002', 
+                                                            '2003', 
                                                             '3001', 
                                                             '3002', 
                                                             '3003', 
@@ -408,9 +434,18 @@ def main():
                                                             '4006', 
                                                             '4007', 
                                                             '4008', 
-                                                            '4009', 
+                                                            '4009',
+                                                            '4010',
+                                                            '4011',
+                                                            '4012',
+                                                            '4013',
                                                             '5001', 
-                                                            '5002']:
+                                                            '5002',
+                                                            '5003',
+                                                            '6001',
+                                                            '6002',
+                                                            '6003',
+                                                            '6004']:
                     print('\033[1;91m' + 'Please provide a valid class_uid for OCSF validation.' + '\033[0m')
                     exit()
     
