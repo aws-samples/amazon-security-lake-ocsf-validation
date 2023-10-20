@@ -1,0 +1,2300 @@
+{
+	"$defs": {
+		"fingerprint": {
+			"properties": {
+				"algorithm": {
+					"title": "Algorithm",
+					"type": "string"
+				},
+				"algorithm_id": {
+					"enum": [
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						99
+					],
+					"title": "Algorithm ID",
+					"type": "integer"
+				},
+				"value": {
+					"title": "Value",
+					"type": "string"
+				}
+			},
+			"required": [
+				"value",
+				"algorithm_id"
+			],
+			"title": "Fingerprint",
+			"type": "object"
+		},
+		"process": {
+			"properties": {
+				"cmd_line": {
+					"title": "Command Line",
+					"type": "string"
+				},
+				"created_time": {
+					"title": "Created Time",
+					"type": "integer"
+				},
+				"file": {
+					"$ref": "#/$defs/file",
+					"title": "File"
+				},
+				"integrity": {
+					"title": "Integrity",
+					"type": "string"
+				},
+				"integrity_id": {
+					"enum": [
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						99
+					],
+					"title": "Integrity Level",
+					"type": "integer"
+				},
+				"lineage": {
+					"items": {
+						"type": "string"
+					},
+					"title": "Lineage",
+					"type": "array"
+				},
+				"loaded_modules": {
+					"items": {
+						"type": "string"
+					},
+					"title": "Loaded Modules",
+					"type": "array"
+				},
+				"name": {
+					"title": "Name",
+					"type": "string"
+				},
+				"parent_process": {
+					"$ref": "#/$defs/process",
+					"title": "Parent Process"
+				},
+				"pid": {
+					"title": "Process ID",
+					"type": "integer"
+				},
+				"sandbox": {
+					"title": "Sandbox",
+					"type": "string"
+				},
+				"session": {
+					"$ref": "#/$defs/session",
+					"title": "User Session"
+				},
+				"terminated_time": {
+					"title": "Terminated Time",
+					"type": "integer"
+				},
+				"tid": {
+					"title": "Thread ID",
+					"type": "integer"
+				},
+				"uid": {
+					"title": "Process UID",
+					"type": "string"
+				},
+				"user": {
+					"$ref": "#/$defs/user",
+					"title": "User"
+				},
+				"xattributes": {
+					"$ref": "#/$defs/object",
+					"title": "Extended Attributes"
+				}
+			},
+			"title": "Process",
+			"type": "object"
+		},
+		"cloud": {
+			"properties": {
+				"account_name": {
+					"title": "Account Name",
+					"type": "string"
+				},
+				"account_uid": {
+					"title": "Account UID",
+					"type": "string"
+				},
+				"org_uid": {
+					"title": "Org ID",
+					"type": "string"
+				},
+				"project_uid": {
+					"title": "Project ID",
+					"type": "string"
+				},
+				"provider": {
+					"title": "Provider",
+					"type": "string"
+				},
+				"region": {
+					"title": "Region",
+					"type": "string"
+				},
+				"zone": {
+					"title": "Network Zone",
+					"type": "string"
+				}
+			},
+			"required": [
+				"provider"
+			],
+			"title": "Cloud",
+			"type": "object"
+		},
+		"device_hw_info": {
+			"properties": {
+				"bios_date": {
+					"title": "BIOS Date",
+					"type": "string"
+				},
+				"bios_manufacturer": {
+					"title": "BIOS Manufacturer",
+					"type": "string"
+				},
+				"bios_ver": {
+					"title": "BIOS Version",
+					"type": "string"
+				},
+				"chassis": {
+					"title": "Chassis",
+					"type": "string"
+				},
+				"cpu_bits": {
+					"title": "CPU Bits",
+					"type": "integer"
+				},
+				"cpu_cores": {
+					"title": "CPU Cores",
+					"type": "integer"
+				},
+				"cpu_count": {
+					"title": "CPU Count",
+					"type": "integer"
+				},
+				"cpu_speed": {
+					"title": "Processor Type",
+					"type": "integer"
+				},
+				"cpu_type": {
+					"title": "Processor Type",
+					"type": "string"
+				},
+				"desktop_display": {
+					"$ref": "#/$defs/display",
+					"title": "Desktop Display"
+				},
+				"keyboard_info": {
+					"$ref": "#/$defs/keyboard_info",
+					"title": "Keyboard Information"
+				},
+				"ram_size": {
+					"title": "RAM Size",
+					"type": "integer"
+				},
+				"serial_number": {
+					"title": "Serial Number",
+					"type": "string"
+				}
+			},
+			"title": "Device Hardware Info",
+			"type": "object"
+		},
+		"digital_signature": {
+			"properties": {
+				"company_name": {
+					"title": "Company Name",
+					"type": "string"
+				},
+				"created_time": {
+					"title": "Created Time",
+					"type": "integer"
+				},
+				"developer_uid": {
+					"title": "Developer UID",
+					"type": "string"
+				},
+				"fingerprints": {
+					"items": {
+						"$ref": "#/$defs/fingerprint"
+					},
+					"title": "Fingerprints",
+					"type": "array"
+				},
+				"issuer_name": {
+					"title": "Issuer Name",
+					"type": "string"
+				},
+				"serial_number": {
+					"title": "Serial Number",
+					"type": "string"
+				}
+			},
+			"required": [
+				"company_name"
+			],
+			"title": "Digital Signature",
+			"type": "object"
+		},
+		"request": {
+			"properties": {
+				"flags": {
+					"items": {
+						"type": "string"
+					},
+					"title": "Flags",
+					"type": "array"
+				},
+				"uid": {
+					"title": "Unique ID",
+					"type": "string"
+				}
+			},
+			"required": [
+				"uid"
+			],
+			"title": "Request Elements",
+			"type": "object"
+		},
+		"device": {
+			"properties": {
+				"hypervisor": {
+					"title": "Hypervisor",
+					"type": "string"
+				},
+				"instance_uid": {
+					"title": "Instance ID",
+					"type": "string"
+				},
+				"hw_info": {
+					"$ref": "#/$defs/device_hw_info",
+					"title": "Hardware Info"
+				},
+				"type": {
+					"title": "Type",
+					"type": "string"
+				},
+				"uid": {
+					"title": "Unique ID",
+					"type": "string"
+				},
+				"ip": {
+					"title": "IP Address",
+					"type": "string"
+				},
+				"vlan_uid": {
+					"title": "VLAN",
+					"type": "string"
+				},
+				"image": {
+					"$ref": "#/$defs/image",
+					"title": "Image"
+				},
+				"type_id": {
+					"enum": [
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						99
+					],
+					"title": "Type ID",
+					"type": "integer"
+				},
+				"is_compliant": {
+					"title": "Compliant Device",
+					"type": "boolean"
+				},
+				"vpc_uid": {
+					"title": "VPC UID",
+					"type": "string"
+				},
+				"risk_score": {
+					"title": "Risk Score",
+					"type": "integer"
+				},
+				"location": {
+					"$ref": "#/$defs/location",
+					"title": "Detailed Geo Location"
+				},
+				"subnet_uid": {
+					"title": "Subnet UID",
+					"type": "string"
+				},
+				"groups": {
+					"items": {
+						"$ref": "#/$defs/group"
+					},
+					"title": "Groups",
+					"type": "array"
+				},
+				"risk_level": {
+					"title": "Risk Level",
+					"type": "string"
+				},
+				"imei": {
+					"title": "IMEI",
+					"type": "string"
+				},
+				"uuid": {
+					"title": "UUID",
+					"type": "string"
+				},
+				"interface_name": {
+					"title": "Network Interface Name",
+					"type": "string"
+				},
+				"region": {
+					"title": "Region",
+					"type": "string"
+				},
+				"desc": {
+					"title": "Description",
+					"type": "string"
+				},
+				"hostname": {
+					"title": "Hostname",
+					"type": "string"
+				},
+				"is_trusted": {
+					"title": "Trusted Device",
+					"type": "boolean"
+				},
+				"os": {
+					"$ref": "#/$defs/os",
+					"title": "OS"
+				},
+				"interface_uid": {
+					"title": "Network Interface ID",
+					"type": "string"
+				},
+				"domain": {
+					"title": "Domain",
+					"type": "string"
+				},
+				"org_unit": {
+					"title": "Org Unit",
+					"type": "string"
+				},
+				"subnet": {
+					"title": "Subnet",
+					"type": "string"
+				},
+				"mac": {
+					"title": "MAC Address",
+					"type": "string"
+				},
+				"autoscale_uid": {
+					"title": "Autoscale UID",
+					"type": "string"
+				},
+				"is_personal": {
+					"title": "Personal Device",
+					"type": "boolean"
+				},
+				"network_interfaces": {
+					"items": {
+						"$ref": "#/$defs/network_interface"
+					},
+					"title": "Network Interfaces",
+					"type": "array"
+				},
+				"name": {
+					"title": "Name",
+					"type": "string"
+				},
+				"risk_level_id": {
+					"enum": [
+						0,
+						1,
+						2,
+						3,
+						4
+					],
+					"title": "Risk Level ID",
+					"type": "integer"
+				},
+				"is_managed": {
+					"title": "Managed Device",
+					"type": "boolean"
+				}
+			},
+			"required": [
+				"type_id"
+			],
+			"title": "Device",
+			"type": "object"
+		},
+		"cvss": {
+			"properties": {
+				"base_score": {
+					"title": "Base Score",
+					"type": "number"
+				},
+				"depth": {
+					"enum": [
+						"Base",
+						"Environmental",
+						"Temporal"
+					],
+					"title": "CVSS Depth",
+					"type": "string"
+				},
+				"metrics": {
+					"items": {
+						"$ref": "#/$defs/metric"
+					},
+					"title": "Metrics",
+					"type": "array"
+				},
+				"overall_score": {
+					"title": "Overall Score",
+					"type": "number"
+				},
+				"severity": {
+					"title": "Severity",
+					"type": "string"
+				},
+				"vector_string": {
+					"title": "Vector String",
+					"type": "string"
+				},
+				"version": {
+					"title": "Version",
+					"type": "string"
+				}
+			},
+			"required": [
+				"version",
+				"base_score"
+			],
+			"title": "CVSS Score",
+			"type": "object"
+		},
+		"malware": {
+			"properties": {
+				"classification_ids": {
+					"items": {
+						"enum": [
+							0,
+							1,
+							10,
+							11,
+							13,
+							14,
+							15,
+							16,
+							17,
+							18,
+							19,
+							2,
+							20,
+							21,
+							22,
+							3,
+							4,
+							5,
+							6,
+							7,
+							8,
+							9,
+							99
+						],
+						"type": "integer"
+					},
+					"title": "Classification IDs",
+					"type": "array"
+				},
+				"classifications": {
+					"items": {
+						"type": "string"
+					},
+					"title": "Classifications",
+					"type": "array"
+				},
+				"cves": {
+					"items": {
+						"$ref": "#/$defs/cve"
+					},
+					"title": "CVE List",
+					"type": "array"
+				},
+				"name": {
+					"title": "Name",
+					"type": "string"
+				},
+				"path": {
+					"title": "Path",
+					"type": "string"
+				},
+				"provider": {
+					"title": "Provider",
+					"type": "string"
+				},
+				"uid": {
+					"title": "Unique ID",
+					"type": "string"
+				}
+			},
+			"required": [
+				"name",
+				"classification_ids"
+			],
+			"title": "Malware",
+			"type": "object"
+		},
+		"response": {
+			"properties": {
+				"code": {
+					"title": "Response Code",
+					"type": "integer"
+				},
+				"error": {
+					"title": "Error Code",
+					"type": "string"
+				},
+				"error_message": {
+					"title": "Error Message",
+					"type": "string"
+				},
+				"flags": {
+					"items": {
+						"type": "string"
+					},
+					"title": "Flags",
+					"type": "array"
+				},
+				"message": {
+					"title": "Message",
+					"type": "string"
+				}
+			},
+			"title": "Response Elements",
+			"type": "object"
+		},
+		"actor": {
+			"properties": {
+				"authorizations": {
+					"items": {
+						"$ref": "#/$defs/authorization"
+					},
+					"title": "Authorization Information",
+					"type": "array"
+				},
+				"idp": {
+					"$ref": "#/$defs/idp",
+					"title": "Identity Provider"
+				},
+				"invoked_by": {
+					"title": "Invoked by",
+					"type": "string"
+				},
+				"process": {
+					"$ref": "#/$defs/process",
+					"title": "Process"
+				},
+				"session": {
+					"$ref": "#/$defs/session",
+					"title": "User Session"
+				},
+				"user": {
+					"$ref": "#/$defs/user",
+					"title": "User"
+				}
+			},
+			"title": "Actor",
+			"type": "object"
+		},
+		"api": {
+			"properties": {
+				"operation": {
+					"title": "Operation",
+					"type": "string"
+				},
+				"request": {
+					"$ref": "#/$defs/request",
+					"title": "API Request Details"
+				},
+				"response": {
+					"$ref": "#/$defs/response",
+					"title": "API Response Details"
+				},
+				"service": {
+					"$ref": "#/$defs/service",
+					"title": "Service"
+				},
+				"version": {
+					"title": "Version",
+					"type": "string"
+				}
+			},
+			"required": [
+				"operation"
+			],
+			"title": "API Details",
+			"type": "object"
+		},
+		"tls_extension": {
+			"properties": {
+				"data": {
+					"$ref": "#/$defs/json_t",
+					"title": "Data"
+				},
+				"type": {
+					"title": "Type",
+					"type": "string"
+				},
+				"type_id": {
+					"enum": [
+						0,
+						1,
+						10,
+						13,
+						14,
+						15,
+						16,
+						18,
+						19,
+						20,
+						21,
+						41,
+						42,
+						43,
+						44,
+						45,
+						47,
+						48,
+						49,
+						5,
+						50,
+						51,
+						99
+					],
+					"title": "Type ID",
+					"type": "integer"
+				}
+			},
+			"required": [
+				"type_id"
+			],
+			"title": "TLS Extension",
+			"type": "object"
+		},
+		"user": {
+			"properties": {
+				"account_type": {
+					"title": "Account Type",
+					"type": "string"
+				},
+				"account_type_id": {
+					"enum": [
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						99
+					],
+					"title": "Account Type ID",
+					"type": "integer"
+				},
+				"account_uid": {
+					"title": "Account UID",
+					"type": "string"
+				},
+				"credential_uid": {
+					"title": "User Credential ID",
+					"type": "string"
+				},
+				"domain": {
+					"title": "Domain",
+					"type": "string"
+				},
+				"email_addr": {
+					"title": "Email Address",
+					"type": "string"
+				},
+				"groups": {
+					"items": {
+						"$ref": "#/$defs/group"
+					},
+					"title": "Groups",
+					"type": "array"
+				},
+				"name": {
+					"title": "Name",
+					"type": "string"
+				},
+				"org_uid": {
+					"title": "Org ID",
+					"type": "string"
+				},
+				"type": {
+					"title": "Type",
+					"type": "string"
+				},
+				"type_id": {
+					"enum": [
+						0,
+						1,
+						2,
+						3,
+						99
+					],
+					"title": "Type ID",
+					"type": "integer"
+				},
+				"uid": {
+					"title": "User ID",
+					"type": "string"
+				},
+				"uuid": {
+					"title": "Unique User ID",
+					"type": "string"
+				}
+			},
+			"title": "User",
+			"type": "object"
+		},
+		"group": {
+			"properties": {
+				"desc": {
+					"title": "Description",
+					"type": "string"
+				},
+				"name": {
+					"title": "Name",
+					"type": "string"
+				},
+				"privileges": {
+					"items": {
+						"type": "string"
+					},
+					"title": "Privileges",
+					"type": "array"
+				},
+				"type": {
+					"title": "Account Type",
+					"type": "string"
+				},
+				"uid": {
+					"title": "Unique ID",
+					"type": "string"
+				}
+			},
+			"required": [
+				"name"
+			],
+			"title": "Group",
+			"type": "object"
+		},
+		"network_proxy": {
+			"properties": {
+				"hostname": {
+					"title": "Hostname",
+					"type": "string"
+				},
+				"ip": {
+					"title": "IP Address",
+					"type": "string"
+				},
+				"port": {
+					"title": "Port",
+					"type": "integer"
+				},
+				"svc_name": {
+					"title": "Service Name",
+					"type": "string"
+				},
+				"uid": {
+					"title": "Unique ID",
+					"type": "string"
+				}
+			},
+			"required": [
+				"port",
+				"ip"
+			],
+			"title": "Network Proxy",
+			"type": "object"
+		},
+		"tactic": {
+			"properties": {
+				"name": {
+					"title": "Name",
+					"type": "string"
+				},
+				"uid": {
+					"title": "Unique ID",
+					"type": "string"
+				}
+			},
+			"required": [
+				"uid"
+			],
+			"title": "Tactic",
+			"type": "object"
+		},
+		"network_traffic": {
+			"properties": {
+				"bytes": {
+					"title": "Total Bytes",
+					"type": "integer"
+				},
+				"bytes_in": {
+					"title": "Bytes In",
+					"type": "integer"
+				},
+				"bytes_out": {
+					"title": "Bytes Out",
+					"type": "integer"
+				},
+				"packets": {
+					"title": "Total Packets",
+					"type": "integer"
+				},
+				"packets_in": {
+					"title": "Packets In",
+					"type": "integer"
+				},
+				"packets_out": {
+					"title": "Packets Out",
+					"type": "integer"
+				}
+			},
+			"title": "Network Traffic",
+			"type": "object"
+		},
+		"attack": {
+			"properties": {
+				"tactics": {
+					"items": {
+						"$ref": "#/$defs/tactic"
+					},
+					"title": "Tactics",
+					"type": "array"
+				},
+				"technique": {
+					"$ref": "#/$defs/technique",
+					"title": "Technique"
+				},
+				"version": {
+					"title": "Version",
+					"type": "string"
+				}
+			},
+			"required": [
+				"version",
+				"technique",
+				"tactics"
+			],
+			"title": "Attack",
+			"type": "object"
+		},
+		"json_t": {
+			"oneOf": [
+				{
+					"type": "string"
+				},
+				{
+					"type": "integer"
+				},
+				{
+					"type": "number"
+				},
+				{
+					"type": "boolean"
+				},
+				{
+					"$ref": "#/$defs/object"
+				},
+				{
+					"items": {
+						"$ref": "#"
+					},
+					"type": "array"
+				}
+			],
+			"title": "JSON"
+		},
+		"image": {
+			"properties": {
+				"labels": {
+					"items": {
+						"type": "string"
+					},
+					"title": "Labels",
+					"type": "array"
+				},
+				"name": {
+					"title": "Image Name",
+					"type": "string"
+				},
+				"path": {
+					"title": "Path",
+					"type": "string"
+				},
+				"tag": {
+					"title": "Image Tag",
+					"type": "string"
+				},
+				"uid": {
+					"title": "Image ID",
+					"type": "string"
+				}
+			},
+			"required": [
+				"uid"
+			],
+			"title": "Image",
+			"type": "object"
+		},
+		"policy": {
+			"properties": {
+				"desc": {
+					"title": "Description",
+					"type": "string"
+				},
+				"group": {
+					"$ref": "#/$defs/group",
+					"title": "Group"
+				},
+				"name": {
+					"title": "Name",
+					"type": "string"
+				},
+				"uid": {
+					"title": "Unique ID",
+					"type": "string"
+				},
+				"version": {
+					"title": "Version",
+					"type": "string"
+				}
+			},
+			"required": [
+				"name"
+			],
+			"title": "Policy",
+			"type": "object"
+		},
+		"certificate": {
+			"properties": {
+				"created_time": {
+					"title": "Created Time",
+					"type": "integer"
+				},
+				"expiration_time": {
+					"title": "Expiration Time",
+					"type": "integer"
+				},
+				"fingerprint": {
+					"$ref": "#/$defs/fingerprint",
+					"title": "Fingerprint"
+				},
+				"issuer_dn": {
+					"title": "Issuer Distinguished Name",
+					"type": "string"
+				},
+				"serial_number": {
+					"title": "Certificate Serial Number",
+					"type": "string"
+				},
+				"subject_dn": {
+					"title": "Subject Distinguished Name",
+					"type": "string"
+				},
+				"version": {
+					"title": "Version",
+					"type": "string"
+				}
+			},
+			"required": [
+				"serial_number",
+				"issuer_dn",
+				"fingerprint"
+			],
+			"title": "Digital Certificate",
+			"type": "object"
+		},
+		"keyboard_info": {
+			"properties": {
+				"function_keys": {
+					"title": "Function Keys",
+					"type": "integer"
+				},
+				"ime": {
+					"title": "IME",
+					"type": "string"
+				},
+				"keyboard_layout": {
+					"title": "Keyboard Layout",
+					"type": "string"
+				},
+				"keyboard_subtype": {
+					"title": "Keyboard Subtype",
+					"type": "integer"
+				},
+				"keyboard_type": {
+					"title": "Keyboard Type",
+					"type": "string"
+				}
+			},
+			"title": "Keyboard Information",
+			"type": "object"
+		},
+		"session": {
+			"properties": {
+				"created_time": {
+					"title": "Created Time",
+					"type": "integer"
+				},
+				"credential_uid": {
+					"title": "User Credential ID",
+					"type": "string"
+				},
+				"expiration_time": {
+					"title": "Expiration Time",
+					"type": "integer"
+				},
+				"issuer": {
+					"title": "Issuer Details",
+					"type": "string"
+				},
+				"mfa": {
+					"title": "Multi Factor Authentication",
+					"type": "boolean"
+				},
+				"uid": {
+					"title": "Unique ID",
+					"type": "string"
+				},
+				"uuid": {
+					"title": "UUID",
+					"type": "string"
+				}
+			},
+			"title": "Session",
+			"type": "object"
+		},
+		"object": {
+			"additionalProperties": true,
+			"properties": {},
+			"title": "Object",
+			"type": "object"
+		},
+		"observable": {
+			"properties": {
+				"name": {
+					"title": "Name",
+					"type": "string"
+				},
+				"reputation": {
+					"$ref": "#/$defs/reputation",
+					"title": "Reputation Scores"
+				},
+				"type": {
+					"title": "Type",
+					"type": "string"
+				},
+				"type_id": {
+					"enum": [
+						0,
+						1,
+						10,
+						2,
+						20,
+						21,
+						22,
+						23,
+						24,
+						25,
+						26,
+						27,
+						28,
+						29,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						99
+					],
+					"title": "Type ID",
+					"type": "integer"
+				},
+				"value": {
+					"title": "Value",
+					"type": "string"
+				}
+			},
+			"required": [
+				"type_id",
+				"name"
+			],
+			"title": "Observable",
+			"type": "object"
+		},
+		"location": {
+			"properties": {
+				"city": {
+					"title": "City",
+					"type": "string"
+				},
+				"continent": {
+					"title": "Continent",
+					"type": "string"
+				},
+				"coordinates": {
+					"items": {
+						"type": "number"
+					},
+					"title": "Coordinates",
+					"type": "array"
+				},
+				"country": {
+					"title": "Country",
+					"type": "string"
+				},
+				"desc": {
+					"title": "Description",
+					"type": "string"
+				},
+				"is_on_premises": {
+					"title": "On Premises",
+					"type": "boolean"
+				},
+				"isp": {
+					"title": "ISP",
+					"type": "string"
+				},
+				"postal_code": {
+					"title": "Postal Code",
+					"type": "string"
+				},
+				"provider": {
+					"title": "Provider",
+					"type": "string"
+				},
+				"region": {
+					"title": "Region",
+					"type": "string"
+				}
+			},
+			"required": [
+				"coordinates"
+			],
+			"title": "Geo Location",
+			"type": "object"
+		},
+		"network_endpoint": {
+			"properties": {
+				"domain": {
+					"title": "Domain",
+					"type": "string"
+				},
+				"hostname": {
+					"title": "Hostname",
+					"type": "string"
+				},
+				"instance_uid": {
+					"title": "Instance ID",
+					"type": "string"
+				},
+				"interface_name": {
+					"title": "Network Interface Name",
+					"type": "string"
+				},
+				"interface_uid": {
+					"title": "Network Interface ID",
+					"type": "string"
+				},
+				"intermediate_ips": {
+					"items": {
+						"type": "string"
+					},
+					"title": "Intermediate IP Addresses",
+					"type": "array"
+				},
+				"ip": {
+					"title": "IP Address",
+					"type": "string"
+				},
+				"location": {
+					"$ref": "#/$defs/location",
+					"title": "Detailed Geo Location"
+				},
+				"mac": {
+					"title": "MAC Address",
+					"type": "string"
+				},
+				"name": {
+					"title": "Name",
+					"type": "string"
+				},
+				"port": {
+					"title": "Port",
+					"type": "integer"
+				},
+				"subnet_uid": {
+					"title": "Subnet UID",
+					"type": "string"
+				},
+				"svc_name": {
+					"title": "Service Name",
+					"type": "string"
+				},
+				"uid": {
+					"title": "Unique ID",
+					"type": "string"
+				},
+				"vlan_uid": {
+					"title": "VLAN",
+					"type": "string"
+				},
+				"vpc_uid": {
+					"title": "VPC UID",
+					"type": "string"
+				}
+			},
+			"title": "Network Endpoint",
+			"type": "object"
+		},
+		"product": {
+			"properties": {
+				"feature": {
+					"$ref": "#/$defs/feature",
+					"title": "Feature"
+				},
+				"lang": {
+					"title": "Language",
+					"type": "string"
+				},
+				"name": {
+					"title": "Product Name",
+					"type": "string"
+				},
+				"path": {
+					"title": "Product Path",
+					"type": "string"
+				},
+				"uid": {
+					"title": "Product ID",
+					"type": "string"
+				},
+				"vendor_name": {
+					"title": "Vendor Name",
+					"type": "string"
+				},
+				"version": {
+					"title": "Product Version",
+					"type": "string"
+				}
+			},
+			"required": [
+				"vendor_name",
+				"name"
+			],
+			"title": "Product",
+			"type": "object"
+		},
+		"reputation": {
+			"properties": {
+				"base_score": {
+					"title": "Reputation Score",
+					"type": "number"
+				},
+				"provider": {
+					"title": "Provider",
+					"type": "string"
+				},
+				"score": {
+					"title": "Reputation Score",
+					"type": "string"
+				},
+				"score_id": {
+					"enum": [
+						0,
+						1,
+						10,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						99
+					],
+					"title": "Reputation Score ID",
+					"type": "integer"
+				}
+			},
+			"required": [
+				"score_id",
+				"base_score"
+			],
+			"title": "Reputation",
+			"type": "object"
+		},
+		"tls": {
+			"properties": {
+				"alert": {
+					"title": "Client TLS Alert",
+					"type": "integer"
+				},
+				"certificate": {
+					"$ref": "#/$defs/certificate",
+					"title": "Certificate"
+				},
+				"certificate_chain": {
+					"items": {
+						"type": "string"
+					},
+					"title": "Certificate Chain",
+					"type": "array"
+				},
+				"cipher": {
+					"title": "Cipher Suite",
+					"type": "string"
+				},
+				"client_ciphers": {
+					"items": {
+						"type": "string"
+					},
+					"title": "Client Cipher Suites",
+					"type": "array"
+				},
+				"extension_list": {
+					"items": {
+						"$ref": "#/$defs/tls_extension"
+					},
+					"title": "Extension List",
+					"type": "array"
+				},
+				"handshake_dur": {
+					"title": "Handshake Duration",
+					"type": "integer"
+				},
+				"ja3_fingerprint": {
+					"$ref": "#/$defs/fingerprint",
+					"title": "JA3 Fingerprint"
+				},
+				"ja3_string": {
+					"title": "JA3 String",
+					"type": "string"
+				},
+				"ja3s_fingerprint": {
+					"$ref": "#/$defs/fingerprint",
+					"title": "JAS3 Fingerprint"
+				},
+				"ja3s_string": {
+					"title": "JAS3 String",
+					"type": "string"
+				},
+				"key_length": {
+					"title": "Key Length",
+					"type": "integer"
+				},
+				"sans": {
+					"items": {
+						"$ref": "#/$defs/san"
+					},
+					"title": "Subject Alternative Names",
+					"type": "array"
+				},
+				"server_ciphers": {
+					"items": {
+						"type": "string"
+					},
+					"title": "Server Cipher Suites",
+					"type": "array"
+				},
+				"sni": {
+					"title": "Server Name Indication",
+					"type": "string"
+				},
+				"version": {
+					"title": "Version",
+					"type": "string"
+				}
+			},
+			"required": [
+				"version"
+			],
+			"title": "Transport Layer Security (TLS)",
+			"type": "object"
+		},
+		"technique": {
+			"properties": {
+				"name": {
+					"title": "Name",
+					"type": "string"
+				},
+				"uid": {
+					"title": "Unique ID",
+					"type": "string"
+				}
+			},
+			"required": [
+				"uid"
+			],
+			"title": "Technique",
+			"type": "object"
+		},
+		"enrichment": {
+			"properties": {
+				"data": {
+					"$ref": "#/$defs/json_t",
+					"title": "Data"
+				},
+				"name": {
+					"title": "Name",
+					"type": "string"
+				},
+				"provider": {
+					"title": "Provider",
+					"type": "string"
+				},
+				"type": {
+					"title": "Type",
+					"type": "string"
+				},
+				"value": {
+					"title": "Value",
+					"type": "string"
+				}
+			},
+			"required": [
+				"value",
+				"name",
+				"data"
+			],
+			"title": "Enrichment",
+			"type": "object"
+		},
+		"authorization": {
+			"properties": {
+				"decision": {
+					"title": "Authorization Decision/Outcome",
+					"type": "string"
+				},
+				"policy": {
+					"$ref": "#/$defs/policy",
+					"title": "Policy"
+				}
+			},
+			"title": "Authorization Information",
+			"type": "object"
+		},
+		"san": {
+			"properties": {
+				"name": {
+					"title": "Name",
+					"type": "string"
+				},
+				"type": {
+					"title": "Type",
+					"type": "string"
+				}
+			},
+			"required": [
+				"type",
+				"name"
+			],
+			"title": "Subject Alternative Name",
+			"type": "object"
+		},
+		"os": {
+			"properties": {
+				"build": {
+					"title": "OS Build",
+					"type": "string"
+				},
+				"country": {
+					"title": "Country",
+					"type": "string"
+				},
+				"cpu_bits": {
+					"title": "CPU Bits",
+					"type": "integer"
+				},
+				"edition": {
+					"title": "OS Edition",
+					"type": "string"
+				},
+				"lang": {
+					"title": "Language",
+					"type": "string"
+				},
+				"name": {
+					"title": "Name",
+					"type": "string"
+				},
+				"sp_name": {
+					"title": "OS Service Pack",
+					"type": "string"
+				},
+				"sp_ver": {
+					"title": "OS Service Pack Version",
+					"type": "integer"
+				},
+				"type": {
+					"title": "Type",
+					"type": "string"
+				},
+				"type_id": {
+					"enum": [
+						0,
+						100,
+						101,
+						200,
+						201,
+						300,
+						301,
+						302,
+						400,
+						401,
+						402,
+						99
+					],
+					"title": "Type ID",
+					"type": "integer"
+				},
+				"version": {
+					"title": "Version",
+					"type": "string"
+				}
+			},
+			"required": [
+				"type_id",
+				"name"
+			],
+			"title": "OS",
+			"type": "object"
+		},
+		"file": {
+			"properties": {
+				"accessed_time": {
+					"title": "Accessed Time",
+					"type": "integer"
+				},
+				"accessor": {
+					"$ref": "#/$defs/user",
+					"title": "Accessor"
+				},
+				"attributes": {
+					"title": "Attributes",
+					"type": "integer"
+				},
+				"company_name": {
+					"title": "Company Name",
+					"type": "string"
+				},
+				"confidentiality": {
+					"title": "Confidentiality",
+					"type": "string"
+				},
+				"confidentiality_id": {
+					"enum": [
+						0,
+						1,
+						2,
+						3,
+						4,
+						99
+					],
+					"title": "Confidentiality ID",
+					"type": "integer"
+				},
+				"created_time": {
+					"title": "Created Time",
+					"type": "integer"
+				},
+				"creator": {
+					"$ref": "#/$defs/user",
+					"title": "Creator"
+				},
+				"desc": {
+					"title": "Description",
+					"type": "string"
+				},
+				"fingerprints": {
+					"items": {
+						"$ref": "#/$defs/fingerprint"
+					},
+					"title": "Fingerprints",
+					"type": "array"
+				},
+				"is_system": {
+					"title": "System",
+					"type": "boolean"
+				},
+				"mime_type": {
+					"title": "MIME type",
+					"type": "string"
+				},
+				"modified_time": {
+					"title": "Modified Time",
+					"type": "integer"
+				},
+				"modifier": {
+					"$ref": "#/$defs/user",
+					"title": "Modifier"
+				},
+				"name": {
+					"title": "Name",
+					"type": "string"
+				},
+				"owner": {
+					"$ref": "#/$defs/user",
+					"title": "Owner"
+				},
+				"parent_folder": {
+					"title": "Parent Folder",
+					"type": "string"
+				},
+				"path": {
+					"title": "Path",
+					"type": "string"
+				},
+				"product": {
+					"$ref": "#/$defs/product",
+					"title": "Product"
+				},
+				"security_descriptor": {
+					"title": "Security Descriptor",
+					"type": "string"
+				},
+				"signature": {
+					"$ref": "#/$defs/digital_signature",
+					"title": "Digital Signature"
+				},
+				"size": {
+					"title": "Size",
+					"type": "integer"
+				},
+				"type": {
+					"title": "Type",
+					"type": "string"
+				},
+				"type_id": {
+					"enum": [
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						99
+					],
+					"title": "Type ID",
+					"type": "integer"
+				},
+				"uid": {
+					"title": "Unique ID",
+					"type": "string"
+				},
+				"version": {
+					"title": "Version",
+					"type": "string"
+				},
+				"xattributes": {
+					"$ref": "#/$defs/object",
+					"title": "Extended Attributes"
+				}
+			},
+			"required": [
+				"type_id",
+				"name"
+			],
+			"title": "File",
+			"type": "object"
+		},
+		"service": {
+			"properties": {
+				"labels": {
+					"items": {
+						"type": "string"
+					},
+					"title": "Labels",
+					"type": "array"
+				},
+				"name": {
+					"title": "Name",
+					"type": "string"
+				},
+				"uid": {
+					"title": "Unique ID",
+					"type": "string"
+				},
+				"version": {
+					"title": "Version",
+					"type": "string"
+				}
+			},
+			"title": "Service",
+			"type": "object"
+		},
+		"cve": {
+			"properties": {
+				"created_time": {
+					"title": "Record Creation Date",
+					"type": "integer"
+				},
+				"cvss": {
+					"$ref": "#/$defs/cvss",
+					"title": "CVSS Score"
+				},
+				"cwe_uid": {
+					"title": "CWE UID",
+					"type": "string"
+				},
+				"cwe_url": {
+					"title": "CWE URL",
+					"type": "string"
+				},
+				"modified_time": {
+					"title": "Record Modified Date",
+					"type": "integer"
+				},
+				"product": {
+					"$ref": "#/$defs/product",
+					"title": "Product"
+				},
+				"type": {
+					"title": "Vulnerability Type",
+					"type": "string"
+				},
+				"uid": {
+					"title": "CVE ID",
+					"type": "string"
+				}
+			},
+			"required": [
+				"uid"
+			],
+			"title": "CVE",
+			"type": "object"
+		},
+		"metadata": {
+			"properties": {
+				"correlation_uid": {
+					"title": "Correlation UID",
+					"type": "string"
+				},
+				"labels": {
+					"items": {
+						"type": "string"
+					},
+					"title": "Labels",
+					"type": "array"
+				},
+				"logged_time": {
+					"title": "Logged Time",
+					"type": "integer"
+				},
+				"modified_time": {
+					"title": "Modified Time",
+					"type": "integer"
+				},
+				"original_time": {
+					"title": "Original Time",
+					"type": "string"
+				},
+				"processed_time": {
+					"title": "Processed Time",
+					"type": "integer"
+				},
+				"product": {
+					"$ref": "#/$defs/product",
+					"title": "Product"
+				},
+				"profiles": {
+					"items": {
+						"type": "string"
+					},
+					"title": "Profiles",
+					"type": "array"
+				},
+				"sequence": {
+					"title": "Sequence Number",
+					"type": "integer"
+				},
+				"uid": {
+					"title": "Event UID",
+					"type": "string"
+				},
+				"version": {
+					"title": "Version",
+					"type": "string"
+				}
+			},
+			"required": [
+				"version",
+				"product"
+			],
+			"title": "Metadata",
+			"type": "object"
+		},
+		"network_interface": {
+			"properties": {
+				"hostname": {
+					"title": "Hostname",
+					"type": "string"
+				},
+				"ip": {
+					"title": "IP Address",
+					"type": "string"
+				},
+				"mac": {
+					"title": "MAC Address",
+					"type": "string"
+				},
+				"name": {
+					"title": "Name",
+					"type": "string"
+				},
+				"namespace": {
+					"title": "Namespace",
+					"type": "string"
+				},
+				"type": {
+					"title": "Type",
+					"type": "string"
+				},
+				"type_id": {
+					"enum": [
+						0,
+						1,
+						2,
+						3,
+						99
+					],
+					"title": "Type ID",
+					"type": "integer"
+				},
+				"uid": {
+					"title": "Unique ID",
+					"type": "string"
+				}
+			},
+			"required": [
+				"type_id"
+			],
+			"title": "Network Interface",
+			"type": "object"
+		},
+		"display": {
+			"properties": {
+				"color_depth": {
+					"title": "Color Depth",
+					"type": "integer"
+				},
+				"physical_height": {
+					"title": "Physical Height",
+					"type": "integer"
+				},
+				"physical_orientation": {
+					"title": "Physical Orientation",
+					"type": "integer"
+				},
+				"physical_width": {
+					"title": "Physical Width",
+					"type": "integer"
+				},
+				"scale_factor": {
+					"title": "Scale Factor",
+					"type": "integer"
+				}
+			},
+			"title": "Display",
+			"type": "object"
+		},
+		"metric": {
+			"properties": {
+				"name": {
+					"title": "Name",
+					"type": "string"
+				},
+				"value": {
+					"title": "Value",
+					"type": "string"
+				}
+			},
+			"required": [
+				"value",
+				"name"
+			],
+			"title": "Metric",
+			"type": "object"
+		},
+		"network_connection_info": {
+			"properties": {
+				"boundary": {
+					"title": "Boundary",
+					"type": "string"
+				},
+				"boundary_id": {
+					"enum": [
+						0,
+						1,
+						10,
+						11,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						99
+					],
+					"title": "Boundary ID",
+					"type": "integer"
+				},
+				"direction": {
+					"title": "Direction",
+					"type": "string"
+				},
+				"direction_id": {
+					"enum": [
+						0,
+						1,
+						2,
+						3,
+						99
+					],
+					"title": "Direction ID",
+					"type": "integer"
+				},
+				"protocol_name": {
+					"title": "Protocol Name",
+					"type": "string"
+				},
+				"protocol_num": {
+					"title": "Protocol Number",
+					"type": "integer"
+				},
+				"protocol_ver": {
+					"title": "IP Version",
+					"type": "string"
+				},
+				"protocol_ver_id": {
+					"enum": [
+						0,
+						4,
+						6,
+						99
+					],
+					"title": "IP Version ID",
+					"type": "integer"
+				},
+				"tcp_flags": {
+					"title": "TCP Flags",
+					"type": "integer"
+				},
+				"uid": {
+					"title": "Connection UID",
+					"type": "string"
+				}
+			},
+			"required": [
+				"direction_id"
+			],
+			"title": "Network Connection Information",
+			"type": "object"
+		},
+		"feature": {
+			"properties": {
+				"name": {
+					"title": "Feature Name",
+					"type": "string"
+				},
+				"uid": {
+					"title": "Feature ID",
+					"type": "string"
+				},
+				"version": {
+					"title": "Feature Version",
+					"type": "string"
+				}
+			},
+			"title": "Feature",
+			"type": "object"
+		},
+		"hassh": {
+			"properties": {
+				"algorithm": {
+					"title": "Algorithm",
+					"type": "string"
+				},
+				"fingerprint": {
+					"$ref": "#/$defs/fingerprint",
+					"title": "Fingerprint"
+				}
+			},
+			"required": [
+				"fingerprint"
+			],
+			"title": "HASSH",
+			"type": "object"
+		},
+		"idp": {
+			"properties": {
+				"name": {
+					"title": "Name",
+					"type": "string"
+				},
+				"uid": {
+					"title": "Unique ID",
+					"type": "string"
+				}
+			},
+			"title": "Identity Provider",
+			"type": "object"
+		}
+	},
+	"$id": "https://schema.ocsf.io/schema/classes/ssh_activity",
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"properties": {
+		"message": {
+			"title": "Message",
+			"type": "string"
+		},
+		"observables": {
+			"items": {
+				"$ref": "#/$defs/observable"
+			},
+			"title": "Observables",
+			"type": "array"
+		},
+		"class_name": {
+			"title": "Class",
+			"type": "string"
+		},
+		"status_id": {
+			"enum": [
+				0,
+				1,
+				2,
+				99
+			],
+			"title": "Status ID",
+			"type": "integer"
+		},
+		"type_uid": {
+			"enum": [
+				400700,
+				400701,
+				400702,
+				400703,
+				400704,
+				400705,
+				400706,
+				400799
+			],
+			"title": "Type ID",
+			"type": "integer"
+		},
+		"activity_name": {
+			"title": "Activity",
+			"type": "string"
+		},
+		"status": {
+			"title": "Status",
+			"type": "string"
+		},
+		"data": {
+			"$ref": "#/$defs/json_t",
+			"title": "Data"
+		},
+		"dst_endpoint": {
+			"$ref": "#/$defs/network_endpoint",
+			"title": "Destination Endpoint"
+		},
+		"timezone_offset": {
+			"title": "Timezone Offset",
+			"type": "integer"
+		},
+		"category_name": {
+			"title": "Category",
+			"type": "string"
+		},
+		"duration": {
+			"title": "Duration",
+			"type": "integer"
+		},
+		"activity_id": {
+			"enum": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				99
+			],
+			"title": "Activity ID",
+			"type": "integer"
+		},
+		"end_time": {
+			"title": "End Time",
+			"type": "integer"
+		},
+		"connection_info": {
+			"$ref": "#/$defs/network_connection_info",
+			"title": "Connection Info"
+		},
+		"protocol_ver": {
+			"title": "SSH Version",
+			"type": "string"
+		},
+		"app_name": {
+			"title": "Application Name",
+			"type": "string"
+		},
+		"class_uid": {
+			"const": 4007,
+			"title": "Class ID",
+			"type": "integer"
+		},
+		"start_time": {
+			"title": "Start Time",
+			"type": "integer"
+		},
+		"confidence": {
+			"title": "Confidence",
+			"type": "integer"
+		},
+		"status_detail": {
+			"title": "Status Details",
+			"type": "string"
+		},
+		"raw_data": {
+			"title": "Raw Data",
+			"type": "string"
+		},
+		"unmapped": {
+			"$ref": "#/$defs/object",
+			"title": "Unmapped Data"
+		},
+		"type_name": {
+			"title": "Type Name",
+			"type": "string"
+		},
+		"category_uid": {
+			"const": 4,
+			"title": "Category ID",
+			"type": "integer"
+		},
+		"tls": {
+			"$ref": "#/$defs/tls",
+			"title": "TLS"
+		},
+		"src_endpoint": {
+			"$ref": "#/$defs/network_endpoint",
+			"title": "Source Endpoint"
+		},
+		"severity_id": {
+			"enum": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				99
+			],
+			"title": "Severity ID",
+			"type": "integer"
+		},
+		"client_hassh": {
+			"$ref": "#/$defs/hassh",
+			"title": "Client HASSH"
+		},
+		"server_hassh": {
+			"$ref": "#/$defs/hassh",
+			"title": "Server HASSH"
+		},
+		"count": {
+			"title": "Count",
+			"type": "integer"
+		},
+		"enrichments": {
+			"items": {
+				"$ref": "#/$defs/enrichment"
+			},
+			"title": "Enrichments",
+			"type": "array"
+		},
+		"severity": {
+			"title": "Severity",
+			"type": "string"
+		},
+		"status_code": {
+			"title": "Status Code",
+			"type": "string"
+		},
+		"metadata": {
+			"$ref": "#/$defs/metadata",
+			"title": "Metadata"
+		},
+		"time": {
+			"title": "Event Time",
+			"type": "integer"
+		},
+		"proxy": {
+			"$ref": "#/$defs/network_proxy",
+			"title": "Proxy"
+		},
+		"traffic": {
+			"$ref": "#/$defs/network_traffic",
+			"title": "Traffic"
+		}
+	},
+	"required": [
+		"severity_id",
+		"metadata",
+		"type_uid",
+		"dst_endpoint",
+		"src_endpoint",
+		"activity_id",
+		"time",
+		"class_uid",
+		"category_uid"
+	],
+	"title": "SSH Activity",
+	"type": "object"
+}
