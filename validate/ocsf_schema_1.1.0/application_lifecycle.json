@@ -12,51 +12,6 @@
 			}
 		},
 		{
-			"smtp_hello": {
-				"type": "string_t",
-				"description": "The value of the SMTP HELO or EHLO command sent by the initiator (client).",
-				"group": "primary",
-				"requirement": "recommended",
-				"caption": "SMTP Hello",
-				"type_name": "String",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"attempt": {
-				"type": "integer_t",
-				"description": "The attempt number for attempting to deliver the email.",
-				"group": "context",
-				"requirement": "optional",
-				"caption": "Attempt",
-				"type_name": "Integer",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"banner": {
-				"type": "string_t",
-				"description": "The initial SMTP connection response that a messaging server receives after it connects to a email server.",
-				"group": "context",
-				"requirement": "optional",
-				"caption": "SMTP Banner",
-				"type_name": "String",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"dst_endpoint": {
-				"type": "object_t",
-				"description": "The responder (server) receiving the email.",
-				"group": "primary",
-				"requirement": "optional",
-				"caption": "Destination Endpoint",
-				"object_name": "Network Endpoint",
-				"object_type": "network_endpoint",
-				"_source": "email_activity"
-			}
-		},
-		{
 			"status_id": {
 				"type": "integer_t",
 				"enum": {
@@ -118,21 +73,9 @@
 			}
 		},
 		{
-			"email": {
-				"type": "object_t",
-				"description": "The email object.",
-				"group": "primary",
-				"requirement": "required",
-				"caption": "Email",
-				"object_name": "Email",
-				"object_type": "email",
-				"_source": "email_activity"
-			}
-		},
-		{
 			"category_name": {
 				"type": "string_t",
-				"description": "The event category name, as defined by category_uid value: <code>Network Activity</code>.",
+				"description": "The event category name, as defined by category_uid value: <code>Application Activity</code>.",
 				"group": "classification",
 				"requirement": "optional",
 				"caption": "Category",
@@ -246,8 +189,7 @@
 				"type": "integer_t",
 				"enum": {
 					"3": {
-						"description": "Email being scanned (example: security scanning)",
-						"caption": "Scan"
+						"caption": "Start"
 					},
 					"99": {
 						"description": "The event activity is not mapped.",
@@ -258,18 +200,21 @@
 						"caption": "Unknown"
 					},
 					"1": {
-						"caption": "Send"
+						"caption": "Install"
 					},
 					"2": {
-						"caption": "Receive"
+						"caption": "Remove"
+					},
+					"4": {
+						"caption": "Stop"
 					}
 				},
 				"description": "The normalized identifier of the activity that triggered the event.",
 				"group": "classification",
-				"requirement": "optional",
+				"requirement": "required",
 				"caption": "Activity ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "application_lifecycle",
 				"sibling": "activity_name"
 			}
 		},
@@ -281,62 +226,6 @@
 				"caption": "Status Details",
 				"type_name": "String",
 				"_source": "base_event"
-			}
-		},
-		{
-			"src_endpoint": {
-				"type": "object_t",
-				"description": "The initiator (client) sending the email.",
-				"group": "primary",
-				"requirement": "optional",
-				"caption": "Source Endpoint",
-				"object_name": "Network Endpoint",
-				"object_type": "network_endpoint",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"direction_id": {
-				"type": "integer_t",
-				"enum": {
-					"3": {
-						"description": "Email Internal, from inside the network destined for an entity inside network.",
-						"caption": "Internal"
-					},
-					"99": {
-						"caption": "Other"
-					},
-					"0": {
-						"description": "The email direction is unknown.",
-						"caption": "Unknown"
-					},
-					"1": {
-						"description": "Email Inbound, from the Internet or outside network destined for an entity inside network.",
-						"caption": "Inbound"
-					},
-					"2": {
-						"description": "Email Outbound, from inside the network destined for an entity outside network.",
-						"caption": "Outbound"
-					}
-				},
-				"description": "<p>The direction of the email relative to the scanning host or organization.</p>Email scanned at an internet gateway might be characterized as inbound to the organization from the Internet, outbound from the organization to the Internet, or internal within the organization. Email scanned at a workstation might be characterized as inbound to, or outbound from the workstation.",
-				"group": "context",
-				"requirement": "required",
-				"caption": "Direction ID",
-				"type_name": "Integer",
-				"_source": "email_activity",
-				"sibling": "direction"
-			}
-		},
-		{
-			"direction": {
-				"type": "string_t",
-				"description": "The direction of the email, as defined by the <code>direction_id</code> value.",
-				"group": "context",
-				"requirement": "optional",
-				"caption": "Direction",
-				"type_name": "String",
-				"_source": "email_activity"
 			}
 		},
 		{
@@ -353,21 +242,23 @@
 			"type_uid": {
 				"type": "integer_t",
 				"enum": {
-					"400903": {
-						"description": "Email being scanned (example: security scanning)",
-						"caption": "Email Activity: Scan"
+					"600203": {
+						"caption": "Application Lifecycle: Start"
 					},
-					"400999": {
-						"caption": "Email Activity: Other"
+					"600299": {
+						"caption": "Application Lifecycle: Other"
 					},
-					"400900": {
-						"caption": "Email Activity: Unknown"
+					"600200": {
+						"caption": "Application Lifecycle: Unknown"
 					},
-					"400901": {
-						"caption": "Email Activity: Send"
+					"600201": {
+						"caption": "Application Lifecycle: Install"
 					},
-					"400902": {
-						"caption": "Email Activity: Receive"
+					"600202": {
+						"caption": "Application Lifecycle: Remove"
+					},
+					"600204": {
+						"caption": "Application Lifecycle: Stop"
 					}
 				},
 				"description": "The event type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: <code>class_uid * 100 + activity_id</code>.",
@@ -375,14 +266,14 @@
 				"requirement": "required",
 				"caption": "Type ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "application_lifecycle",
 				"sibling": "type_name"
 			}
 		},
 		{
 			"class_name": {
 				"type": "string_t",
-				"description": "The event class name, as defined by class_uid value: <code>Email Activity</code>.",
+				"description": "The event class name, as defined by class_uid value: <code>Application Lifecycle</code>.",
 				"group": "classification",
 				"requirement": "optional",
 				"caption": "Class",
@@ -419,10 +310,10 @@
 				"default": 0,
 				"type": "integer_t",
 				"enum": {
-					"4": {
-						"description": "Network Activity events.",
-						"uid": 4,
-						"caption": "Network Activity"
+					"6": {
+						"description": "Application Activity events report detailed information about the behavior of applications and services.",
+						"uid": 6,
+						"caption": "Application Activity"
 					}
 				},
 				"description": "The category unique identifier of the event.",
@@ -430,7 +321,7 @@
 				"requirement": "required",
 				"caption": "Category ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "application_lifecycle",
 				"sibling": "category_name"
 			}
 		},
@@ -451,9 +342,9 @@
 				"default": 0,
 				"type": "integer_t",
 				"enum": {
-					"4009": {
-						"description": "Email events report activities of emails.",
-						"caption": "Email Activity"
+					"6002": {
+						"description": "Application Lifecycle events report installation, removal, start, stop of an application or service.",
+						"caption": "Application Lifecycle"
 					}
 				},
 				"description": "The unique identifier of a class. A Class describes the attributes available in an event.",
@@ -461,7 +352,7 @@
 				"requirement": "required",
 				"caption": "Class ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "application_lifecycle",
 				"sibling": "class_name"
 			}
 		},
@@ -477,15 +368,15 @@
 			}
 		},
 		{
-			"email_auth": {
+			"app": {
 				"type": "object_t",
-				"description": "The SPF, DKIM and DMARC attributes of an email.",
+				"description": "The application that was affected by the lifecycle event.  This also applies to self-updating application systems.",
 				"group": "primary",
-				"requirement": "recommended",
-				"caption": "Email Authentication",
-				"object_name": "Email Authentication",
-				"object_type": "email_auth",
-				"_source": "email_activity"
+				"requirement": "required",
+				"caption": "Application",
+				"object_name": "Product",
+				"object_type": "product",
+				"_source": "application_lifecycle"
 			}
 		},
 		{
@@ -546,20 +437,19 @@
 			}
 		}
 	],
-	"name": "email_activity",
-	"description": "Email events report activities of emails.",
-	"uid": 4009,
-	"extends": "base_event",
-	"category": "network",
-	"caption": "Email Activity",
+	"name": "application_lifecycle",
+	"description": "Application Lifecycle events report installation, removal, start, stop of an application or service.",
+	"uid": 6002,
+	"extends": "application",
+	"category": "application",
+	"caption": "Application Lifecycle",
 	"profiles": [
 		"cloud",
 		"datetime",
 		"host",
-		"security_control",
 		"container",
 		"linux/linux_users",
 		"person"
 	],
-	"category_name": "Network Activity"
+	"category_name": "Application Activity"
 }

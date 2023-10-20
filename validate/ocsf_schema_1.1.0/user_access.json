@@ -12,48 +12,15 @@
 			}
 		},
 		{
-			"smtp_hello": {
-				"type": "string_t",
-				"description": "The value of the SMTP HELO or EHLO command sent by the initiator (client).",
-				"group": "primary",
-				"requirement": "recommended",
-				"caption": "SMTP Hello",
-				"type_name": "String",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"attempt": {
-				"type": "integer_t",
-				"description": "The attempt number for attempting to deliver the email.",
-				"group": "context",
-				"requirement": "optional",
-				"caption": "Attempt",
-				"type_name": "Integer",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"banner": {
-				"type": "string_t",
-				"description": "The initial SMTP connection response that a messaging server receives after it connects to a email server.",
-				"group": "context",
-				"requirement": "optional",
-				"caption": "SMTP Banner",
-				"type_name": "String",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"dst_endpoint": {
+			"resource": {
 				"type": "object_t",
-				"description": "The responder (server) receiving the email.",
+				"description": "Resource that the privileges give access to.",
 				"group": "primary",
 				"requirement": "optional",
-				"caption": "Destination Endpoint",
-				"object_name": "Network Endpoint",
-				"object_type": "network_endpoint",
-				"_source": "email_activity"
+				"caption": "Resource",
+				"object_name": "Resource Details",
+				"object_type": "resource_details",
+				"_source": "user_access"
 			}
 		},
 		{
@@ -118,21 +85,9 @@
 			}
 		},
 		{
-			"email": {
-				"type": "object_t",
-				"description": "The email object.",
-				"group": "primary",
-				"requirement": "required",
-				"caption": "Email",
-				"object_name": "Email",
-				"object_type": "email",
-				"_source": "email_activity"
-			}
-		},
-		{
 			"category_name": {
 				"type": "string_t",
-				"description": "The event category name, as defined by category_uid value: <code>Network Activity</code>.",
+				"description": "The event category name, as defined by category_uid value: <code>Identity & Access Management</code>.",
 				"group": "classification",
 				"requirement": "optional",
 				"caption": "Category",
@@ -245,10 +200,6 @@
 			"activity_id": {
 				"type": "integer_t",
 				"enum": {
-					"3": {
-						"description": "Email being scanned (example: security scanning)",
-						"caption": "Scan"
-					},
 					"99": {
 						"description": "The event activity is not mapped.",
 						"caption": "Other"
@@ -258,18 +209,20 @@
 						"caption": "Unknown"
 					},
 					"1": {
-						"caption": "Send"
+						"description": "Assign privileges to a user.",
+						"caption": "Assign Privileges"
 					},
 					"2": {
-						"caption": "Receive"
+						"description": "Revoke privileges from a user.",
+						"caption": "Revoke Privileges"
 					}
 				},
 				"description": "The normalized identifier of the activity that triggered the event.",
 				"group": "classification",
-				"requirement": "optional",
+				"requirement": "required",
 				"caption": "Activity ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "user_access",
 				"sibling": "activity_name"
 			}
 		},
@@ -281,62 +234,6 @@
 				"caption": "Status Details",
 				"type_name": "String",
 				"_source": "base_event"
-			}
-		},
-		{
-			"src_endpoint": {
-				"type": "object_t",
-				"description": "The initiator (client) sending the email.",
-				"group": "primary",
-				"requirement": "optional",
-				"caption": "Source Endpoint",
-				"object_name": "Network Endpoint",
-				"object_type": "network_endpoint",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"direction_id": {
-				"type": "integer_t",
-				"enum": {
-					"3": {
-						"description": "Email Internal, from inside the network destined for an entity inside network.",
-						"caption": "Internal"
-					},
-					"99": {
-						"caption": "Other"
-					},
-					"0": {
-						"description": "The email direction is unknown.",
-						"caption": "Unknown"
-					},
-					"1": {
-						"description": "Email Inbound, from the Internet or outside network destined for an entity inside network.",
-						"caption": "Inbound"
-					},
-					"2": {
-						"description": "Email Outbound, from inside the network destined for an entity outside network.",
-						"caption": "Outbound"
-					}
-				},
-				"description": "<p>The direction of the email relative to the scanning host or organization.</p>Email scanned at an internet gateway might be characterized as inbound to the organization from the Internet, outbound from the organization to the Internet, or internal within the organization. Email scanned at a workstation might be characterized as inbound to, or outbound from the workstation.",
-				"group": "context",
-				"requirement": "required",
-				"caption": "Direction ID",
-				"type_name": "Integer",
-				"_source": "email_activity",
-				"sibling": "direction"
-			}
-		},
-		{
-			"direction": {
-				"type": "string_t",
-				"description": "The direction of the email, as defined by the <code>direction_id</code> value.",
-				"group": "context",
-				"requirement": "optional",
-				"caption": "Direction",
-				"type_name": "String",
-				"_source": "email_activity"
 			}
 		},
 		{
@@ -353,21 +250,19 @@
 			"type_uid": {
 				"type": "integer_t",
 				"enum": {
-					"400903": {
-						"description": "Email being scanned (example: security scanning)",
-						"caption": "Email Activity: Scan"
+					"300599": {
+						"caption": "User Access Management: Other"
 					},
-					"400999": {
-						"caption": "Email Activity: Other"
+					"300500": {
+						"caption": "User Access Management: Unknown"
 					},
-					"400900": {
-						"caption": "Email Activity: Unknown"
+					"300501": {
+						"description": "Assign privileges to a user.",
+						"caption": "User Access Management: Assign Privileges"
 					},
-					"400901": {
-						"caption": "Email Activity: Send"
-					},
-					"400902": {
-						"caption": "Email Activity: Receive"
+					"300502": {
+						"description": "Revoke privileges from a user.",
+						"caption": "User Access Management: Revoke Privileges"
 					}
 				},
 				"description": "The event type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: <code>class_uid * 100 + activity_id</code>.",
@@ -375,14 +270,14 @@
 				"requirement": "required",
 				"caption": "Type ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "user_access",
 				"sibling": "type_name"
 			}
 		},
 		{
 			"class_name": {
 				"type": "string_t",
-				"description": "The event class name, as defined by class_uid value: <code>Email Activity</code>.",
+				"description": "The event class name, as defined by class_uid value: <code>User Access Management</code>.",
 				"group": "classification",
 				"requirement": "optional",
 				"caption": "Class",
@@ -419,10 +314,10 @@
 				"default": 0,
 				"type": "integer_t",
 				"enum": {
-					"4": {
-						"description": "Network Activity events.",
-						"uid": 4,
-						"caption": "Network Activity"
+					"3": {
+						"description": "Identity & Access Management (IAM) events relate to the supervision of the system's authentication and access control model. Examples of such events are the success or failure of authentication, granting of authority, password change, entity change, privileged use etc.",
+						"uid": 3,
+						"caption": "Identity & Access Management"
 					}
 				},
 				"description": "The category unique identifier of the event.",
@@ -430,8 +325,20 @@
 				"requirement": "required",
 				"caption": "Category ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "user_access",
 				"sibling": "category_name"
+			}
+		},
+		{
+			"user": {
+				"type": "object_t",
+				"description": "User to which privileges were assigned.",
+				"group": "primary",
+				"requirement": "required",
+				"caption": "User",
+				"object_name": "User",
+				"object_type": "user",
+				"_source": "user_access"
 			}
 		},
 		{
@@ -451,9 +358,9 @@
 				"default": 0,
 				"type": "integer_t",
 				"enum": {
-					"4009": {
-						"description": "Email events report activities of emails.",
-						"caption": "Email Activity"
+					"3005": {
+						"description": "User Access Management events report management updates to a user's privileges.",
+						"caption": "User Access Management"
 					}
 				},
 				"description": "The unique identifier of a class. A Class describes the attributes available in an event.",
@@ -461,7 +368,7 @@
 				"requirement": "required",
 				"caption": "Class ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "user_access",
 				"sibling": "class_name"
 			}
 		},
@@ -477,15 +384,15 @@
 			}
 		},
 		{
-			"email_auth": {
-				"type": "object_t",
-				"description": "The SPF, DKIM and DMARC attributes of an email.",
+			"privileges": {
+				"type": "string_t",
+				"description": "List of privileges assigned to a user.",
 				"group": "primary",
-				"requirement": "recommended",
-				"caption": "Email Authentication",
-				"object_name": "Email Authentication",
-				"object_type": "email_auth",
-				"_source": "email_activity"
+				"is_array": true,
+				"requirement": "required",
+				"caption": "Privileges",
+				"type_name": "String",
+				"_source": "user_access"
 			}
 		},
 		{
@@ -546,20 +453,19 @@
 			}
 		}
 	],
-	"name": "email_activity",
-	"description": "Email events report activities of emails.",
-	"uid": 4009,
-	"extends": "base_event",
-	"category": "network",
-	"caption": "Email Activity",
+	"name": "user_access",
+	"description": "User Access Management events report management updates to a user's privileges.",
+	"uid": 3005,
+	"extends": "iam",
+	"category": "iam",
+	"caption": "User Access Management",
 	"profiles": [
 		"cloud",
 		"datetime",
 		"host",
-		"security_control",
+		"person",
 		"container",
-		"linux/linux_users",
-		"person"
+		"linux/linux_users"
 	],
-	"category_name": "Network Activity"
+	"category_name": "Identity & Access Management"
 }

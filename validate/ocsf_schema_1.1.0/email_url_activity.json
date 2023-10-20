@@ -12,51 +12,6 @@
 			}
 		},
 		{
-			"smtp_hello": {
-				"type": "string_t",
-				"description": "The value of the SMTP HELO or EHLO command sent by the initiator (client).",
-				"group": "primary",
-				"requirement": "recommended",
-				"caption": "SMTP Hello",
-				"type_name": "String",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"attempt": {
-				"type": "integer_t",
-				"description": "The attempt number for attempting to deliver the email.",
-				"group": "context",
-				"requirement": "optional",
-				"caption": "Attempt",
-				"type_name": "Integer",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"banner": {
-				"type": "string_t",
-				"description": "The initial SMTP connection response that a messaging server receives after it connects to a email server.",
-				"group": "context",
-				"requirement": "optional",
-				"caption": "SMTP Banner",
-				"type_name": "String",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"dst_endpoint": {
-				"type": "object_t",
-				"description": "The responder (server) receiving the email.",
-				"group": "primary",
-				"requirement": "optional",
-				"caption": "Destination Endpoint",
-				"object_name": "Network Endpoint",
-				"object_type": "network_endpoint",
-				"_source": "email_activity"
-			}
-		},
-		{
 			"status_id": {
 				"type": "integer_t",
 				"enum": {
@@ -118,15 +73,15 @@
 			}
 		},
 		{
-			"email": {
+			"url": {
 				"type": "object_t",
-				"description": "The email object.",
+				"description": "The URL included in the email content.",
 				"group": "primary",
 				"requirement": "required",
-				"caption": "Email",
-				"object_name": "Email",
-				"object_type": "email",
-				"_source": "email_activity"
+				"caption": "URL",
+				"object_name": "Uniform Resource Locator",
+				"object_type": "url",
+				"_source": "email_url_activity"
 			}
 		},
 		{
@@ -246,7 +201,7 @@
 				"type": "integer_t",
 				"enum": {
 					"3": {
-						"description": "Email being scanned (example: security scanning)",
+						"description": "Email URL being scanned (example: security scanning).",
 						"caption": "Scan"
 					},
 					"99": {
@@ -269,7 +224,7 @@
 				"requirement": "optional",
 				"caption": "Activity ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "email_url_activity",
 				"sibling": "activity_name"
 			}
 		},
@@ -281,62 +236,6 @@
 				"caption": "Status Details",
 				"type_name": "String",
 				"_source": "base_event"
-			}
-		},
-		{
-			"src_endpoint": {
-				"type": "object_t",
-				"description": "The initiator (client) sending the email.",
-				"group": "primary",
-				"requirement": "optional",
-				"caption": "Source Endpoint",
-				"object_name": "Network Endpoint",
-				"object_type": "network_endpoint",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"direction_id": {
-				"type": "integer_t",
-				"enum": {
-					"3": {
-						"description": "Email Internal, from inside the network destined for an entity inside network.",
-						"caption": "Internal"
-					},
-					"99": {
-						"caption": "Other"
-					},
-					"0": {
-						"description": "The email direction is unknown.",
-						"caption": "Unknown"
-					},
-					"1": {
-						"description": "Email Inbound, from the Internet or outside network destined for an entity inside network.",
-						"caption": "Inbound"
-					},
-					"2": {
-						"description": "Email Outbound, from inside the network destined for an entity outside network.",
-						"caption": "Outbound"
-					}
-				},
-				"description": "<p>The direction of the email relative to the scanning host or organization.</p>Email scanned at an internet gateway might be characterized as inbound to the organization from the Internet, outbound from the organization to the Internet, or internal within the organization. Email scanned at a workstation might be characterized as inbound to, or outbound from the workstation.",
-				"group": "context",
-				"requirement": "required",
-				"caption": "Direction ID",
-				"type_name": "Integer",
-				"_source": "email_activity",
-				"sibling": "direction"
-			}
-		},
-		{
-			"direction": {
-				"type": "string_t",
-				"description": "The direction of the email, as defined by the <code>direction_id</code> value.",
-				"group": "context",
-				"requirement": "optional",
-				"caption": "Direction",
-				"type_name": "String",
-				"_source": "email_activity"
 			}
 		},
 		{
@@ -353,21 +252,21 @@
 			"type_uid": {
 				"type": "integer_t",
 				"enum": {
-					"400903": {
-						"description": "Email being scanned (example: security scanning)",
-						"caption": "Email Activity: Scan"
+					"401203": {
+						"description": "Email URL being scanned (example: security scanning).",
+						"caption": "Email URL Activity: Scan"
 					},
-					"400999": {
-						"caption": "Email Activity: Other"
+					"401299": {
+						"caption": "Email URL Activity: Other"
 					},
-					"400900": {
-						"caption": "Email Activity: Unknown"
+					"401200": {
+						"caption": "Email URL Activity: Unknown"
 					},
-					"400901": {
-						"caption": "Email Activity: Send"
+					"401201": {
+						"caption": "Email URL Activity: Send"
 					},
-					"400902": {
-						"caption": "Email Activity: Receive"
+					"401202": {
+						"caption": "Email URL Activity: Receive"
 					}
 				},
 				"description": "The event type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: <code>class_uid * 100 + activity_id</code>.",
@@ -375,14 +274,14 @@
 				"requirement": "required",
 				"caption": "Type ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "email_url_activity",
 				"sibling": "type_name"
 			}
 		},
 		{
 			"class_name": {
 				"type": "string_t",
-				"description": "The event class name, as defined by class_uid value: <code>Email Activity</code>.",
+				"description": "The event class name, as defined by class_uid value: <code>Email URL Activity</code>.",
 				"group": "classification",
 				"requirement": "optional",
 				"caption": "Class",
@@ -430,7 +329,7 @@
 				"requirement": "required",
 				"caption": "Category ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "email_url_activity",
 				"sibling": "category_name"
 			}
 		},
@@ -451,9 +350,9 @@
 				"default": 0,
 				"type": "integer_t",
 				"enum": {
-					"4009": {
-						"description": "Email events report activities of emails.",
-						"caption": "Email Activity"
+					"4012": {
+						"description": "Email URL Activity events report URLs within an email.",
+						"caption": "Email URL Activity"
 					}
 				},
 				"description": "The unique identifier of a class. A Class describes the attributes available in an event.",
@@ -461,7 +360,7 @@
 				"requirement": "required",
 				"caption": "Class ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "email_url_activity",
 				"sibling": "class_name"
 			}
 		},
@@ -477,15 +376,14 @@
 			}
 		},
 		{
-			"email_auth": {
-				"type": "object_t",
-				"description": "The SPF, DKIM and DMARC attributes of an email.",
+			"email_uid": {
+				"type": "string_t",
+				"description": "The unique identifier of the email, used to correlate related email alert and activity events.",
 				"group": "primary",
-				"requirement": "recommended",
-				"caption": "Email Authentication",
-				"object_name": "Email Authentication",
-				"object_type": "email_auth",
-				"_source": "email_activity"
+				"requirement": "required",
+				"caption": "Email UID",
+				"type_name": "String",
+				"_source": "email_url_activity"
 			}
 		},
 		{
@@ -546,12 +444,12 @@
 			}
 		}
 	],
-	"name": "email_activity",
-	"description": "Email events report activities of emails.",
-	"uid": 4009,
+	"name": "email_url_activity",
+	"description": "Email URL Activity events report URLs within an email.",
+	"uid": 4012,
 	"extends": "base_event",
 	"category": "network",
-	"caption": "Email Activity",
+	"caption": "Email URL Activity",
 	"profiles": [
 		"cloud",
 		"datetime",

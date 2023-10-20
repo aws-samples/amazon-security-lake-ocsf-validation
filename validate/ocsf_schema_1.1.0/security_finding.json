@@ -1,2082 +1,810 @@
 {
-	"$defs": {
-		"resource": {
-			"properties": {
-				"account_uid": {
-					"title": "Account UID",
-					"type": "string"
-				},
-				"cloud_partition": {
-					"title": "Cloud Partition",
-					"type": "string"
-				},
-				"criticality": {
-					"title": "Criticality",
-					"type": "string"
-				},
-				"details": {
-					"title": "Details",
-					"type": "string"
-				},
-				"device": {
-					"$ref": "#/$defs/device",
-					"title": "Device"
-				},
-				"group_name": {
-					"title": "Group Name",
-					"type": "string"
-				},
-				"labels": {
-					"items": {
-						"type": "string"
+	"attributes": [
+		{
+			"region": {
+				"type": "string_t",
+				"description": "The AWS region that is used as a partition in the Amazon Security Lake instance..",
+				"group": "context",
+				"requirement": "optional",
+				"caption": "Amazon Security Lake - AWS Region",
+				"type_name": "String",
+				"_source": "aws/base_event"
+			}
+		},
+		{
+			"state_id": {
+				"type": "integer_t",
+				"enum": {
+					"3": {
+						"description": "The finding was reviewed, considered as a false positive and is now suppressed.",
+						"caption": "Suppressed"
 					},
-					"title": "Labels",
-					"type": "array"
-				},
-				"name": {
-					"title": "Name",
-					"type": "string"
-				},
-				"owner": {
-					"$ref": "#/$defs/user",
-					"title": "Owner"
-				},
-				"region": {
-					"title": "Region",
-					"type": "string"
-				},
-				"type": {
-					"title": "Type",
-					"type": "string"
-				},
-				"uid": {
-					"title": "Unique ID",
-					"type": "string"
-				}
-			},
-			"title": "Resource",
-			"type": "object"
-		},
-		"fingerprint": {
-			"properties": {
-				"algorithm": {
-					"title": "Algorithm",
-					"type": "string"
-				},
-				"algorithm_id": {
-					"enum": [
-						0,
-						1,
-						2,
-						3,
-						4,
-						5,
-						99
-					],
-					"title": "Algorithm ID",
-					"type": "integer"
-				},
-				"value": {
-					"title": "Value",
-					"type": "string"
-				}
-			},
-			"required": [
-				"value",
-				"algorithm_id"
-			],
-			"title": "Fingerprint",
-			"type": "object"
-		},
-		"process": {
-			"properties": {
-				"cmd_line": {
-					"title": "Command Line",
-					"type": "string"
-				},
-				"created_time": {
-					"title": "Created Time",
-					"type": "integer"
-				},
-				"file": {
-					"$ref": "#/$defs/file",
-					"title": "File"
-				},
-				"integrity": {
-					"title": "Integrity",
-					"type": "string"
-				},
-				"integrity_id": {
-					"enum": [
-						0,
-						1,
-						2,
-						3,
-						4,
-						5,
-						6,
-						99
-					],
-					"title": "Integrity Level",
-					"type": "integer"
-				},
-				"lineage": {
-					"items": {
-						"type": "string"
+					"99": {
+						"description": "The state is not mapped. See the <code>state</code> attribute, which contains a data source specific value.",
+						"caption": "Other"
 					},
-					"title": "Lineage",
-					"type": "array"
-				},
-				"loaded_modules": {
-					"items": {
-						"type": "string"
+					"0": {
+						"caption": "Unknown"
 					},
-					"title": "Loaded Modules",
-					"type": "array"
-				},
-				"name": {
-					"title": "Name",
-					"type": "string"
-				},
-				"parent_process": {
-					"$ref": "#/$defs/process",
-					"title": "Parent Process"
-				},
-				"pid": {
-					"title": "Process ID",
-					"type": "integer"
-				},
-				"sandbox": {
-					"title": "Sandbox",
-					"type": "string"
-				},
-				"session": {
-					"$ref": "#/$defs/session",
-					"title": "User Session"
-				},
-				"terminated_time": {
-					"title": "Terminated Time",
-					"type": "integer"
-				},
-				"tid": {
-					"title": "Thread ID",
-					"type": "integer"
-				},
-				"uid": {
-					"title": "Process UID",
-					"type": "string"
-				},
-				"user": {
-					"$ref": "#/$defs/user",
-					"title": "User"
-				},
-				"xattributes": {
-					"$ref": "#/$defs/object",
-					"title": "Extended Attributes"
-				}
-			},
-			"title": "Process",
-			"type": "object"
-		},
-		"cloud": {
-			"properties": {
-				"account_name": {
-					"title": "Account Name",
-					"type": "string"
-				},
-				"account_uid": {
-					"title": "Account UID",
-					"type": "string"
-				},
-				"org_uid": {
-					"title": "Org ID",
-					"type": "string"
-				},
-				"project_uid": {
-					"title": "Project ID",
-					"type": "string"
-				},
-				"provider": {
-					"title": "Provider",
-					"type": "string"
-				},
-				"region": {
-					"title": "Region",
-					"type": "string"
-				},
-				"zone": {
-					"title": "Network Zone",
-					"type": "string"
-				}
-			},
-			"required": [
-				"provider"
-			],
-			"title": "Cloud",
-			"type": "object"
-		},
-		"device_hw_info": {
-			"properties": {
-				"bios_date": {
-					"title": "BIOS Date",
-					"type": "string"
-				},
-				"bios_manufacturer": {
-					"title": "BIOS Manufacturer",
-					"type": "string"
-				},
-				"bios_ver": {
-					"title": "BIOS Version",
-					"type": "string"
-				},
-				"chassis": {
-					"title": "Chassis",
-					"type": "string"
-				},
-				"cpu_bits": {
-					"title": "CPU Bits",
-					"type": "integer"
-				},
-				"cpu_cores": {
-					"title": "CPU Cores",
-					"type": "integer"
-				},
-				"cpu_count": {
-					"title": "CPU Count",
-					"type": "integer"
-				},
-				"cpu_speed": {
-					"title": "Processor Type",
-					"type": "integer"
-				},
-				"cpu_type": {
-					"title": "Processor Type",
-					"type": "string"
-				},
-				"desktop_display": {
-					"$ref": "#/$defs/display",
-					"title": "Desktop Display"
-				},
-				"keyboard_info": {
-					"$ref": "#/$defs/keyboard_info",
-					"title": "Keyboard Information"
-				},
-				"ram_size": {
-					"title": "RAM Size",
-					"type": "integer"
-				},
-				"serial_number": {
-					"title": "Serial Number",
-					"type": "string"
-				}
-			},
-			"title": "Device Hardware Info",
-			"type": "object"
-		},
-		"digital_signature": {
-			"properties": {
-				"company_name": {
-					"title": "Company Name",
-					"type": "string"
-				},
-				"created_time": {
-					"title": "Created Time",
-					"type": "integer"
-				},
-				"developer_uid": {
-					"title": "Developer UID",
-					"type": "string"
-				},
-				"fingerprints": {
-					"items": {
-						"$ref": "#/$defs/fingerprint"
+					"1": {
+						"description": "The finding is new and yet to be reviewed.",
+						"caption": "New"
 					},
-					"title": "Fingerprints",
-					"type": "array"
-				},
-				"issuer_name": {
-					"title": "Issuer Name",
-					"type": "string"
-				},
-				"serial_number": {
-					"title": "Serial Number",
-					"type": "string"
-				}
-			},
-			"required": [
-				"company_name"
-			],
-			"title": "Digital Signature",
-			"type": "object"
-		},
-		"request": {
-			"properties": {
-				"flags": {
-					"items": {
-						"type": "string"
+					"2": {
+						"description": "The finding is under review.",
+						"caption": "In Progress"
 					},
-					"title": "Flags",
-					"type": "array"
+					"4": {
+						"description": "The finding was reviewed and remediated and is now considered resolved.",
+						"caption": "Resolved"
+					}
 				},
-				"uid": {
-					"title": "Unique ID",
-					"type": "string"
-				}
-			},
-			"required": [
-				"uid"
-			],
-			"title": "Request Elements",
-			"type": "object"
+				"description": "The normalized state identifier of a security finding.",
+				"group": "context",
+				"requirement": "required",
+				"caption": "State ID",
+				"type_name": "Integer",
+				"_source": "security_finding",
+				"sibling": "state"
+			}
 		},
-		"device": {
-			"properties": {
-				"hypervisor": {
-					"title": "Hypervisor",
-					"type": "string"
-				},
-				"instance_uid": {
-					"title": "Instance ID",
-					"type": "string"
-				},
-				"hw_info": {
-					"$ref": "#/$defs/device_hw_info",
-					"title": "Hardware Info"
-				},
-				"type": {
-					"title": "Type",
-					"type": "string"
-				},
-				"uid": {
-					"title": "Unique ID",
-					"type": "string"
-				},
-				"ip": {
-					"title": "IP Address",
-					"type": "string"
-				},
-				"vlan_uid": {
-					"title": "VLAN",
-					"type": "string"
-				},
-				"image": {
-					"$ref": "#/$defs/image",
-					"title": "Image"
-				},
-				"type_id": {
-					"enum": [
-						0,
-						1,
-						2,
-						3,
-						4,
-						5,
-						6,
-						7,
-						8,
-						99
-					],
-					"title": "Type ID",
-					"type": "integer"
-				},
-				"is_compliant": {
-					"title": "Compliant Device",
-					"type": "boolean"
-				},
-				"vpc_uid": {
-					"title": "VPC UID",
-					"type": "string"
-				},
-				"risk_score": {
-					"title": "Risk Score",
-					"type": "integer"
-				},
-				"location": {
-					"$ref": "#/$defs/location",
-					"title": "Detailed Geo Location"
-				},
-				"subnet_uid": {
-					"title": "Subnet UID",
-					"type": "string"
-				},
-				"groups": {
-					"items": {
-						"$ref": "#/$defs/group"
+		{
+			"confidence_score": {
+				"type": "integer_t",
+				"description": "The confidence score as reported by the event source.",
+				"group": "primary",
+				"requirement": "optional",
+				"caption": "Confidence Score",
+				"type_name": "Integer",
+				"_source": "security_finding"
+			}
+		},
+		{
+			"nist": {
+				"type": "string_t",
+				"description": "The NIST Cybersecurity Framework recommendations for managing the cybersecurity risk.",
+				"group": "context",
+				"is_array": true,
+				"requirement": "optional",
+				"caption": "NIST List",
+				"type_name": "String",
+				"_source": "security_finding"
+			}
+		},
+		{
+			"status_id": {
+				"type": "integer_t",
+				"enum": {
+					"99": {
+						"description": "The event status is not mapped. See the <code>status</code> attribute, which contains a data source specific value.",
+						"caption": "Other"
 					},
-					"title": "Groups",
-					"type": "array"
-				},
-				"risk_level": {
-					"title": "Risk Level",
-					"type": "string"
-				},
-				"imei": {
-					"title": "IMEI",
-					"type": "string"
-				},
-				"uuid": {
-					"title": "UUID",
-					"type": "string"
-				},
-				"interface_name": {
-					"title": "Network Interface Name",
-					"type": "string"
-				},
-				"region": {
-					"title": "Region",
-					"type": "string"
-				},
-				"desc": {
-					"title": "Description",
-					"type": "string"
-				},
-				"hostname": {
-					"title": "Hostname",
-					"type": "string"
-				},
-				"is_trusted": {
-					"title": "Trusted Device",
-					"type": "boolean"
-				},
-				"os": {
-					"$ref": "#/$defs/os",
-					"title": "OS"
-				},
-				"interface_uid": {
-					"title": "Network Interface ID",
-					"type": "string"
-				},
-				"domain": {
-					"title": "Domain",
-					"type": "string"
-				},
-				"org_unit": {
-					"title": "Org Unit",
-					"type": "string"
-				},
-				"subnet": {
-					"title": "Subnet",
-					"type": "string"
-				},
-				"mac": {
-					"title": "MAC Address",
-					"type": "string"
-				},
-				"autoscale_uid": {
-					"title": "Autoscale UID",
-					"type": "string"
-				},
-				"is_personal": {
-					"title": "Personal Device",
-					"type": "boolean"
-				},
-				"network_interfaces": {
-					"items": {
-						"$ref": "#/$defs/network_interface"
+					"0": {
+						"caption": "Unknown"
 					},
-					"title": "Network Interfaces",
-					"type": "array"
-				},
-				"name": {
-					"title": "Name",
-					"type": "string"
-				},
-				"risk_level_id": {
-					"enum": [
-						0,
-						1,
-						2,
-						3,
-						4
-					],
-					"title": "Risk Level ID",
-					"type": "integer"
-				},
-				"is_managed": {
-					"title": "Managed Device",
-					"type": "boolean"
-				}
-			},
-			"required": [
-				"type_id"
-			],
-			"title": "Device",
-			"type": "object"
-		},
-		"cvss": {
-			"properties": {
-				"base_score": {
-					"title": "Base Score",
-					"type": "number"
-				},
-				"depth": {
-					"enum": [
-						"Base",
-						"Environmental",
-						"Temporal"
-					],
-					"title": "CVSS Depth",
-					"type": "string"
-				},
-				"metrics": {
-					"items": {
-						"$ref": "#/$defs/metric"
+					"1": {
+						"caption": "Success"
 					},
-					"title": "Metrics",
-					"type": "array"
+					"2": {
+						"caption": "Failure"
+					}
 				},
-				"overall_score": {
-					"title": "Overall Score",
-					"type": "number"
-				},
-				"severity": {
-					"title": "Severity",
-					"type": "string"
-				},
-				"vector_string": {
-					"title": "Vector String",
-					"type": "string"
-				},
-				"version": {
-					"title": "Version",
-					"type": "string"
-				}
-			},
-			"required": [
-				"version",
-				"base_score"
-			],
-			"title": "CVSS Score",
-			"type": "object"
+				"description": "The normalized identifier of the event status.",
+				"group": "primary",
+				"requirement": "recommended",
+				"caption": "Status ID",
+				"type_name": "Integer",
+				"_source": "base_event",
+				"sibling": "status"
+			}
 		},
-		"malware": {
-			"properties": {
-				"classification_ids": {
-					"items": {
-						"enum": [
-							0,
-							1,
-							10,
-							11,
-							13,
-							14,
-							15,
-							16,
-							17,
-							18,
-							19,
-							2,
-							20,
-							21,
-							22,
-							3,
-							4,
-							5,
-							6,
-							7,
-							8,
-							9,
-							99
-						],
-						"type": "integer"
+		{
+			"risk_score": {
+				"type": "integer_t",
+				"description": "The risk score as reported by the event source.",
+				"group": "primary",
+				"requirement": "optional",
+				"caption": "Risk Score",
+				"type_name": "Integer",
+				"_source": "security_finding"
+			}
+		},
+		{
+			"severity": {
+				"type": "string_t",
+				"description": "The event severity, normalized to the caption of the severity_id value. In the case of 'Other', it is defined by the event source.",
+				"group": "classification",
+				"requirement": "optional",
+				"caption": "Severity",
+				"type_name": "String",
+				"_source": "base_event"
+			}
+		},
+		{
+			"metadata": {
+				"type": "object_t",
+				"description": "The metadata associated with the event.",
+				"group": "context",
+				"requirement": "required",
+				"caption": "Metadata",
+				"object_name": "Metadata",
+				"object_type": "metadata",
+				"_source": "base_event"
+			}
+		},
+		{
+			"state": {
+				"type": "string_t",
+				"description": "The normalized state of a security finding.",
+				"group": "context",
+				"requirement": "optional",
+				"caption": "State",
+				"type_name": "String",
+				"_source": "security_finding"
+			}
+		},
+		{
+			"duration": {
+				"type": "integer_t",
+				"description": "The event duration or aggregate time, the amount of time the event covers from <code>start_time</code> to <code>end_time</code> in milliseconds.",
+				"group": "occurrence",
+				"requirement": "optional",
+				"caption": "Duration",
+				"type_name": "Integer",
+				"_source": "base_event"
+			}
+		},
+		{
+			"analytic": {
+				"type": "object_t",
+				"description": "The analytic technique used to analyze and derive insights from the data or information that led to the finding or conclusion.",
+				"group": "primary",
+				"requirement": "recommended",
+				"caption": "Analytic",
+				"object_name": "Analytic",
+				"object_type": "analytic",
+				"_source": "security_finding"
+			}
+		},
+		{
+			"category_name": {
+				"type": "string_t",
+				"description": "The event category name, as defined by category_uid value: <code>Findings</code>.",
+				"group": "classification",
+				"requirement": "optional",
+				"caption": "Category",
+				"type_name": "String",
+				"_source": "base_event"
+			}
+		},
+		{
+			"impact_score": {
+				"type": "integer_t",
+				"description": "The impact of the finding, valid range 0-100.",
+				"group": "primary",
+				"requirement": "optional",
+				"caption": "Impact",
+				"type_name": "Integer",
+				"_source": "security_finding"
+			}
+		},
+		{
+			"unmapped": {
+				"type": "object_t",
+				"description": "The attributes that are not mapped to the event schema. The names and values of those attributes are specific to the event source.",
+				"group": "context",
+				"caption": "Unmapped Data",
+				"object_name": "Object",
+				"object_type": "object",
+				"_source": "base_event"
+			}
+		},
+		{
+			"start_time": {
+				"type": "timestamp_t",
+				"description": "The start time of a time period, or the time of the least recent event included in the aggregate event.",
+				"group": "occurrence",
+				"requirement": "optional",
+				"caption": "Start Time",
+				"type_name": "Timestamp",
+				"_source": "base_event"
+			}
+		},
+		{
+			"end_time": {
+				"type": "timestamp_t",
+				"description": "The end time of a time period, or the time of the most recent event included in the aggregate event.",
+				"group": "occurrence",
+				"requirement": "optional",
+				"caption": "End Time",
+				"type_name": "Timestamp",
+				"_source": "base_event"
+			}
+		},
+		{
+			"observables": {
+				"type": "object_t",
+				"description": "The observables associated with the event.",
+				"group": "primary",
+				"is_array": true,
+				"requirement": "optional",
+				"caption": "Observables",
+				"object_name": "Observable",
+				"object_type": "observable",
+				"_source": "base_event"
+			}
+		},
+		{
+			"confidence": {
+				"type": "string_t",
+				"description": "The confidence, normalized to the caption of the confidence_id value. In the case of 'Other', it is defined by the event source.",
+				"group": "primary",
+				"requirement": "optional",
+				"caption": "Confidence",
+				"type_name": "String",
+				"_source": "security_finding"
+			}
+		},
+		{
+			"activity_name": {
+				"type": "string_t",
+				"description": "The event activity name, as defined by the activity_id.",
+				"group": "classification",
+				"requirement": "optional",
+				"caption": "Activity",
+				"type_name": "String",
+				"_source": "base_event"
+			}
+		},
+		{
+			"raw_data": {
+				"type": "string_t",
+				"description": "The event data as received from the event source.",
+				"group": "context",
+				"caption": "Raw Data",
+				"type_name": "String",
+				"_source": "base_event"
+			}
+		},
+		{
+			"malware": {
+				"type": "object_t",
+				"description": "The list of malware identified by a finding.",
+				"group": "context",
+				"is_array": true,
+				"requirement": "optional",
+				"caption": "Malware",
+				"object_name": "Malware",
+				"object_type": "malware",
+				"_source": "security_finding"
+			}
+		},
+		{
+			"count": {
+				"default": 1,
+				"type": "integer_t",
+				"description": "The number of times that events in the same logical group occurred during the event <strong>Start Time</strong> to <strong>End Time</strong> period.",
+				"group": "occurrence",
+				"requirement": "optional",
+				"caption": "Count",
+				"type_name": "Integer",
+				"_source": "base_event"
+			}
+		},
+		{
+			"status": {
+				"type": "string_t",
+				"description": "The event status, normalized to the caption of the status_id value. In the case of 'Other', it is defined by the event source.",
+				"group": "primary",
+				"requirement": "optional",
+				"caption": "Status",
+				"type_name": "String",
+				"_source": "base_event"
+			}
+		},
+		{
+			"message": {
+				"type": "string_t",
+				"description": "The description of the event, as defined by the event source.",
+				"group": "primary",
+				"requirement": "recommended",
+				"caption": "Message",
+				"type_name": "String",
+				"_source": "base_event"
+			}
+		},
+		{
+			"data_sources": {
+				"type": "string_t",
+				"description": "The data sources for the finding.",
+				"group": "context",
+				"is_array": true,
+				"requirement": "optional",
+				"caption": "Data Sources",
+				"type_name": "String",
+				"_source": "security_finding"
+			}
+		},
+		{
+			"activity_id": {
+				"type": "integer_t",
+				"enum": {
+					"3": {
+						"description": "A security finding was closed.",
+						"caption": "Close"
 					},
-					"title": "Classification IDs",
-					"type": "array"
-				},
-				"classifications": {
-					"items": {
-						"type": "string"
+					"99": {
+						"description": "The event activity is not mapped.",
+						"caption": "Other"
 					},
-					"title": "Classifications",
-					"type": "array"
-				},
-				"cves": {
-					"items": {
-						"$ref": "#/$defs/cve"
+					"0": {
+						"description": "The event activity is unknown.",
+						"caption": "Unknown"
 					},
-					"title": "CVE List",
-					"type": "array"
-				},
-				"name": {
-					"title": "Name",
-					"type": "string"
-				},
-				"path": {
-					"title": "Path",
-					"type": "string"
-				},
-				"provider": {
-					"title": "Provider",
-					"type": "string"
-				},
-				"uid": {
-					"title": "Unique ID",
-					"type": "string"
-				}
-			},
-			"required": [
-				"name",
-				"classification_ids"
-			],
-			"title": "Malware",
-			"type": "object"
-		},
-		"response": {
-			"properties": {
-				"code": {
-					"title": "Response Code",
-					"type": "integer"
-				},
-				"error": {
-					"title": "Error Code",
-					"type": "string"
-				},
-				"error_message": {
-					"title": "Error Message",
-					"type": "string"
-				},
-				"flags": {
-					"items": {
-						"type": "string"
+					"1": {
+						"description": "A security finding was created.",
+						"caption": "Create"
 					},
-					"title": "Flags",
-					"type": "array"
+					"2": {
+						"description": "A security finding was updated.",
+						"caption": "Update"
+					}
 				},
-				"message": {
-					"title": "Message",
-					"type": "string"
-				}
-			},
-			"title": "Response Elements",
-			"type": "object"
+				"description": "The normalized identifier of the activity that triggered the event.",
+				"group": "classification",
+				"requirement": "required",
+				"caption": "Activity ID",
+				"type_name": "Integer",
+				"_source": "security_finding",
+				"sibling": "activity_name"
+			}
 		},
-		"api": {
-			"properties": {
-				"operation": {
-					"title": "Operation",
-					"type": "string"
-				},
-				"request": {
-					"$ref": "#/$defs/request",
-					"title": "API Request Details"
-				},
-				"response": {
-					"$ref": "#/$defs/response",
-					"title": "API Response Details"
-				},
-				"service": {
-					"$ref": "#/$defs/service",
-					"title": "Service"
-				},
-				"version": {
-					"title": "Version",
-					"type": "string"
-				}
-			},
-			"required": [
-				"operation"
-			],
-			"title": "API Details",
-			"type": "object"
+		{
+			"compliance": {
+				"type": "object_t",
+				"description": "The compliance object provides context to compliance findings (e.g., a check against a specific regulatory or best practice framework such as CIS, NIST etc.) and contains compliance related details.",
+				"group": "context",
+				"requirement": "optional",
+				"caption": "Compliance",
+				"object_name": "Compliance",
+				"object_type": "compliance",
+				"_source": "security_finding"
+			}
 		},
-		"user": {
-			"properties": {
-				"account_type": {
-					"title": "Account Type",
-					"type": "string"
-				},
-				"account_type_id": {
-					"enum": [
-						0,
-						1,
-						2,
-						3,
-						4,
-						5,
-						6,
-						99
-					],
-					"title": "Account Type ID",
-					"type": "integer"
-				},
-				"account_uid": {
-					"title": "Account UID",
-					"type": "string"
-				},
-				"credential_uid": {
-					"title": "User Credential ID",
-					"type": "string"
-				},
-				"domain": {
-					"title": "Domain",
-					"type": "string"
-				},
-				"email_addr": {
-					"title": "Email Address",
-					"type": "string"
-				},
-				"groups": {
-					"items": {
-						"$ref": "#/$defs/group"
+		{
+			"status_detail": {
+				"type": "string_t",
+				"description": "The status details contains additional information about the event outcome.",
+				"group": "primary",
+				"caption": "Status Details",
+				"type_name": "String",
+				"_source": "base_event"
+			}
+		},
+		{
+			"confidence_id": {
+				"type": "integer_t",
+				"enum": {
+					"3": {
+						"caption": "High"
 					},
-					"title": "Groups",
-					"type": "array"
-				},
-				"name": {
-					"title": "Name",
-					"type": "string"
-				},
-				"org_uid": {
-					"title": "Org ID",
-					"type": "string"
-				},
-				"type": {
-					"title": "Type",
-					"type": "string"
-				},
-				"type_id": {
-					"enum": [
-						0,
-						1,
-						2,
-						3,
-						99
-					],
-					"title": "Type ID",
-					"type": "integer"
-				},
-				"uid": {
-					"title": "User ID",
-					"type": "string"
-				},
-				"uuid": {
-					"title": "Unique User ID",
-					"type": "string"
-				}
-			},
-			"title": "User",
-			"type": "object"
-		},
-		"group": {
-			"properties": {
-				"desc": {
-					"title": "Description",
-					"type": "string"
-				},
-				"name": {
-					"title": "Name",
-					"type": "string"
-				},
-				"privileges": {
-					"items": {
-						"type": "string"
+					"99": {
+						"description": "The confidence is not mapped to the defined enum values. See the <code>confidence</code> attribute, which contains a data source specific value.",
+						"caption": "Other"
 					},
-					"title": "Privileges",
-					"type": "array"
-				},
-				"type": {
-					"title": "Account Type",
-					"type": "string"
-				},
-				"uid": {
-					"title": "Unique ID",
-					"type": "string"
-				}
-			},
-			"required": [
-				"name"
-			],
-			"title": "Group",
-			"type": "object"
-		},
-		"tactic": {
-			"properties": {
-				"name": {
-					"title": "Name",
-					"type": "string"
-				},
-				"uid": {
-					"title": "Unique ID",
-					"type": "string"
-				}
-			},
-			"required": [
-				"uid"
-			],
-			"title": "Tactic",
-			"type": "object"
-		},
-		"attack": {
-			"properties": {
-				"tactics": {
-					"items": {
-						"$ref": "#/$defs/tactic"
+					"0": {
+						"description": "No confidence is assigned.",
+						"caption": "Unknown"
 					},
-					"title": "Tactics",
-					"type": "array"
-				},
-				"technique": {
-					"$ref": "#/$defs/technique",
-					"title": "Technique"
-				},
-				"version": {
-					"title": "Version",
-					"type": "string"
-				}
-			},
-			"required": [
-				"version",
-				"technique",
-				"tactics"
-			],
-			"title": "Attack",
-			"type": "object"
-		},
-		"json_t": {
-			"oneOf": [
-				{
-					"type": "string"
-				},
-				{
-					"type": "integer"
-				},
-				{
-					"type": "number"
-				},
-				{
-					"type": "boolean"
-				},
-				{
-					"$ref": "#/$defs/object"
-				},
-				{
-					"items": {
-						"$ref": "#"
+					"1": {
+						"caption": "Low"
 					},
-					"type": "array"
-				}
-			],
-			"title": "JSON"
+					"2": {
+						"caption": "Medium"
+					}
+				},
+				"description": "The normalized confidence refers to the accuracy of the rule that created the finding. A rule with a low confidence means that the finding scope is wide and may create finding reports that may not be malicious in nature.",
+				"group": "primary",
+				"requirement": "recommended",
+				"caption": "Confidence Id",
+				"type_name": "Integer",
+				"_source": "security_finding",
+				"sibling": "confidence"
+			}
 		},
-		"image": {
-			"properties": {
-				"labels": {
-					"items": {
-						"type": "string"
+		{
+			"status_code": {
+				"type": "string_t",
+				"description": "The event status code, as reported by the event source.<br /><br />For example, in a Windows Failed Authentication event, this would be the value of 'Failure Code', e.g. 0x18.",
+				"group": "primary",
+				"caption": "Status Code",
+				"type_name": "String",
+				"_source": "base_event"
+			}
+		},
+		{
+			"type_uid": {
+				"type": "integer_t",
+				"enum": {
+					"200103": {
+						"description": "A security finding was closed.",
+						"caption": "Security Finding: Close"
 					},
-					"title": "Labels",
-					"type": "array"
-				},
-				"name": {
-					"title": "Image Name",
-					"type": "string"
-				},
-				"path": {
-					"title": "Path",
-					"type": "string"
-				},
-				"tag": {
-					"title": "Image Tag",
-					"type": "string"
-				},
-				"uid": {
-					"title": "Image ID",
-					"type": "string"
-				}
-			},
-			"required": [
-				"uid"
-			],
-			"title": "Image",
-			"type": "object"
-		},
-		"keyboard_info": {
-			"properties": {
-				"function_keys": {
-					"title": "Function Keys",
-					"type": "integer"
-				},
-				"ime": {
-					"title": "IME",
-					"type": "string"
-				},
-				"keyboard_layout": {
-					"title": "Keyboard Layout",
-					"type": "string"
-				},
-				"keyboard_subtype": {
-					"title": "Keyboard Subtype",
-					"type": "integer"
-				},
-				"keyboard_type": {
-					"title": "Keyboard Type",
-					"type": "string"
-				}
-			},
-			"title": "Keyboard Information",
-			"type": "object"
-		},
-		"session": {
-			"properties": {
-				"created_time": {
-					"title": "Created Time",
-					"type": "integer"
-				},
-				"credential_uid": {
-					"title": "User Credential ID",
-					"type": "string"
-				},
-				"expiration_time": {
-					"title": "Expiration Time",
-					"type": "integer"
-				},
-				"issuer": {
-					"title": "Issuer Details",
-					"type": "string"
-				},
-				"mfa": {
-					"title": "Multi Factor Authentication",
-					"type": "boolean"
-				},
-				"uid": {
-					"title": "Unique ID",
-					"type": "string"
-				},
-				"uuid": {
-					"title": "UUID",
-					"type": "string"
-				}
-			},
-			"title": "Session",
-			"type": "object"
-		},
-		"object": {
-			"additionalProperties": true,
-			"properties": {},
-			"title": "Object",
-			"type": "object"
-		},
-		"observable": {
-			"properties": {
-				"name": {
-					"title": "Name",
-					"type": "string"
-				},
-				"reputation": {
-					"$ref": "#/$defs/reputation",
-					"title": "Reputation Scores"
-				},
-				"type": {
-					"title": "Type",
-					"type": "string"
-				},
-				"type_id": {
-					"enum": [
-						0,
-						1,
-						10,
-						2,
-						20,
-						21,
-						22,
-						23,
-						24,
-						25,
-						26,
-						27,
-						28,
-						29,
-						3,
-						4,
-						5,
-						6,
-						7,
-						8,
-						9,
-						99
-					],
-					"title": "Type ID",
-					"type": "integer"
-				},
-				"value": {
-					"title": "Value",
-					"type": "string"
-				}
-			},
-			"required": [
-				"type_id",
-				"name"
-			],
-			"title": "Observable",
-			"type": "object"
-		},
-		"location": {
-			"properties": {
-				"city": {
-					"title": "City",
-					"type": "string"
-				},
-				"continent": {
-					"title": "Continent",
-					"type": "string"
-				},
-				"coordinates": {
-					"items": {
-						"type": "number"
+					"200199": {
+						"caption": "Security Finding: Other"
 					},
-					"title": "Coordinates",
-					"type": "array"
-				},
-				"country": {
-					"title": "Country",
-					"type": "string"
-				},
-				"desc": {
-					"title": "Description",
-					"type": "string"
-				},
-				"is_on_premises": {
-					"title": "On Premises",
-					"type": "boolean"
-				},
-				"isp": {
-					"title": "ISP",
-					"type": "string"
-				},
-				"postal_code": {
-					"title": "Postal Code",
-					"type": "string"
-				},
-				"provider": {
-					"title": "Provider",
-					"type": "string"
-				},
-				"region": {
-					"title": "Region",
-					"type": "string"
-				}
-			},
-			"required": [
-				"coordinates"
-			],
-			"title": "Geo Location",
-			"type": "object"
-		},
-		"finding": {
-			"properties": {
-				"created_time": {
-					"title": "Created Time",
-					"type": "integer"
-				},
-				"desc": {
-					"title": "Description",
-					"type": "string"
-				},
-				"first_seen_time": {
-					"title": "First Seen",
-					"type": "integer"
-				},
-				"last_seen_time": {
-					"title": "Last Seen",
-					"type": "integer"
-				},
-				"modified_time": {
-					"title": "Modified Time",
-					"type": "integer"
-				},
-				"product_uid": {
-					"title": "Product Identifier",
-					"type": "string"
-				},
-				"related_events": {
-					"items": {
-						"$ref": "#/$defs/related_event"
+					"200100": {
+						"caption": "Security Finding: Unknown"
 					},
-					"title": "Related Events",
-					"type": "array"
-				},
-				"remediation": {
-					"$ref": "#/$defs/remediation",
-					"title": "Remediation"
-				},
-				"src_url": {
-					"title": "Source URL",
-					"type": "string"
-				},
-				"supporting_data": {
-					"items": {
-						"$ref": "#/$defs/json_t"
+					"200101": {
+						"description": "A security finding was created.",
+						"caption": "Security Finding: Create"
 					},
-					"title": "Supporting Data",
-					"type": "array"
+					"200102": {
+						"description": "A security finding was updated.",
+						"caption": "Security Finding: Update"
+					}
 				},
-				"title": {
-					"title": "Title",
-					"type": "string"
-				},
-				"types": {
-					"items": {
-						"type": "string"
+				"description": "The event type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: <code>class_uid * 100 + activity_id</code>.",
+				"group": "classification",
+				"requirement": "required",
+				"caption": "Type ID",
+				"type_name": "Integer",
+				"_source": "security_finding",
+				"sibling": "type_name"
+			}
+		},
+		{
+			"class_name": {
+				"type": "string_t",
+				"description": "The event class name, as defined by class_uid value: <code>Security Finding</code>.",
+				"group": "classification",
+				"requirement": "optional",
+				"caption": "Class",
+				"type_name": "String",
+				"_source": "base_event"
+			}
+		},
+		{
+			"type_name": {
+				"type": "string_t",
+				"description": "The event type name, as defined by the type_uid.",
+				"group": "classification",
+				"requirement": "optional",
+				"caption": "Type Name",
+				"type_name": "String",
+				"_source": "base_event"
+			}
+		},
+		{
+			"risk_level_id": {
+				"type": "integer_t",
+				"enum": {
+					"3": {
+						"caption": "High"
 					},
-					"title": "Types",
-					"type": "array"
-				},
-				"uid": {
-					"title": "Unique ID",
-					"type": "string"
-				}
-			},
-			"required": [
-				"uid",
-				"title"
-			],
-			"title": "Finding Details",
-			"type": "object"
-		},
-		"product": {
-			"properties": {
-				"feature": {
-					"$ref": "#/$defs/feature",
-					"title": "Feature"
-				},
-				"lang": {
-					"title": "Language",
-					"type": "string"
-				},
-				"name": {
-					"title": "Product Name",
-					"type": "string"
-				},
-				"path": {
-					"title": "Product Path",
-					"type": "string"
-				},
-				"uid": {
-					"title": "Product ID",
-					"type": "string"
-				},
-				"vendor_name": {
-					"title": "Vendor Name",
-					"type": "string"
-				},
-				"version": {
-					"title": "Product Version",
-					"type": "string"
-				}
-			},
-			"required": [
-				"vendor_name",
-				"name"
-			],
-			"title": "Product",
-			"type": "object"
-		},
-		"package": {
-			"properties": {
-				"architecture": {
-					"title": "Architecture",
-					"type": "string"
-				},
-				"epoch": {
-					"title": "Epoch",
-					"type": "integer"
-				},
-				"license": {
-					"title": "Software License",
-					"type": "string"
-				},
-				"name": {
-					"title": "Name",
-					"type": "string"
-				},
-				"release": {
-					"title": "Software Release Details",
-					"type": "string"
-				},
-				"version": {
-					"title": "Version",
-					"type": "string"
-				}
-			},
-			"required": [
-				"version",
-				"name"
-			],
-			"title": "Software Package",
-			"type": "object"
-		},
-		"reputation": {
-			"properties": {
-				"base_score": {
-					"title": "Reputation Score",
-					"type": "number"
-				},
-				"provider": {
-					"title": "Provider",
-					"type": "string"
-				},
-				"score": {
-					"title": "Reputation Score",
-					"type": "string"
-				},
-				"score_id": {
-					"enum": [
-						0,
-						1,
-						10,
-						2,
-						3,
-						4,
-						5,
-						6,
-						7,
-						8,
-						9,
-						99
-					],
-					"title": "Reputation Score ID",
-					"type": "integer"
-				}
-			},
-			"required": [
-				"score_id",
-				"base_score"
-			],
-			"title": "Reputation",
-			"type": "object"
-		},
-		"technique": {
-			"properties": {
-				"name": {
-					"title": "Name",
-					"type": "string"
-				},
-				"uid": {
-					"title": "Unique ID",
-					"type": "string"
-				}
-			},
-			"required": [
-				"uid"
-			],
-			"title": "Technique",
-			"type": "object"
-		},
-		"related_event": {
-			"properties": {
-				"product_uid": {
-					"title": "Product Identifier",
-					"type": "string"
-				},
-				"type": {
-					"title": "Type",
-					"type": "string"
-				},
-				"type_uid": {
-					"title": "Type ID",
-					"type": "integer"
-				},
-				"uid": {
-					"title": "Unique ID",
-					"type": "string"
-				}
-			},
-			"required": [
-				"uid"
-			],
-			"title": "Related Event",
-			"type": "object"
-		},
-		"enrichment": {
-			"properties": {
-				"data": {
-					"$ref": "#/$defs/json_t",
-					"title": "Data"
-				},
-				"name": {
-					"title": "Name",
-					"type": "string"
-				},
-				"provider": {
-					"title": "Provider",
-					"type": "string"
-				},
-				"type": {
-					"title": "Type",
-					"type": "string"
-				},
-				"value": {
-					"title": "Value",
-					"type": "string"
-				}
-			},
-			"required": [
-				"value",
-				"name",
-				"data"
-			],
-			"title": "Enrichment",
-			"type": "object"
-		},
-		"os": {
-			"properties": {
-				"build": {
-					"title": "OS Build",
-					"type": "string"
-				},
-				"country": {
-					"title": "Country",
-					"type": "string"
-				},
-				"cpu_bits": {
-					"title": "CPU Bits",
-					"type": "integer"
-				},
-				"edition": {
-					"title": "OS Edition",
-					"type": "string"
-				},
-				"lang": {
-					"title": "Language",
-					"type": "string"
-				},
-				"name": {
-					"title": "Name",
-					"type": "string"
-				},
-				"sp_name": {
-					"title": "OS Service Pack",
-					"type": "string"
-				},
-				"sp_ver": {
-					"title": "OS Service Pack Version",
-					"type": "integer"
-				},
-				"type": {
-					"title": "Type",
-					"type": "string"
-				},
-				"type_id": {
-					"enum": [
-						0,
-						100,
-						101,
-						200,
-						201,
-						300,
-						301,
-						302,
-						400,
-						401,
-						402,
-						99
-					],
-					"title": "Type ID",
-					"type": "integer"
-				},
-				"version": {
-					"title": "Version",
-					"type": "string"
-				}
-			},
-			"required": [
-				"type_id",
-				"name"
-			],
-			"title": "OS",
-			"type": "object"
-		},
-		"file": {
-			"properties": {
-				"accessed_time": {
-					"title": "Accessed Time",
-					"type": "integer"
-				},
-				"accessor": {
-					"$ref": "#/$defs/user",
-					"title": "Accessor"
-				},
-				"attributes": {
-					"title": "Attributes",
-					"type": "integer"
-				},
-				"company_name": {
-					"title": "Company Name",
-					"type": "string"
-				},
-				"confidentiality": {
-					"title": "Confidentiality",
-					"type": "string"
-				},
-				"confidentiality_id": {
-					"enum": [
-						0,
-						1,
-						2,
-						3,
-						4,
-						99
-					],
-					"title": "Confidentiality ID",
-					"type": "integer"
-				},
-				"created_time": {
-					"title": "Created Time",
-					"type": "integer"
-				},
-				"creator": {
-					"$ref": "#/$defs/user",
-					"title": "Creator"
-				},
-				"desc": {
-					"title": "Description",
-					"type": "string"
-				},
-				"fingerprints": {
-					"items": {
-						"$ref": "#/$defs/fingerprint"
+					"0": {
+						"caption": "Info"
 					},
-					"title": "Fingerprints",
-					"type": "array"
-				},
-				"is_system": {
-					"title": "System",
-					"type": "boolean"
-				},
-				"mime_type": {
-					"title": "MIME type",
-					"type": "string"
-				},
-				"modified_time": {
-					"title": "Modified Time",
-					"type": "integer"
-				},
-				"modifier": {
-					"$ref": "#/$defs/user",
-					"title": "Modifier"
-				},
-				"name": {
-					"title": "Name",
-					"type": "string"
-				},
-				"owner": {
-					"$ref": "#/$defs/user",
-					"title": "Owner"
-				},
-				"parent_folder": {
-					"title": "Parent Folder",
-					"type": "string"
-				},
-				"path": {
-					"title": "Path",
-					"type": "string"
-				},
-				"product": {
-					"$ref": "#/$defs/product",
-					"title": "Product"
-				},
-				"security_descriptor": {
-					"title": "Security Descriptor",
-					"type": "string"
-				},
-				"signature": {
-					"$ref": "#/$defs/digital_signature",
-					"title": "Digital Signature"
-				},
-				"size": {
-					"title": "Size",
-					"type": "integer"
-				},
-				"type": {
-					"title": "Type",
-					"type": "string"
-				},
-				"type_id": {
-					"enum": [
-						0,
-						1,
-						2,
-						3,
-						4,
-						5,
-						6,
-						7,
-						99
-					],
-					"title": "Type ID",
-					"type": "integer"
-				},
-				"uid": {
-					"title": "Unique ID",
-					"type": "string"
-				},
-				"version": {
-					"title": "Version",
-					"type": "string"
-				},
-				"xattributes": {
-					"$ref": "#/$defs/object",
-					"title": "Extended Attributes"
-				}
-			},
-			"required": [
-				"type_id",
-				"name"
-			],
-			"title": "File",
-			"type": "object"
-		},
-		"service": {
-			"properties": {
-				"labels": {
-					"items": {
-						"type": "string"
+					"1": {
+						"caption": "Low"
 					},
-					"title": "Labels",
-					"type": "array"
-				},
-				"name": {
-					"title": "Name",
-					"type": "string"
-				},
-				"uid": {
-					"title": "Unique ID",
-					"type": "string"
-				},
-				"version": {
-					"title": "Version",
-					"type": "string"
-				}
-			},
-			"title": "Service",
-			"type": "object"
-		},
-		"cve": {
-			"properties": {
-				"created_time": {
-					"title": "Record Creation Date",
-					"type": "integer"
-				},
-				"cvss": {
-					"$ref": "#/$defs/cvss",
-					"title": "CVSS Score"
-				},
-				"cwe_uid": {
-					"title": "CWE UID",
-					"type": "string"
-				},
-				"cwe_url": {
-					"title": "CWE URL",
-					"type": "string"
-				},
-				"modified_time": {
-					"title": "Record Modified Date",
-					"type": "integer"
-				},
-				"product": {
-					"$ref": "#/$defs/product",
-					"title": "Product"
-				},
-				"type": {
-					"title": "Vulnerability Type",
-					"type": "string"
-				},
-				"uid": {
-					"title": "CVE ID",
-					"type": "string"
-				}
-			},
-			"required": [
-				"uid"
-			],
-			"title": "CVE",
-			"type": "object"
-		},
-		"metadata": {
-			"properties": {
-				"correlation_uid": {
-					"title": "Correlation UID",
-					"type": "string"
-				},
-				"labels": {
-					"items": {
-						"type": "string"
+					"2": {
+						"caption": "Medium"
 					},
-					"title": "Labels",
-					"type": "array"
+					"4": {
+						"caption": "Critical"
+					}
 				},
-				"logged_time": {
-					"title": "Logged Time",
-					"type": "integer"
-				},
-				"modified_time": {
-					"title": "Modified Time",
-					"type": "integer"
-				},
-				"original_time": {
-					"title": "Original Time",
-					"type": "string"
-				},
-				"processed_time": {
-					"title": "Processed Time",
-					"type": "integer"
-				},
-				"product": {
-					"$ref": "#/$defs/product",
-					"title": "Product"
-				},
-				"profiles": {
-					"items": {
-						"type": "string"
-					},
-					"title": "Profiles",
-					"type": "array"
-				},
-				"sequence": {
-					"title": "Sequence Number",
-					"type": "integer"
-				},
-				"uid": {
-					"title": "Event UID",
-					"type": "string"
-				},
-				"version": {
-					"title": "Version",
-					"type": "string"
-				}
-			},
-			"required": [
-				"version",
-				"product"
-			],
-			"title": "Metadata",
-			"type": "object"
+				"description": "The normalized risk level id.",
+				"group": "primary",
+				"requirement": "optional",
+				"caption": "Risk Level ID",
+				"type_name": "Integer",
+				"_source": "security_finding",
+				"sibling": "risk_level"
+			}
 		},
-		"network_interface": {
-			"properties": {
-				"hostname": {
-					"title": "Hostname",
-					"type": "string"
-				},
-				"ip": {
-					"title": "IP Address",
-					"type": "string"
-				},
-				"mac": {
-					"title": "MAC Address",
-					"type": "string"
-				},
-				"name": {
-					"title": "Name",
-					"type": "string"
-				},
-				"namespace": {
-					"title": "Namespace",
-					"type": "string"
-				},
-				"type": {
-					"title": "Type",
-					"type": "string"
-				},
-				"type_id": {
-					"enum": [
-						0,
-						1,
-						2,
-						3,
-						99
-					],
-					"title": "Type ID",
-					"type": "integer"
-				},
-				"uid": {
-					"title": "Unique ID",
-					"type": "string"
-				}
-			},
-			"required": [
-				"type_id"
-			],
-			"title": "Network Interface",
-			"type": "object"
+		{
+			"resources": {
+				"type": "object_t",
+				"description": "Describes details about resources that were affected by the activity/event.",
+				"group": "primary",
+				"is_array": true,
+				"requirement": "recommended",
+				"caption": "Resources Array",
+				"object_name": "Resource Details",
+				"object_type": "resource_details",
+				"_source": "security_finding"
+			}
 		},
-		"display": {
-			"properties": {
-				"color_depth": {
-					"title": "Color Depth",
-					"type": "integer"
-				},
-				"physical_height": {
-					"title": "Physical Height",
-					"type": "integer"
-				},
-				"physical_orientation": {
-					"title": "Physical Orientation",
-					"type": "integer"
-				},
-				"physical_width": {
-					"title": "Physical Width",
-					"type": "integer"
-				},
-				"scale_factor": {
-					"title": "Scale Factor",
-					"type": "integer"
-				}
-			},
-			"title": "Display",
-			"type": "object"
+		{
+			"cis_csc": {
+				"type": "object_t",
+				"description": "The CIS Critical Security Controls is a list of top 20 actions and practices an organization’s security team can take on such that cyber attacks or malware, are minimized and prevented.",
+				"group": "context",
+				"is_array": true,
+				"requirement": "optional",
+				"caption": "CIS CSC",
+				"object_name": "CIS CSC",
+				"object_type": "cis_csc",
+				"_source": "security_finding"
+			}
 		},
-		"metric": {
-			"properties": {
-				"name": {
-					"title": "Name",
-					"type": "string"
-				},
-				"value": {
-					"title": "Value",
-					"type": "string"
-				}
-			},
-			"required": [
-				"value",
-				"name"
-			],
-			"title": "Metric",
-			"type": "object"
+		{
+			"impact": {
+				"type": "string_t",
+				"description": "The impact , normalized to the caption of the impact_id value. In the case of 'Other', it is defined by the event source.",
+				"group": "primary",
+				"requirement": "optional",
+				"caption": "Impact",
+				"type_name": "String",
+				"_source": "security_finding"
+			}
 		},
-		"compliance": {
-			"properties": {
-				"requirements": {
-					"items": {
-						"type": "string"
-					},
-					"title": "Requirements",
-					"type": "array"
-				},
-				"status": {
-					"title": "Status",
-					"type": "string"
-				},
-				"status_detail": {
-					"title": "Status Details",
-					"type": "string"
-				}
-			},
-			"title": "Compliance Details",
-			"type": "object"
+		{
+			"vulnerabilities": {
+				"type": "object_t",
+				"description": "This object describes vulnerabilities reported in a security finding.",
+				"group": "context",
+				"is_array": true,
+				"requirement": "optional",
+				"caption": "Vulnerabilities",
+				"object_name": "Vulnerability Details",
+				"object_type": "vulnerability",
+				"_source": "security_finding"
+			}
 		},
-		"feature": {
-			"properties": {
-				"name": {
-					"title": "Feature Name",
-					"type": "string"
-				},
-				"uid": {
-					"title": "Feature ID",
-					"type": "string"
-				},
-				"version": {
-					"title": "Feature Version",
-					"type": "string"
-				}
-			},
-			"title": "Feature",
-			"type": "object"
+		{
+			"accountid": {
+				"type": "string_t",
+				"description": "The AWS Account ID that is used as a partition in the Amazon Security Lake instance.",
+				"group": "context",
+				"extension": "aws",
+				"requirement": "optional",
+				"extension_id": 998,
+				"caption": "Amazon Security Lake - AWS Account ID",
+				"type_name": "String",
+				"_source": "aws/base_event"
+			}
 		},
-		"remediation": {
-			"properties": {
-				"desc": {
-					"title": "Description",
-					"type": "string"
-				},
-				"kb_articles": {
-					"items": {
-						"type": "string"
-					},
-					"title": "Knowledgebase Articles",
-					"type": "array"
-				}
-			},
-			"title": "Remediation",
-			"type": "object"
+		{
+			"process": {
+				"type": "object_t",
+				"description": "The process object.",
+				"group": "context",
+				"requirement": "optional",
+				"caption": "Process",
+				"object_name": "Process",
+				"object_type": "process",
+				"_source": "security_finding"
+			}
 		},
-		"vulnerability": {
-			"properties": {
-				"cve": {
-					"$ref": "#/$defs/cve",
-					"title": "CVE"
+		{
+			"category_uid": {
+				"default": 0,
+				"type": "integer_t",
+				"enum": {
+					"2": {
+						"description": "Findings events report findings, detections, and possible resolutions of malware, anomalies, or other actions performed by security products.",
+						"uid": 2,
+						"caption": "Findings"
+					}
 				},
-				"desc": {
-					"title": "Description",
-					"type": "string"
+				"description": "The category unique identifier of the event.",
+				"group": "classification",
+				"requirement": "required",
+				"caption": "Category ID",
+				"type_name": "Integer",
+				"_source": "security_finding",
+				"sibling": "category_name"
+			}
+		},
+		{
+			"finding": {
+				"type": "object_t",
+				"description": "The Finding object provides details about a finding/detection generated by a security tool.",
+				"group": "primary",
+				"requirement": "required",
+				"caption": "Finding",
+				"object_name": "Finding",
+				"object_type": "finding",
+				"_source": "security_finding"
+			}
+		},
+		{
+			"enrichments": {
+				"type": "object_t",
+				"description": "The additional information from an external data source, which is associated with the event. For example add location information for the IP address in the DNS answers:</p><code>[{\"name\": \"answers.ip\", \"value\": \"92.24.47.250\", \"type\": \"location\", \"data\": {\"city\": \"Socotra\", \"continent\": \"Asia\", \"coordinates\": [-25.4153, 17.0743], \"country\": \"YE\", \"desc\": \"Yemen\"}}]</code>",
+				"group": "context",
+				"is_array": true,
+				"caption": "Enrichments",
+				"object_name": "Enrichment",
+				"object_type": "enrichment",
+				"_source": "base_event"
+			}
+		},
+		{
+			"class_uid": {
+				"default": 0,
+				"type": "integer_t",
+				"enum": {
+					"2001": {
+						"description": "Security Finding events describe findings, detections, anomalies, alerts and/or actions performed by security products",
+						"caption": "Security Finding"
+					}
 				},
-				"kb_articles": {
-					"items": {
-						"type": "string"
+				"description": "The unique identifier of a class. A Class describes the attributes available in an event.",
+				"group": "classification",
+				"requirement": "required",
+				"caption": "Class ID",
+				"type_name": "Integer",
+				"_source": "security_finding",
+				"sibling": "class_name"
+			}
+		},
+		{
+			"risk_level": {
+				"type": "string_t",
+				"description": "The risk level, normalized to the caption of the risk_level_id value. In the case of 'Other', it is defined by the event source.",
+				"group": "primary",
+				"requirement": "optional",
+				"caption": "Risk Level",
+				"type_name": "String",
+				"_source": "security_finding"
+			}
+		},
+		{
+			"impact_id": {
+				"type": "integer_t",
+				"enum": {
+					"3": {
+						"caption": "High"
 					},
-					"title": "Knowledgebase Articles",
-					"type": "array"
-				},
-				"packages": {
-					"items": {
-						"$ref": "#/$defs/package"
+					"99": {
+						"description": "The detection impact is not mapped. See the <code>impact</code> attribute, which contains a data source specific value.",
+						"caption": "Other"
 					},
-					"title": "Software Packages",
-					"type": "array"
-				},
-				"references": {
-					"items": {
-						"type": "string"
+					"0": {
+						"caption": "Unknown"
 					},
-					"title": "References",
-					"type": "array"
-				},
-				"related_vulnerabilities": {
-					"items": {
-						"type": "string"
+					"1": {
+						"caption": "Low"
 					},
-					"title": "Related Vulnerabilities",
-					"type": "array"
+					"2": {
+						"caption": "Medium"
+					},
+					"4": {
+						"caption": "Critical"
+					}
 				},
-				"severity": {
-					"title": "Severity",
-					"type": "string"
+				"description": "The normalized impact of the finding.",
+				"group": "primary",
+				"requirement": "recommended",
+				"caption": "Impact ID",
+				"type_name": "Integer",
+				"_source": "security_finding",
+				"sibling": "impact"
+			}
+		},
+		{
+			"kill_chain": {
+				"type": "object_t",
+				"description": "The <a target='_blank' href='https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html'>Cyber Kill Chain®</a> provides a detailed description of each phase and its associated activities within the broader context of a cyber attack.",
+				"group": "context",
+				"is_array": true,
+				"requirement": "optional",
+				"caption": "Kill Chain",
+				"object_name": "Kill Chain Phase",
+				"object_type": "kill_chain_phase",
+				"_source": "security_finding"
+			}
+		},
+		{
+			"attacks": {
+				"type": "object_t",
+				"description": "The attack object describes the technique and associated tactics as defined by <a target='_blank' href='https://attack.mitre.org/wiki/ATT&CK_Matrix'>ATT&CK Matrix<sup>TM</sup></a>.",
+				"group": "context",
+				"is_array": true,
+				"requirement": "optional",
+				"caption": "Attacks",
+				"object_name": "Attack",
+				"object_type": "attack",
+				"_source": "security_finding"
+			}
+		},
+		{
+			"time": {
+				"type": "timestamp_t",
+				"description": "The normalized event occurrence time.",
+				"group": "occurrence",
+				"requirement": "required",
+				"caption": "Event Time",
+				"type_name": "Timestamp",
+				"_source": "base_event"
+			}
+		},
+		{
+			"severity_id": {
+				"type": "integer_t",
+				"enum": {
+					"3": {
+						"description": "Action is required but the situation is not serious at this time.",
+						"caption": "Medium"
+					},
+					"6": {
+						"description": "An error occurred but it is too late to take remedial action.",
+						"caption": "Fatal"
+					},
+					"99": {
+						"description": "The event severity is not mapped. See the <code>severity</code> attribute, which contains a data source specific value.",
+						"caption": "Other"
+					},
+					"0": {
+						"description": "The event severity is not known.",
+						"caption": "Unknown"
+					},
+					"1": {
+						"description": "Informational message. No action required.",
+						"caption": "Informational"
+					},
+					"2": {
+						"description": "The user decides if action is needed.",
+						"caption": "Low"
+					},
+					"4": {
+						"description": "Action is required immediately.",
+						"caption": "High"
+					},
+					"5": {
+						"description": "Action is required immediately and the scope is broad.",
+						"caption": "Critical"
+					}
 				},
-				"title": {
-					"title": "Title",
-					"type": "string"
-				},
-				"vendor_name": {
-					"title": "Vendor Name",
-					"type": "string"
-				}
-			},
-			"required": [
-				"cve"
-			],
-			"title": "Vulnerability Details",
-			"type": "object"
+				"description": "<p>The normalized identifier of the event severity.</p>The normalized severity is a measurement the effort and expense required to manage and resolve an event or incident. Smaller numerical values represent lower impact events, and larger numerical values represent higher impact events.",
+				"group": "classification",
+				"requirement": "required",
+				"caption": "Severity ID",
+				"type_name": "Integer",
+				"_source": "base_event",
+				"sibling": "severity"
+			}
+		},
+		{
+			"timezone_offset": {
+				"type": "integer_t",
+				"description": "The number of minutes that the reported event <code>time</code> is ahead or behind UTC, in the range -1,080 to +1,080.",
+				"group": "occurrence",
+				"requirement": "recommended",
+				"caption": "Timezone Offset",
+				"type_name": "Integer",
+				"_source": "base_event"
+			}
+		},
+		{
+			"evidence": {
+				"type": "json_t",
+				"description": "The data the finding exposes to the analyst.",
+				"group": "context",
+				"requirement": "optional",
+				"caption": "Evidence",
+				"type_name": "JSON",
+				"_source": "security_finding"
+			}
 		}
-	},
-	"$id": "https://schema.ocsf.io/schema/classes/security_finding",
-	"$schema": "http://json-schema.org/draft-07/schema#",
-	"properties": {
-		"message": {
-			"title": "Message",
-			"type": "string"
-		},
-		"process": {
-			"$ref": "#/$defs/process",
-			"title": "Process"
-		},
-		"observables": {
-			"items": {
-				"$ref": "#/$defs/observable"
-			},
-			"title": "Observables",
-			"type": "array"
-		},
-		"state_id": {
-			"enum": [
-				0,
-				1,
-				2,
-				3,
-				4,
-				99
-			],
-			"title": "State ID",
-			"type": "integer"
-		},
-		"class_name": {
-			"title": "Class",
-			"type": "string"
-		},
-		"status_id": {
-			"enum": [
-				0,
-				1,
-				2,
-				99
-			],
-			"title": "Status ID",
-			"type": "integer"
-		},
-		"type_uid": {
-			"enum": [
-				200100,
-				200101,
-				200102,
-				200199
-			],
-			"title": "Type ID",
-			"type": "integer"
-		},
-		"activity_name": {
-			"title": "Activity",
-			"type": "string"
-		},
-		"status": {
-			"title": "Status",
-			"type": "string"
-		},
-		"malware": {
-			"items": {
-				"$ref": "#/$defs/malware"
-			},
-			"title": "Malware",
-			"type": "array"
-		},
-		"data": {
-			"$ref": "#/$defs/json_t",
-			"title": "Data"
-		},
-		"timezone_offset": {
-			"title": "Timezone Offset",
-			"type": "integer"
-		},
-		"category_name": {
-			"title": "Category",
-			"type": "string"
-		},
-		"duration": {
-			"title": "Duration",
-			"type": "integer"
-		},
-		"activity_id": {
-			"enum": [
-				0,
-				1,
-				2,
-				99
-			],
-			"title": "Activity ID",
-			"type": "integer"
-		},
-		"end_time": {
-			"title": "End Time",
-			"type": "integer"
-		},
-		"class_uid": {
-			"const": 2001,
-			"title": "Class ID",
-			"type": "integer"
-		},
-		"start_time": {
-			"title": "Start Time",
-			"type": "integer"
-		},
-		"confidence": {
-			"title": "Confidence",
-			"type": "integer"
-		},
-		"finding": {
-			"$ref": "#/$defs/finding",
-			"title": "Finding"
-		},
-		"status_detail": {
-			"title": "Status Details",
-			"type": "string"
-		},
-		"raw_data": {
-			"title": "Raw Data",
-			"type": "string"
-		},
-		"unmapped": {
-			"$ref": "#/$defs/object",
-			"title": "Unmapped Data"
-		},
-		"type_name": {
-			"title": "Type Name",
-			"type": "string"
-		},
-		"category_uid": {
-			"const": 2,
-			"title": "Category ID",
-			"type": "integer"
-		},
-		"severity_id": {
-			"enum": [
-				0,
-				1,
-				2,
-				3,
-				4,
-				5,
-				6,
-				99
-			],
-			"title": "Severity ID",
-			"type": "integer"
-		},
-		"resources": {
-			"items": {
-				"$ref": "#/$defs/resource"
-			},
-			"title": "Resources Array",
-			"type": "array"
-		},
-		"count": {
-			"title": "Count",
-			"type": "integer"
-		},
-		"enrichments": {
-			"items": {
-				"$ref": "#/$defs/enrichment"
-			},
-			"title": "Enrichments",
-			"type": "array"
-		},
-		"severity": {
-			"title": "Severity",
-			"type": "string"
-		},
-		"status_code": {
-			"title": "Status Code",
-			"type": "string"
-		},
-		"metadata": {
-			"$ref": "#/$defs/metadata",
-			"title": "Metadata"
-		},
-		"compliance": {
-			"$ref": "#/$defs/compliance",
-			"title": "Compliance"
-		},
-		"time": {
-			"title": "Event Time",
-			"type": "integer"
-		},
-		"vulnerabilities": {
-			"items": {
-				"$ref": "#/$defs/vulnerability"
-			},
-			"title": "Vulnerabilities",
-			"type": "array"
-		},
-		"attacks": {
-			"items": {
-				"$ref": "#/$defs/attack"
-			},
-			"title": "Attacks",
-			"type": "array"
-		},
-		"state": {
-			"title": "State",
-			"type": "string"
-		}
-	},
-	"required": [
-		"severity_id",
-		"metadata",
-		"type_uid",
-		"finding",
-		"activity_id",
-		"state_id",
-		"time",
-		"class_uid",
-		"category_uid"
 	],
-	"title": "Security Finding",
-	"type": "object"
+	"name": "security_finding",
+	"description": "Security Finding events describe findings, detections, anomalies, alerts and/or actions performed by security products",
+	"uid": 2001,
+	"extends": "base_event",
+	"category": "findings",
+	"caption": "Security Finding",
+	"profiles": [
+		"cloud",
+		"datetime",
+		"person",
+		"container",
+		"linux/linux_users"
+	],
+	"category_name": "Findings"
 }

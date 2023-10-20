@@ -12,48 +12,28 @@
 			}
 		},
 		{
-			"smtp_hello": {
-				"type": "string_t",
-				"description": "The value of the SMTP HELO or EHLO command sent by the initiator (client).",
+			"web_resources": {
+				"type": "object_t",
+				"description": "Describes details about web resources that were affected by an activity/event.",
 				"group": "primary",
-				"requirement": "recommended",
-				"caption": "SMTP Hello",
-				"type_name": "String",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"attempt": {
-				"type": "integer_t",
-				"description": "The attempt number for attempting to deliver the email.",
-				"group": "context",
-				"requirement": "optional",
-				"caption": "Attempt",
-				"type_name": "Integer",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"banner": {
-				"type": "string_t",
-				"description": "The initial SMTP connection response that a messaging server receives after it connects to a email server.",
-				"group": "context",
-				"requirement": "optional",
-				"caption": "SMTP Banner",
-				"type_name": "String",
-				"_source": "email_activity"
+				"is_array": true,
+				"requirement": "required",
+				"caption": "Web Resources",
+				"object_name": "Web Resource",
+				"object_type": "web_resource",
+				"_source": "web_resources_activity"
 			}
 		},
 		{
 			"dst_endpoint": {
 				"type": "object_t",
-				"description": "The responder (server) receiving the email.",
+				"description": "Details about server providing the web resources.",
 				"group": "primary",
-				"requirement": "optional",
+				"requirement": "recommended",
 				"caption": "Destination Endpoint",
 				"object_name": "Network Endpoint",
 				"object_type": "network_endpoint",
-				"_source": "email_activity"
+				"_source": "web_resources_activity"
 			}
 		},
 		{
@@ -118,21 +98,9 @@
 			}
 		},
 		{
-			"email": {
-				"type": "object_t",
-				"description": "The email object.",
-				"group": "primary",
-				"requirement": "required",
-				"caption": "Email",
-				"object_name": "Email",
-				"object_type": "email",
-				"_source": "email_activity"
-			}
-		},
-		{
 			"category_name": {
 				"type": "string_t",
-				"description": "The event category name, as defined by category_uid value: <code>Network Activity</code>.",
+				"description": "The event category name, as defined by category_uid value: <code>Application Activity</code>.",
 				"group": "classification",
 				"requirement": "optional",
 				"caption": "Category",
@@ -246,8 +214,12 @@
 				"type": "integer_t",
 				"enum": {
 					"3": {
-						"description": "Email being scanned (example: security scanning)",
-						"caption": "Scan"
+						"description": "One or more web resources were updated.",
+						"caption": "Update"
+					},
+					"6": {
+						"description": "One or more web resources were imported into an Application.",
+						"caption": "Import"
 					},
 					"99": {
 						"description": "The event activity is not mapped.",
@@ -258,18 +230,36 @@
 						"caption": "Unknown"
 					},
 					"1": {
-						"caption": "Send"
+						"description": "One or more web resources were created.",
+						"caption": "Create"
 					},
 					"2": {
-						"caption": "Receive"
+						"description": "One or more web resources were read / viewed.",
+						"caption": "Read"
+					},
+					"4": {
+						"description": "One or more web resources were deleted.",
+						"caption": "Delete"
+					},
+					"5": {
+						"description": "A search was performed on one or more web resources.",
+						"caption": "Search"
+					},
+					"7": {
+						"description": "One or more web resources were exported from an Application.",
+						"caption": "Export"
+					},
+					"8": {
+						"description": "One or more web resources were shared.",
+						"caption": "Share"
 					}
 				},
 				"description": "The normalized identifier of the activity that triggered the event.",
 				"group": "classification",
-				"requirement": "optional",
+				"requirement": "required",
 				"caption": "Activity ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "web_resources_activity",
 				"sibling": "activity_name"
 			}
 		},
@@ -286,57 +276,13 @@
 		{
 			"src_endpoint": {
 				"type": "object_t",
-				"description": "The initiator (client) sending the email.",
+				"description": "Details about the endpoint from which the request originated.",
 				"group": "primary",
-				"requirement": "optional",
+				"requirement": "recommended",
 				"caption": "Source Endpoint",
 				"object_name": "Network Endpoint",
 				"object_type": "network_endpoint",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"direction_id": {
-				"type": "integer_t",
-				"enum": {
-					"3": {
-						"description": "Email Internal, from inside the network destined for an entity inside network.",
-						"caption": "Internal"
-					},
-					"99": {
-						"caption": "Other"
-					},
-					"0": {
-						"description": "The email direction is unknown.",
-						"caption": "Unknown"
-					},
-					"1": {
-						"description": "Email Inbound, from the Internet or outside network destined for an entity inside network.",
-						"caption": "Inbound"
-					},
-					"2": {
-						"description": "Email Outbound, from inside the network destined for an entity outside network.",
-						"caption": "Outbound"
-					}
-				},
-				"description": "<p>The direction of the email relative to the scanning host or organization.</p>Email scanned at an internet gateway might be characterized as inbound to the organization from the Internet, outbound from the organization to the Internet, or internal within the organization. Email scanned at a workstation might be characterized as inbound to, or outbound from the workstation.",
-				"group": "context",
-				"requirement": "required",
-				"caption": "Direction ID",
-				"type_name": "Integer",
-				"_source": "email_activity",
-				"sibling": "direction"
-			}
-		},
-		{
-			"direction": {
-				"type": "string_t",
-				"description": "The direction of the email, as defined by the <code>direction_id</code> value.",
-				"group": "context",
-				"requirement": "optional",
-				"caption": "Direction",
-				"type_name": "String",
-				"_source": "email_activity"
+				"_source": "web_resources_activity"
 			}
 		},
 		{
@@ -353,21 +299,43 @@
 			"type_uid": {
 				"type": "integer_t",
 				"enum": {
-					"400903": {
-						"description": "Email being scanned (example: security scanning)",
-						"caption": "Email Activity: Scan"
+					"600103": {
+						"description": "One or more web resources were updated.",
+						"caption": "Web Resources Activity: Update"
 					},
-					"400999": {
-						"caption": "Email Activity: Other"
+					"600106": {
+						"description": "One or more web resources were imported into an Application.",
+						"caption": "Web Resources Activity: Import"
 					},
-					"400900": {
-						"caption": "Email Activity: Unknown"
+					"600199": {
+						"caption": "Web Resources Activity: Other"
 					},
-					"400901": {
-						"caption": "Email Activity: Send"
+					"600100": {
+						"caption": "Web Resources Activity: Unknown"
 					},
-					"400902": {
-						"caption": "Email Activity: Receive"
+					"600101": {
+						"description": "One or more web resources were created.",
+						"caption": "Web Resources Activity: Create"
+					},
+					"600102": {
+						"description": "One or more web resources were read / viewed.",
+						"caption": "Web Resources Activity: Read"
+					},
+					"600104": {
+						"description": "One or more web resources were deleted.",
+						"caption": "Web Resources Activity: Delete"
+					},
+					"600105": {
+						"description": "A search was performed on one or more web resources.",
+						"caption": "Web Resources Activity: Search"
+					},
+					"600107": {
+						"description": "One or more web resources were exported from an Application.",
+						"caption": "Web Resources Activity: Export"
+					},
+					"600108": {
+						"description": "One or more web resources were shared.",
+						"caption": "Web Resources Activity: Share"
 					}
 				},
 				"description": "The event type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: <code>class_uid * 100 + activity_id</code>.",
@@ -375,14 +343,14 @@
 				"requirement": "required",
 				"caption": "Type ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "web_resources_activity",
 				"sibling": "type_name"
 			}
 		},
 		{
 			"class_name": {
 				"type": "string_t",
-				"description": "The event class name, as defined by class_uid value: <code>Email Activity</code>.",
+				"description": "The event class name, as defined by class_uid value: <code>Web Resources Activity</code>.",
 				"group": "classification",
 				"requirement": "optional",
 				"caption": "Class",
@@ -415,14 +383,27 @@
 			}
 		},
 		{
+			"web_resources_result": {
+				"type": "object_t",
+				"description": "The results of the activity on web resources. It should contain the new values of the changed attributes of the web resources.",
+				"group": "primary",
+				"is_array": true,
+				"requirement": "optional",
+				"caption": "Web Resources Result",
+				"object_name": "Web Resource",
+				"object_type": "web_resource",
+				"_source": "web_resources_activity"
+			}
+		},
+		{
 			"category_uid": {
 				"default": 0,
 				"type": "integer_t",
 				"enum": {
-					"4": {
-						"description": "Network Activity events.",
-						"uid": 4,
-						"caption": "Network Activity"
+					"6": {
+						"description": "Application Activity events report detailed information about the behavior of applications and services.",
+						"uid": 6,
+						"caption": "Application Activity"
 					}
 				},
 				"description": "The category unique identifier of the event.",
@@ -430,7 +411,7 @@
 				"requirement": "required",
 				"caption": "Category ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "web_resources_activity",
 				"sibling": "category_name"
 			}
 		},
@@ -451,9 +432,9 @@
 				"default": 0,
 				"type": "integer_t",
 				"enum": {
-					"4009": {
-						"description": "Email events report activities of emails.",
-						"caption": "Email Activity"
+					"6001": {
+						"description": "Web Resources Activity events describe actions executed on a set of Web Resources.",
+						"caption": "Web Resources Activity"
 					}
 				},
 				"description": "The unique identifier of a class. A Class describes the attributes available in an event.",
@@ -461,7 +442,7 @@
 				"requirement": "required",
 				"caption": "Class ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "web_resources_activity",
 				"sibling": "class_name"
 			}
 		},
@@ -474,18 +455,6 @@
 				"caption": "Event Time",
 				"type_name": "Timestamp",
 				"_source": "base_event"
-			}
-		},
-		{
-			"email_auth": {
-				"type": "object_t",
-				"description": "The SPF, DKIM and DMARC attributes of an email.",
-				"group": "primary",
-				"requirement": "recommended",
-				"caption": "Email Authentication",
-				"object_name": "Email Authentication",
-				"object_type": "email_auth",
-				"_source": "email_activity"
 			}
 		},
 		{
@@ -546,20 +515,19 @@
 			}
 		}
 	],
-	"name": "email_activity",
-	"description": "Email events report activities of emails.",
-	"uid": 4009,
+	"name": "web_resources_activity",
+	"description": "Web Resources Activity events describe actions executed on a set of Web Resources.",
+	"uid": 6001,
 	"extends": "base_event",
-	"category": "network",
-	"caption": "Email Activity",
+	"category": "application",
+	"caption": "Web Resources Activity",
 	"profiles": [
 		"cloud",
 		"datetime",
 		"host",
-		"security_control",
 		"container",
 		"linux/linux_users",
 		"person"
 	],
-	"category_name": "Network Activity"
+	"category_name": "Application Activity"
 }

@@ -12,48 +12,27 @@
 			}
 		},
 		{
-			"smtp_hello": {
-				"type": "string_t",
-				"description": "The value of the SMTP HELO or EHLO command sent by the initiator (client).",
+			"traffic": {
+				"type": "object_t",
+				"description": "The network traffic refers to the amount of data moving across a network at a given point of time. Intended to be used alongside Network Connection.",
 				"group": "primary",
-				"requirement": "recommended",
-				"caption": "SMTP Hello",
-				"type_name": "String",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"attempt": {
-				"type": "integer_t",
-				"description": "The attempt number for attempting to deliver the email.",
-				"group": "context",
 				"requirement": "optional",
-				"caption": "Attempt",
-				"type_name": "Integer",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"banner": {
-				"type": "string_t",
-				"description": "The initial SMTP connection response that a messaging server receives after it connects to a email server.",
-				"group": "context",
-				"requirement": "optional",
-				"caption": "SMTP Banner",
-				"type_name": "String",
-				"_source": "email_activity"
+				"caption": "Traffic",
+				"object_name": "Network Traffic",
+				"object_type": "network_traffic",
+				"_source": "network_activity"
 			}
 		},
 		{
 			"dst_endpoint": {
 				"type": "object_t",
-				"description": "The responder (server) receiving the email.",
+				"description": "The endpoint that received the activity on the target file.",
 				"group": "primary",
-				"requirement": "optional",
+				"requirement": "recommended",
 				"caption": "Destination Endpoint",
 				"object_name": "Network Endpoint",
 				"object_type": "network_endpoint",
-				"_source": "email_activity"
+				"_source": "network_file_activity"
 			}
 		},
 		{
@@ -107,6 +86,17 @@
 			}
 		},
 		{
+			"tls": {
+				"type": "object_t",
+				"description": "The Transport Layer Security (TLS) attributes.",
+				"group": "primary",
+				"caption": "TLS",
+				"object_name": "Transport Layer Security (TLS)",
+				"object_type": "tls",
+				"_source": "network_activity"
+			}
+		},
+		{
 			"duration": {
 				"type": "integer_t",
 				"description": "The event duration or aggregate time, the amount of time the event covers from <code>start_time</code> to <code>end_time</code> in milliseconds.",
@@ -118,18 +108,6 @@
 			}
 		},
 		{
-			"email": {
-				"type": "object_t",
-				"description": "The email object.",
-				"group": "primary",
-				"requirement": "required",
-				"caption": "Email",
-				"object_name": "Email",
-				"object_type": "email",
-				"_source": "email_activity"
-			}
-		},
-		{
 			"category_name": {
 				"type": "string_t",
 				"description": "The event category name, as defined by category_uid value: <code>Network Activity</code>.",
@@ -138,6 +116,18 @@
 				"caption": "Category",
 				"type_name": "String",
 				"_source": "base_event"
+			}
+		},
+		{
+			"connection_info": {
+				"type": "object_t",
+				"description": "The network connection information.",
+				"group": "primary",
+				"requirement": "optional",
+				"caption": "Connection Info",
+				"object_name": "Network Connection Information",
+				"object_type": "network_connection_info",
+				"_source": "network_file_activity"
 			}
 		},
 		{
@@ -184,6 +174,28 @@
 				"object_name": "Observable",
 				"object_type": "observable",
 				"_source": "base_event"
+			}
+		},
+		{
+			"expiration_time": {
+				"type": "timestamp_t",
+				"description": "The share expiration time.",
+				"group": "context",
+				"requirement": "optional",
+				"caption": "Expiration Time",
+				"type_name": "Timestamp",
+				"_source": "network_file_activity"
+			}
+		},
+		{
+			"app_name": {
+				"type": "string_t",
+				"description": "The name of the application that is associated with the event or object.",
+				"group": "context",
+				"requirement": "optional",
+				"caption": "Application Name",
+				"type_name": "String",
+				"_source": "network_activity"
 			}
 		},
 		{
@@ -246,8 +258,12 @@
 				"type": "integer_t",
 				"enum": {
 					"3": {
-						"description": "Email being scanned (example: security scanning)",
-						"caption": "Scan"
+						"description": "Update a file.",
+						"caption": "Update"
+					},
+					"6": {
+						"description": "Copy a file.",
+						"caption": "Copy"
 					},
 					"99": {
 						"description": "The event activity is not mapped.",
@@ -258,18 +274,60 @@
 						"caption": "Unknown"
 					},
 					"1": {
-						"caption": "Send"
+						"description": "Upload a file.",
+						"caption": "Upload"
+					},
+					"10": {
+						"description": "Lock a file.",
+						"caption": "Lock"
 					},
 					"2": {
-						"caption": "Receive"
+						"description": "Download a file.",
+						"caption": "Download"
+					},
+					"4": {
+						"description": "Delete a file.",
+						"caption": "Delete"
+					},
+					"5": {
+						"description": "Rename a file.",
+						"caption": "Rename"
+					},
+					"7": {
+						"description": "Move a file.",
+						"caption": "Move"
+					},
+					"8": {
+						"description": "Restore a file.",
+						"caption": "Restore"
+					},
+					"9": {
+						"description": "Preview a file.",
+						"caption": "Preview"
+					},
+					"11": {
+						"description": "Unlock a file.",
+						"caption": "Unlock"
+					},
+					"14": {
+						"description": "Open a file.",
+						"caption": "Open"
+					},
+					"12": {
+						"description": "Share a file.",
+						"caption": "Share"
+					},
+					"13": {
+						"description": "Unshare a file.",
+						"caption": "Unshare"
 					}
 				},
 				"description": "The normalized identifier of the activity that triggered the event.",
 				"group": "classification",
-				"requirement": "optional",
+				"requirement": "required",
 				"caption": "Activity ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "network_file_activity",
 				"sibling": "activity_name"
 			}
 		},
@@ -286,57 +344,13 @@
 		{
 			"src_endpoint": {
 				"type": "object_t",
-				"description": "The initiator (client) sending the email.",
+				"description": "The endpoint that performed the activity on the target file.",
 				"group": "primary",
-				"requirement": "optional",
+				"requirement": "required",
 				"caption": "Source Endpoint",
 				"object_name": "Network Endpoint",
 				"object_type": "network_endpoint",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"direction_id": {
-				"type": "integer_t",
-				"enum": {
-					"3": {
-						"description": "Email Internal, from inside the network destined for an entity inside network.",
-						"caption": "Internal"
-					},
-					"99": {
-						"caption": "Other"
-					},
-					"0": {
-						"description": "The email direction is unknown.",
-						"caption": "Unknown"
-					},
-					"1": {
-						"description": "Email Inbound, from the Internet or outside network destined for an entity inside network.",
-						"caption": "Inbound"
-					},
-					"2": {
-						"description": "Email Outbound, from inside the network destined for an entity outside network.",
-						"caption": "Outbound"
-					}
-				},
-				"description": "<p>The direction of the email relative to the scanning host or organization.</p>Email scanned at an internet gateway might be characterized as inbound to the organization from the Internet, outbound from the organization to the Internet, or internal within the organization. Email scanned at a workstation might be characterized as inbound to, or outbound from the workstation.",
-				"group": "context",
-				"requirement": "required",
-				"caption": "Direction ID",
-				"type_name": "Integer",
-				"_source": "email_activity",
-				"sibling": "direction"
-			}
-		},
-		{
-			"direction": {
-				"type": "string_t",
-				"description": "The direction of the email, as defined by the <code>direction_id</code> value.",
-				"group": "context",
-				"requirement": "optional",
-				"caption": "Direction",
-				"type_name": "String",
-				"_source": "email_activity"
+				"_source": "network_file_activity"
 			}
 		},
 		{
@@ -353,21 +367,67 @@
 			"type_uid": {
 				"type": "integer_t",
 				"enum": {
-					"400903": {
-						"description": "Email being scanned (example: security scanning)",
-						"caption": "Email Activity: Scan"
+					"401003": {
+						"description": "Update a file.",
+						"caption": "Network File Activity: Update"
 					},
-					"400999": {
-						"caption": "Email Activity: Other"
+					"401006": {
+						"description": "Copy a file.",
+						"caption": "Network File Activity: Copy"
 					},
-					"400900": {
-						"caption": "Email Activity: Unknown"
+					"401099": {
+						"caption": "Network File Activity: Other"
 					},
-					"400901": {
-						"caption": "Email Activity: Send"
+					"401000": {
+						"caption": "Network File Activity: Unknown"
 					},
-					"400902": {
-						"caption": "Email Activity: Receive"
+					"401001": {
+						"description": "Upload a file.",
+						"caption": "Network File Activity: Upload"
+					},
+					"401010": {
+						"description": "Lock a file.",
+						"caption": "Network File Activity: Lock"
+					},
+					"401002": {
+						"description": "Download a file.",
+						"caption": "Network File Activity: Download"
+					},
+					"401004": {
+						"description": "Delete a file.",
+						"caption": "Network File Activity: Delete"
+					},
+					"401005": {
+						"description": "Rename a file.",
+						"caption": "Network File Activity: Rename"
+					},
+					"401007": {
+						"description": "Move a file.",
+						"caption": "Network File Activity: Move"
+					},
+					"401008": {
+						"description": "Restore a file.",
+						"caption": "Network File Activity: Restore"
+					},
+					"401009": {
+						"description": "Preview a file.",
+						"caption": "Network File Activity: Preview"
+					},
+					"401011": {
+						"description": "Unlock a file.",
+						"caption": "Network File Activity: Unlock"
+					},
+					"401014": {
+						"description": "Open a file.",
+						"caption": "Network File Activity: Open"
+					},
+					"401012": {
+						"description": "Share a file.",
+						"caption": "Network File Activity: Share"
+					},
+					"401013": {
+						"description": "Unshare a file.",
+						"caption": "Network File Activity: Unshare"
 					}
 				},
 				"description": "The event type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: <code>class_uid * 100 + activity_id</code>.",
@@ -375,14 +435,14 @@
 				"requirement": "required",
 				"caption": "Type ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "network_file_activity",
 				"sibling": "type_name"
 			}
 		},
 		{
 			"class_name": {
 				"type": "string_t",
-				"description": "The event class name, as defined by class_uid value: <code>Email Activity</code>.",
+				"description": "The event class name, as defined by class_uid value: <code>Network File Activity</code>.",
 				"group": "classification",
 				"requirement": "optional",
 				"caption": "Class",
@@ -399,6 +459,18 @@
 				"caption": "Type Name",
 				"type_name": "String",
 				"_source": "base_event"
+			}
+		},
+		{
+			"proxy": {
+				"type": "object_t",
+				"description": "The proxy (server) in a network connection.",
+				"group": "primary",
+				"requirement": "optional",
+				"caption": "Proxy",
+				"object_name": "Network Proxy Endpoint",
+				"object_type": "network_proxy",
+				"_source": "network_activity"
 			}
 		},
 		{
@@ -430,7 +502,7 @@
 				"requirement": "required",
 				"caption": "Category ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "network_file_activity",
 				"sibling": "category_name"
 			}
 		},
@@ -451,9 +523,9 @@
 				"default": 0,
 				"type": "integer_t",
 				"enum": {
-					"4009": {
-						"description": "Email events report activities of emails.",
-						"caption": "Email Activity"
+					"4010": {
+						"description": "Network File Activity events report file activities traversing the network, including file storage services such as Box, MS OneDrive, or Google Drive.",
+						"caption": "Network File Activity"
 					}
 				},
 				"description": "The unique identifier of a class. A Class describes the attributes available in an event.",
@@ -461,7 +533,7 @@
 				"requirement": "required",
 				"caption": "Class ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "network_file_activity",
 				"sibling": "class_name"
 			}
 		},
@@ -474,18 +546,6 @@
 				"caption": "Event Time",
 				"type_name": "Timestamp",
 				"_source": "base_event"
-			}
-		},
-		{
-			"email_auth": {
-				"type": "object_t",
-				"description": "The SPF, DKIM and DMARC attributes of an email.",
-				"group": "primary",
-				"requirement": "recommended",
-				"caption": "Email Authentication",
-				"object_name": "Email Authentication",
-				"object_type": "email_auth",
-				"_source": "email_activity"
 			}
 		},
 		{
@@ -535,6 +595,18 @@
 			}
 		},
 		{
+			"file": {
+				"type": "object_t",
+				"description": "The file that is the target of the activity.",
+				"group": "primary",
+				"requirement": "required",
+				"caption": "File",
+				"object_name": "File",
+				"object_type": "file",
+				"_source": "network_file_activity"
+			}
+		},
+		{
 			"timezone_offset": {
 				"type": "integer_t",
 				"description": "The number of minutes that the reported event <code>time</code> is ahead or behind UTC, in the range -1,080 to +1,080.",
@@ -546,17 +618,19 @@
 			}
 		}
 	],
-	"name": "email_activity",
-	"description": "Email events report activities of emails.",
-	"uid": 4009,
-	"extends": "base_event",
+	"name": "network_file_activity",
+	"description": "Network File Activity events report file activities traversing the network, including file storage services such as Box, MS OneDrive, or Google Drive.",
+	"uid": 4010,
+	"extends": "network_activity",
 	"category": "network",
-	"caption": "Email Activity",
+	"caption": "Network File Activity",
 	"profiles": [
 		"cloud",
 		"datetime",
 		"host",
+		"network_proxy",
 		"security_control",
+		"firewall",
 		"container",
 		"linux/linux_users",
 		"person"

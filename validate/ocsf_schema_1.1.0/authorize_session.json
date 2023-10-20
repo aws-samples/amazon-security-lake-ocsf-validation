@@ -12,48 +12,15 @@
 			}
 		},
 		{
-			"smtp_hello": {
-				"type": "string_t",
-				"description": "The value of the SMTP HELO or EHLO command sent by the initiator (client).",
-				"group": "primary",
-				"requirement": "recommended",
-				"caption": "SMTP Hello",
-				"type_name": "String",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"attempt": {
-				"type": "integer_t",
-				"description": "The attempt number for attempting to deliver the email.",
-				"group": "context",
-				"requirement": "optional",
-				"caption": "Attempt",
-				"type_name": "Integer",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"banner": {
-				"type": "string_t",
-				"description": "The initial SMTP connection response that a messaging server receives after it connects to a email server.",
-				"group": "context",
-				"requirement": "optional",
-				"caption": "SMTP Banner",
-				"type_name": "String",
-				"_source": "email_activity"
-			}
-		},
-		{
 			"dst_endpoint": {
 				"type": "object_t",
-				"description": "The responder (server) receiving the email.",
-				"group": "primary",
+				"description": "The Endpoint for which the user session was targeted.",
+				"group": "context",
 				"requirement": "optional",
 				"caption": "Destination Endpoint",
 				"object_name": "Network Endpoint",
 				"object_type": "network_endpoint",
-				"_source": "email_activity"
+				"_source": "authorize_session"
 			}
 		},
 		{
@@ -118,21 +85,9 @@
 			}
 		},
 		{
-			"email": {
-				"type": "object_t",
-				"description": "The email object.",
-				"group": "primary",
-				"requirement": "required",
-				"caption": "Email",
-				"object_name": "Email",
-				"object_type": "email",
-				"_source": "email_activity"
-			}
-		},
-		{
 			"category_name": {
 				"type": "string_t",
-				"description": "The event category name, as defined by category_uid value: <code>Network Activity</code>.",
+				"description": "The event category name, as defined by category_uid value: <code>Identity & Access Management</code>.",
 				"group": "classification",
 				"requirement": "optional",
 				"caption": "Category",
@@ -160,6 +115,18 @@
 				"caption": "Start Time",
 				"type_name": "Timestamp",
 				"_source": "base_event"
+			}
+		},
+		{
+			"session": {
+				"type": "object_t",
+				"description": "The user session with the assigned privileges.",
+				"group": "primary",
+				"requirement": "recommended",
+				"caption": "Session",
+				"object_name": "Session",
+				"object_type": "session",
+				"_source": "authorize_session"
 			}
 		},
 		{
@@ -245,10 +212,6 @@
 			"activity_id": {
 				"type": "integer_t",
 				"enum": {
-					"3": {
-						"description": "Email being scanned (example: security scanning)",
-						"caption": "Scan"
-					},
 					"99": {
 						"description": "The event activity is not mapped.",
 						"caption": "Other"
@@ -258,18 +221,20 @@
 						"caption": "Unknown"
 					},
 					"1": {
-						"caption": "Send"
+						"description": "Assign special privileges to a new logon.",
+						"caption": "Assign Privileges"
 					},
 					"2": {
-						"caption": "Receive"
+						"description": "Assign special groups to a new logon.",
+						"caption": "Assign Groups"
 					}
 				},
 				"description": "The normalized identifier of the activity that triggered the event.",
 				"group": "classification",
-				"requirement": "optional",
+				"requirement": "required",
 				"caption": "Activity ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "authorize_session",
 				"sibling": "activity_name"
 			}
 		},
@@ -281,62 +246,6 @@
 				"caption": "Status Details",
 				"type_name": "String",
 				"_source": "base_event"
-			}
-		},
-		{
-			"src_endpoint": {
-				"type": "object_t",
-				"description": "The initiator (client) sending the email.",
-				"group": "primary",
-				"requirement": "optional",
-				"caption": "Source Endpoint",
-				"object_name": "Network Endpoint",
-				"object_type": "network_endpoint",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"direction_id": {
-				"type": "integer_t",
-				"enum": {
-					"3": {
-						"description": "Email Internal, from inside the network destined for an entity inside network.",
-						"caption": "Internal"
-					},
-					"99": {
-						"caption": "Other"
-					},
-					"0": {
-						"description": "The email direction is unknown.",
-						"caption": "Unknown"
-					},
-					"1": {
-						"description": "Email Inbound, from the Internet or outside network destined for an entity inside network.",
-						"caption": "Inbound"
-					},
-					"2": {
-						"description": "Email Outbound, from inside the network destined for an entity outside network.",
-						"caption": "Outbound"
-					}
-				},
-				"description": "<p>The direction of the email relative to the scanning host or organization.</p>Email scanned at an internet gateway might be characterized as inbound to the organization from the Internet, outbound from the organization to the Internet, or internal within the organization. Email scanned at a workstation might be characterized as inbound to, or outbound from the workstation.",
-				"group": "context",
-				"requirement": "required",
-				"caption": "Direction ID",
-				"type_name": "Integer",
-				"_source": "email_activity",
-				"sibling": "direction"
-			}
-		},
-		{
-			"direction": {
-				"type": "string_t",
-				"description": "The direction of the email, as defined by the <code>direction_id</code> value.",
-				"group": "context",
-				"requirement": "optional",
-				"caption": "Direction",
-				"type_name": "String",
-				"_source": "email_activity"
 			}
 		},
 		{
@@ -353,21 +262,19 @@
 			"type_uid": {
 				"type": "integer_t",
 				"enum": {
-					"400903": {
-						"description": "Email being scanned (example: security scanning)",
-						"caption": "Email Activity: Scan"
+					"300399": {
+						"caption": "Authorize Session: Other"
 					},
-					"400999": {
-						"caption": "Email Activity: Other"
+					"300300": {
+						"caption": "Authorize Session: Unknown"
 					},
-					"400900": {
-						"caption": "Email Activity: Unknown"
+					"300301": {
+						"description": "Assign special privileges to a new logon.",
+						"caption": "Authorize Session: Assign Privileges"
 					},
-					"400901": {
-						"caption": "Email Activity: Send"
-					},
-					"400902": {
-						"caption": "Email Activity: Receive"
+					"300302": {
+						"description": "Assign special groups to a new logon.",
+						"caption": "Authorize Session: Assign Groups"
 					}
 				},
 				"description": "The event type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: <code>class_uid * 100 + activity_id</code>.",
@@ -375,14 +282,14 @@
 				"requirement": "required",
 				"caption": "Type ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "authorize_session",
 				"sibling": "type_name"
 			}
 		},
 		{
 			"class_name": {
 				"type": "string_t",
-				"description": "The event class name, as defined by class_uid value: <code>Email Activity</code>.",
+				"description": "The event class name, as defined by class_uid value: <code>Authorize Session</code>.",
 				"group": "classification",
 				"requirement": "optional",
 				"caption": "Class",
@@ -419,10 +326,10 @@
 				"default": 0,
 				"type": "integer_t",
 				"enum": {
-					"4": {
-						"description": "Network Activity events.",
-						"uid": 4,
-						"caption": "Network Activity"
+					"3": {
+						"description": "Identity & Access Management (IAM) events relate to the supervision of the system's authentication and access control model. Examples of such events are the success or failure of authentication, granting of authority, password change, entity change, privileged use etc.",
+						"uid": 3,
+						"caption": "Identity & Access Management"
 					}
 				},
 				"description": "The category unique identifier of the event.",
@@ -430,8 +337,32 @@
 				"requirement": "required",
 				"caption": "Category ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "authorize_session",
 				"sibling": "category_name"
+			}
+		},
+		{
+			"group": {
+				"type": "object_t",
+				"description": "Group that was assigned to the new user session.",
+				"group": "primary",
+				"requirement": "recommended",
+				"caption": "Group",
+				"object_name": "Group",
+				"object_type": "group",
+				"_source": "authorize_session"
+			}
+		},
+		{
+			"user": {
+				"type": "object_t",
+				"description": "The user to which new privileges were assigned.",
+				"group": "primary",
+				"requirement": "required",
+				"caption": "User",
+				"object_name": "User",
+				"object_type": "user",
+				"_source": "authorize_session"
 			}
 		},
 		{
@@ -451,9 +382,9 @@
 				"default": 0,
 				"type": "integer_t",
 				"enum": {
-					"4009": {
-						"description": "Email events report activities of emails.",
-						"caption": "Email Activity"
+					"3003": {
+						"description": "Authorize Session events report privileges or groups assigned to a new user session, usually at login time.",
+						"caption": "Authorize Session"
 					}
 				},
 				"description": "The unique identifier of a class. A Class describes the attributes available in an event.",
@@ -461,7 +392,7 @@
 				"requirement": "required",
 				"caption": "Class ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "authorize_session",
 				"sibling": "class_name"
 			}
 		},
@@ -477,15 +408,15 @@
 			}
 		},
 		{
-			"email_auth": {
-				"type": "object_t",
-				"description": "The SPF, DKIM and DMARC attributes of an email.",
+			"privileges": {
+				"type": "string_t",
+				"description": "The list of sensitive privileges, assigned to the new user session.",
 				"group": "primary",
+				"is_array": true,
 				"requirement": "recommended",
-				"caption": "Email Authentication",
-				"object_name": "Email Authentication",
-				"object_type": "email_auth",
-				"_source": "email_activity"
+				"caption": "Privileges",
+				"type_name": "String",
+				"_source": "authorize_session"
 			}
 		},
 		{
@@ -546,20 +477,33 @@
 			}
 		}
 	],
-	"name": "email_activity",
-	"description": "Email events report activities of emails.",
-	"uid": 4009,
-	"extends": "base_event",
-	"category": "network",
-	"caption": "Email Activity",
+	"name": "authorize_session",
+	"description": "Authorize Session events report privileges or groups assigned to a new user session, usually at login time.",
+	"uid": 3003,
+	"extends": "iam",
+	"category": "iam",
+	"constraints": {
+		"just_one": [
+			"privileges",
+			"group"
+		]
+	},
+	"caption": "Authorize Session",
 	"profiles": [
 		"cloud",
 		"datetime",
 		"host",
-		"security_control",
 		"container",
 		"linux/linux_users",
 		"person"
 	],
-	"category_name": "Network Activity"
+	"category_name": "Identity & Access Management",
+	"associations": {
+		"user": [
+			"session"
+		],
+		"session": [
+			"user"
+		]
+	}
 }

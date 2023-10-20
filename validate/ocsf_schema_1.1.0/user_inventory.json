@@ -12,51 +12,6 @@
 			}
 		},
 		{
-			"smtp_hello": {
-				"type": "string_t",
-				"description": "The value of the SMTP HELO or EHLO command sent by the initiator (client).",
-				"group": "primary",
-				"requirement": "recommended",
-				"caption": "SMTP Hello",
-				"type_name": "String",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"attempt": {
-				"type": "integer_t",
-				"description": "The attempt number for attempting to deliver the email.",
-				"group": "context",
-				"requirement": "optional",
-				"caption": "Attempt",
-				"type_name": "Integer",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"banner": {
-				"type": "string_t",
-				"description": "The initial SMTP connection response that a messaging server receives after it connects to a email server.",
-				"group": "context",
-				"requirement": "optional",
-				"caption": "SMTP Banner",
-				"type_name": "String",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"dst_endpoint": {
-				"type": "object_t",
-				"description": "The responder (server) receiving the email.",
-				"group": "primary",
-				"requirement": "optional",
-				"caption": "Destination Endpoint",
-				"object_name": "Network Endpoint",
-				"object_type": "network_endpoint",
-				"_source": "email_activity"
-			}
-		},
-		{
 			"status_id": {
 				"type": "integer_t",
 				"enum": {
@@ -118,21 +73,9 @@
 			}
 		},
 		{
-			"email": {
-				"type": "object_t",
-				"description": "The email object.",
-				"group": "primary",
-				"requirement": "required",
-				"caption": "Email",
-				"object_name": "Email",
-				"object_type": "email",
-				"_source": "email_activity"
-			}
-		},
-		{
 			"category_name": {
 				"type": "string_t",
-				"description": "The event category name, as defined by category_uid value: <code>Network Activity</code>.",
+				"description": "The event category name, as defined by category_uid value: <code>Discovery</code>.",
 				"group": "classification",
 				"requirement": "optional",
 				"caption": "Category",
@@ -245,10 +188,6 @@
 			"activity_id": {
 				"type": "integer_t",
 				"enum": {
-					"3": {
-						"description": "Email being scanned (example: security scanning)",
-						"caption": "Scan"
-					},
 					"99": {
 						"description": "The event activity is not mapped.",
 						"caption": "Other"
@@ -258,18 +197,20 @@
 						"caption": "Unknown"
 					},
 					"1": {
-						"caption": "Send"
+						"description": "The discovered information is via a log.",
+						"caption": "Log"
 					},
 					"2": {
-						"caption": "Receive"
+						"description": "The discovered information is via a collection process.",
+						"caption": "Collect"
 					}
 				},
 				"description": "The normalized identifier of the activity that triggered the event.",
 				"group": "classification",
-				"requirement": "optional",
+				"requirement": "required",
 				"caption": "Activity ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "discovery",
 				"sibling": "activity_name"
 			}
 		},
@@ -281,62 +222,6 @@
 				"caption": "Status Details",
 				"type_name": "String",
 				"_source": "base_event"
-			}
-		},
-		{
-			"src_endpoint": {
-				"type": "object_t",
-				"description": "The initiator (client) sending the email.",
-				"group": "primary",
-				"requirement": "optional",
-				"caption": "Source Endpoint",
-				"object_name": "Network Endpoint",
-				"object_type": "network_endpoint",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"direction_id": {
-				"type": "integer_t",
-				"enum": {
-					"3": {
-						"description": "Email Internal, from inside the network destined for an entity inside network.",
-						"caption": "Internal"
-					},
-					"99": {
-						"caption": "Other"
-					},
-					"0": {
-						"description": "The email direction is unknown.",
-						"caption": "Unknown"
-					},
-					"1": {
-						"description": "Email Inbound, from the Internet or outside network destined for an entity inside network.",
-						"caption": "Inbound"
-					},
-					"2": {
-						"description": "Email Outbound, from inside the network destined for an entity outside network.",
-						"caption": "Outbound"
-					}
-				},
-				"description": "<p>The direction of the email relative to the scanning host or organization.</p>Email scanned at an internet gateway might be characterized as inbound to the organization from the Internet, outbound from the organization to the Internet, or internal within the organization. Email scanned at a workstation might be characterized as inbound to, or outbound from the workstation.",
-				"group": "context",
-				"requirement": "required",
-				"caption": "Direction ID",
-				"type_name": "Integer",
-				"_source": "email_activity",
-				"sibling": "direction"
-			}
-		},
-		{
-			"direction": {
-				"type": "string_t",
-				"description": "The direction of the email, as defined by the <code>direction_id</code> value.",
-				"group": "context",
-				"requirement": "optional",
-				"caption": "Direction",
-				"type_name": "String",
-				"_source": "email_activity"
 			}
 		},
 		{
@@ -353,21 +238,19 @@
 			"type_uid": {
 				"type": "integer_t",
 				"enum": {
-					"400903": {
-						"description": "Email being scanned (example: security scanning)",
-						"caption": "Email Activity: Scan"
+					"500399": {
+						"caption": "User Inventory Info: Other"
 					},
-					"400999": {
-						"caption": "Email Activity: Other"
+					"500300": {
+						"caption": "User Inventory Info: Unknown"
 					},
-					"400900": {
-						"caption": "Email Activity: Unknown"
+					"500301": {
+						"description": "The discovered information is via a log.",
+						"caption": "User Inventory Info: Log"
 					},
-					"400901": {
-						"caption": "Email Activity: Send"
-					},
-					"400902": {
-						"caption": "Email Activity: Receive"
+					"500302": {
+						"description": "The discovered information is via a collection process.",
+						"caption": "User Inventory Info: Collect"
 					}
 				},
 				"description": "The event type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: <code>class_uid * 100 + activity_id</code>.",
@@ -375,14 +258,14 @@
 				"requirement": "required",
 				"caption": "Type ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "user_inventory",
 				"sibling": "type_name"
 			}
 		},
 		{
 			"class_name": {
 				"type": "string_t",
-				"description": "The event class name, as defined by class_uid value: <code>Email Activity</code>.",
+				"description": "The event class name, as defined by class_uid value: <code>User Inventory Info</code>.",
 				"group": "classification",
 				"requirement": "optional",
 				"caption": "Class",
@@ -399,6 +282,18 @@
 				"caption": "Type Name",
 				"type_name": "String",
 				"_source": "base_event"
+			}
+		},
+		{
+			"actor": {
+				"type": "object_t",
+				"description": "The actor describes the process that was the source of the inventory activity. In the case of user inventory data, that could be a particular procss or script that is run to scrape the user data. For example, it could be a powershell process that runs to pull data from the Azure AD graph API.",
+				"group": "context",
+				"requirement": "optional",
+				"caption": "Actor",
+				"object_name": "Actor",
+				"object_type": "actor",
+				"_source": "user_inventory"
 			}
 		},
 		{
@@ -419,10 +314,10 @@
 				"default": 0,
 				"type": "integer_t",
 				"enum": {
-					"4": {
-						"description": "Network Activity events.",
-						"uid": 4,
-						"caption": "Network Activity"
+					"5": {
+						"description": "Discovery events report the existence and state of devices, files, configurations, processes, registry keys, and other objects.",
+						"uid": 5,
+						"caption": "Discovery"
 					}
 				},
 				"description": "The category unique identifier of the event.",
@@ -430,8 +325,20 @@
 				"requirement": "required",
 				"caption": "Category ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "user_inventory",
 				"sibling": "category_name"
+			}
+		},
+		{
+			"user": {
+				"type": "object_t",
+				"description": "The user that is being discovered by an inventory process.",
+				"group": "primary",
+				"requirement": "required",
+				"caption": "User",
+				"object_name": "User",
+				"object_type": "user",
+				"_source": "user_inventory"
 			}
 		},
 		{
@@ -451,9 +358,9 @@
 				"default": 0,
 				"type": "integer_t",
 				"enum": {
-					"4009": {
-						"description": "Email events report activities of emails.",
-						"caption": "Email Activity"
+					"5003": {
+						"description": "User Inventory Info events report user inventory data. For example, this can be used to collect information about users by dumping Active Directory data. This event class is meant to be used in conjunction with the <code>person</code> profile to allow capturing extended information about the user.",
+						"caption": "User Inventory Info"
 					}
 				},
 				"description": "The unique identifier of a class. A Class describes the attributes available in an event.",
@@ -461,7 +368,7 @@
 				"requirement": "required",
 				"caption": "Class ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "user_inventory",
 				"sibling": "class_name"
 			}
 		},
@@ -474,18 +381,6 @@
 				"caption": "Event Time",
 				"type_name": "Timestamp",
 				"_source": "base_event"
-			}
-		},
-		{
-			"email_auth": {
-				"type": "object_t",
-				"description": "The SPF, DKIM and DMARC attributes of an email.",
-				"group": "primary",
-				"requirement": "recommended",
-				"caption": "Email Authentication",
-				"object_name": "Email Authentication",
-				"object_type": "email_auth",
-				"_source": "email_activity"
 			}
 		},
 		{
@@ -546,20 +441,18 @@
 			}
 		}
 	],
-	"name": "email_activity",
-	"description": "Email events report activities of emails.",
-	"uid": 4009,
-	"extends": "base_event",
-	"category": "network",
-	"caption": "Email Activity",
+	"name": "user_inventory",
+	"description": "User Inventory Info events report user inventory data. For example, this can be used to collect information about users by dumping Active Directory data. This event class is meant to be used in conjunction with the <code>person</code> profile to allow capturing extended information about the user.",
+	"uid": 5003,
+	"extends": "discovery",
+	"category": "discovery",
+	"caption": "User Inventory Info",
 	"profiles": [
 		"cloud",
 		"datetime",
-		"host",
-		"security_control",
 		"container",
 		"linux/linux_users",
 		"person"
 	],
-	"category_name": "Network Activity"
+	"category_name": "Discovery"
 }

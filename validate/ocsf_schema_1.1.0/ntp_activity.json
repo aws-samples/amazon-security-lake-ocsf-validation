@@ -12,48 +12,27 @@
 			}
 		},
 		{
-			"smtp_hello": {
-				"type": "string_t",
-				"description": "The value of the SMTP HELO or EHLO command sent by the initiator (client).",
+			"traffic": {
+				"type": "object_t",
+				"description": "The network traffic refers to the amount of data moving across a network at a given point of time. Intended to be used alongside Network Connection.",
 				"group": "primary",
-				"requirement": "recommended",
-				"caption": "SMTP Hello",
-				"type_name": "String",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"attempt": {
-				"type": "integer_t",
-				"description": "The attempt number for attempting to deliver the email.",
-				"group": "context",
 				"requirement": "optional",
-				"caption": "Attempt",
-				"type_name": "Integer",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"banner": {
-				"type": "string_t",
-				"description": "The initial SMTP connection response that a messaging server receives after it connects to a email server.",
-				"group": "context",
-				"requirement": "optional",
-				"caption": "SMTP Banner",
-				"type_name": "String",
-				"_source": "email_activity"
+				"caption": "Traffic",
+				"object_name": "Network Traffic",
+				"object_type": "network_traffic",
+				"_source": "network_activity"
 			}
 		},
 		{
 			"dst_endpoint": {
 				"type": "object_t",
-				"description": "The responder (server) receiving the email.",
+				"description": "The responder (server) in a network connection.",
 				"group": "primary",
-				"requirement": "optional",
+				"requirement": "required",
 				"caption": "Destination Endpoint",
 				"object_name": "Network Endpoint",
 				"object_type": "network_endpoint",
-				"_source": "email_activity"
+				"_source": "network_activity"
 			}
 		},
 		{
@@ -107,6 +86,17 @@
 			}
 		},
 		{
+			"tls": {
+				"type": "object_t",
+				"description": "The Transport Layer Security (TLS) attributes.",
+				"group": "primary",
+				"caption": "TLS",
+				"object_name": "Transport Layer Security (TLS)",
+				"object_type": "tls",
+				"_source": "network_activity"
+			}
+		},
+		{
 			"duration": {
 				"type": "integer_t",
 				"description": "The event duration or aggregate time, the amount of time the event covers from <code>start_time</code> to <code>end_time</code> in milliseconds.",
@@ -118,18 +108,6 @@
 			}
 		},
 		{
-			"email": {
-				"type": "object_t",
-				"description": "The email object.",
-				"group": "primary",
-				"requirement": "required",
-				"caption": "Email",
-				"object_name": "Email",
-				"object_type": "email",
-				"_source": "email_activity"
-			}
-		},
-		{
 			"category_name": {
 				"type": "string_t",
 				"description": "The event category name, as defined by category_uid value: <code>Network Activity</code>.",
@@ -138,6 +116,18 @@
 				"caption": "Category",
 				"type_name": "String",
 				"_source": "base_event"
+			}
+		},
+		{
+			"connection_info": {
+				"type": "object_t",
+				"description": "The network connection information.",
+				"group": "primary",
+				"requirement": "recommended",
+				"caption": "Connection Info",
+				"object_name": "Network Connection Information",
+				"object_type": "network_connection_info",
+				"_source": "network_activity"
 			}
 		},
 		{
@@ -184,6 +174,28 @@
 				"object_name": "Observable",
 				"object_type": "observable",
 				"_source": "base_event"
+			}
+		},
+		{
+			"delay": {
+				"type": "integer_t",
+				"description": "The total round-trip delay to the reference clock in milliseconds.",
+				"group": "primary",
+				"requirement": "optional",
+				"caption": "Root Delay",
+				"type_name": "Integer",
+				"_source": "ntp_activity"
+			}
+		},
+		{
+			"app_name": {
+				"type": "string_t",
+				"description": "The name of the application that is associated with the event or object.",
+				"group": "context",
+				"requirement": "optional",
+				"caption": "Application Name",
+				"type_name": "String",
+				"_source": "network_activity"
 			}
 		},
 		{
@@ -246,30 +258,48 @@
 				"type": "integer_t",
 				"enum": {
 					"3": {
-						"description": "Email being scanned (example: security scanning)",
-						"caption": "Scan"
+						"description": "NTP client, syncs with servers.",
+						"caption": "Client Synchronization"
+					},
+					"6": {
+						"description": "Monitoring and control messaging.",
+						"caption": "Control"
 					},
 					"99": {
 						"description": "The event activity is not mapped.",
 						"caption": "Other"
 					},
 					"0": {
-						"description": "The event activity is unknown.",
+						"description": "Not used in standard NTP implementations.",
 						"caption": "Unknown"
 					},
 					"1": {
-						"caption": "Send"
+						"description": "Bidirectional time exchange between devices.",
+						"caption": "Symmetric Active Exchange"
 					},
 					"2": {
-						"caption": "Receive"
+						"description": "Device responds as a server to peers in symmetric active mode.",
+						"caption": "Symmetric Passive Response"
+					},
+					"4": {
+						"description": "Dedicated NTP time server, responds to clients.",
+						"caption": "Server Response"
+					},
+					"5": {
+						"description": "Broadcast time info to network devices.",
+						"caption": "Broadcast"
+					},
+					"7": {
+						"description": "Reserved - Not defined in standard NTP specifications.",
+						"caption": "Private Use Case"
 					}
 				},
 				"description": "The normalized identifier of the activity that triggered the event.",
 				"group": "classification",
-				"requirement": "optional",
+				"requirement": "required",
 				"caption": "Activity ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "ntp_activity",
 				"sibling": "activity_name"
 			}
 		},
@@ -286,57 +316,13 @@
 		{
 			"src_endpoint": {
 				"type": "object_t",
-				"description": "The initiator (client) sending the email.",
+				"description": "The initiator (client) of the network connection.",
 				"group": "primary",
-				"requirement": "optional",
+				"requirement": "required",
 				"caption": "Source Endpoint",
 				"object_name": "Network Endpoint",
 				"object_type": "network_endpoint",
-				"_source": "email_activity"
-			}
-		},
-		{
-			"direction_id": {
-				"type": "integer_t",
-				"enum": {
-					"3": {
-						"description": "Email Internal, from inside the network destined for an entity inside network.",
-						"caption": "Internal"
-					},
-					"99": {
-						"caption": "Other"
-					},
-					"0": {
-						"description": "The email direction is unknown.",
-						"caption": "Unknown"
-					},
-					"1": {
-						"description": "Email Inbound, from the Internet or outside network destined for an entity inside network.",
-						"caption": "Inbound"
-					},
-					"2": {
-						"description": "Email Outbound, from inside the network destined for an entity outside network.",
-						"caption": "Outbound"
-					}
-				},
-				"description": "<p>The direction of the email relative to the scanning host or organization.</p>Email scanned at an internet gateway might be characterized as inbound to the organization from the Internet, outbound from the organization to the Internet, or internal within the organization. Email scanned at a workstation might be characterized as inbound to, or outbound from the workstation.",
-				"group": "context",
-				"requirement": "required",
-				"caption": "Direction ID",
-				"type_name": "Integer",
-				"_source": "email_activity",
-				"sibling": "direction"
-			}
-		},
-		{
-			"direction": {
-				"type": "string_t",
-				"description": "The direction of the email, as defined by the <code>direction_id</code> value.",
-				"group": "context",
-				"requirement": "optional",
-				"caption": "Direction",
-				"type_name": "String",
-				"_source": "email_activity"
+				"_source": "network_activity"
 			}
 		},
 		{
@@ -353,21 +339,40 @@
 			"type_uid": {
 				"type": "integer_t",
 				"enum": {
-					"400903": {
-						"description": "Email being scanned (example: security scanning)",
-						"caption": "Email Activity: Scan"
+					"401303": {
+						"description": "NTP client, syncs with servers.",
+						"caption": "NTP Activity: Client Synchronization"
 					},
-					"400999": {
-						"caption": "Email Activity: Other"
+					"401306": {
+						"description": "Monitoring and control messaging.",
+						"caption": "NTP Activity: Control"
 					},
-					"400900": {
-						"caption": "Email Activity: Unknown"
+					"401399": {
+						"description": "The event activity is not mapped.",
+						"caption": "NTP Activity: Other"
 					},
-					"400901": {
-						"caption": "Email Activity: Send"
+					"401300": {
+						"caption": "NTP Activity: Unknown"
 					},
-					"400902": {
-						"caption": "Email Activity: Receive"
+					"401301": {
+						"description": "Bidirectional time exchange between devices.",
+						"caption": "NTP Activity: Symmetric Active Exchange"
+					},
+					"401302": {
+						"description": "Device responds as a server to peers in symmetric active mode.",
+						"caption": "NTP Activity: Symmetric Passive Response"
+					},
+					"401304": {
+						"description": "Dedicated NTP time server, responds to clients.",
+						"caption": "NTP Activity: Server Response"
+					},
+					"401305": {
+						"description": "Broadcast time info to network devices.",
+						"caption": "NTP Activity: Broadcast"
+					},
+					"401307": {
+						"description": "Reserved - Not defined in standard NTP specifications.",
+						"caption": "NTP Activity: Private Use Case"
 					}
 				},
 				"description": "The event type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: <code>class_uid * 100 + activity_id</code>.",
@@ -375,14 +380,14 @@
 				"requirement": "required",
 				"caption": "Type ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "ntp_activity",
 				"sibling": "type_name"
 			}
 		},
 		{
 			"class_name": {
 				"type": "string_t",
-				"description": "The event class name, as defined by class_uid value: <code>Email Activity</code>.",
+				"description": "The event class name, as defined by class_uid value: <code>NTP Activity</code>.",
 				"group": "classification",
 				"requirement": "optional",
 				"caption": "Class",
@@ -399,6 +404,88 @@
 				"caption": "Type Name",
 				"type_name": "String",
 				"_source": "base_event"
+			}
+		},
+		{
+			"dispersion": {
+				"type": "integer_t",
+				"description": "The dispersion in the NTP protocol is the estimated time error or uncertainty relative to the reference clock in milliseconds.",
+				"group": "primary",
+				"requirement": "optional",
+				"caption": "Root Dispersion",
+				"type_name": "Integer",
+				"_source": "ntp_activity"
+			}
+		},
+		{
+			"precision": {
+				"type": "integer_t",
+				"description": "The NTP precision quantifies a clock's accuracy and stability in log2 seconds, as defined in RFC-5905.",
+				"group": "primary",
+				"requirement": "recommended",
+				"caption": "Precision",
+				"type_name": "Integer",
+				"_source": "ntp_activity"
+			}
+		},
+		{
+			"proxy": {
+				"type": "object_t",
+				"description": "The proxy (server) in a network connection.",
+				"group": "primary",
+				"requirement": "optional",
+				"caption": "Proxy",
+				"object_name": "Network Proxy Endpoint",
+				"object_type": "network_proxy",
+				"_source": "network_activity"
+			}
+		},
+		{
+			"stratum_id": {
+				"type": "integer_t",
+				"enum": {
+					"99": {
+						"description": "The stratum level is not mapped. See the <code>stratum</code> attribute, which may contain a data source specific value.",
+						"caption": "Other"
+					},
+					"0": {
+						"description": "Unspecified or invalid.",
+						"caption": "Unknown"
+					},
+					"1": {
+						"description": "The highest precision primary server (e.g atomic clock or GPS).",
+						"caption": "Primary Server"
+					},
+					"2": {
+						"description": "A secondary level server (possible values: 2-15).",
+						"caption": "Secondary Server"
+					},
+					"16": {
+						"caption": "Unsynchronized"
+					},
+					"17": {
+						"description": "Reserved stratum (possible values: 17-255).",
+						"caption": "Reserved"
+					}
+				},
+				"description": "The normalized identifier of the stratum level, as defined in <a target='_blank' href='https://www.rfc-editor.org/rfc/rfc5905.html'>RFC-5905</a>.",
+				"group": "primary",
+				"requirement": "recommended",
+				"caption": "Stratum ID",
+				"type_name": "Integer",
+				"_source": "ntp_activity",
+				"sibling": "stratum"
+			}
+		},
+		{
+			"stratum": {
+				"type": "string_t",
+				"description": "The stratum level of the NTP server's time source, normalized to the caption of the stratum_id value.",
+				"group": "primary",
+				"requirement": "optional",
+				"caption": "Stratum",
+				"type_name": "String",
+				"_source": "ntp_activity"
 			}
 		},
 		{
@@ -430,7 +517,7 @@
 				"requirement": "required",
 				"caption": "Category ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "ntp_activity",
 				"sibling": "category_name"
 			}
 		},
@@ -447,13 +534,24 @@
 			}
 		},
 		{
+			"version": {
+				"type": "string_t",
+				"description": "The version number of the NTP protocol.",
+				"group": "context",
+				"requirement": "required",
+				"caption": "Version",
+				"type_name": "String",
+				"_source": "ntp_activity"
+			}
+		},
+		{
 			"class_uid": {
 				"default": 0,
 				"type": "integer_t",
 				"enum": {
-					"4009": {
-						"description": "Email events report activities of emails.",
-						"caption": "Email Activity"
+					"4013": {
+						"description": "The Network Time Protocol (NTP) Activity events report instances of remote clients synchronizing their clocks with an NTP server, as observed on the network.",
+						"caption": "NTP Activity"
 					}
 				},
 				"description": "The unique identifier of a class. A Class describes the attributes available in an event.",
@@ -461,7 +559,7 @@
 				"requirement": "required",
 				"caption": "Class ID",
 				"type_name": "Integer",
-				"_source": "email_activity",
+				"_source": "ntp_activity",
 				"sibling": "class_name"
 			}
 		},
@@ -474,18 +572,6 @@
 				"caption": "Event Time",
 				"type_name": "Timestamp",
 				"_source": "base_event"
-			}
-		},
-		{
-			"email_auth": {
-				"type": "object_t",
-				"description": "The SPF, DKIM and DMARC attributes of an email.",
-				"group": "primary",
-				"requirement": "recommended",
-				"caption": "Email Authentication",
-				"object_name": "Email Authentication",
-				"object_type": "email_auth",
-				"_source": "email_activity"
 			}
 		},
 		{
@@ -546,17 +632,19 @@
 			}
 		}
 	],
-	"name": "email_activity",
-	"description": "Email events report activities of emails.",
-	"uid": 4009,
-	"extends": "base_event",
+	"name": "ntp_activity",
+	"description": "The Network Time Protocol (NTP) Activity events report instances of remote clients synchronizing their clocks with an NTP server, as observed on the network.",
+	"uid": 4013,
+	"extends": "network_activity",
 	"category": "network",
-	"caption": "Email Activity",
+	"caption": "NTP Activity",
 	"profiles": [
 		"cloud",
 		"datetime",
 		"host",
+		"network_proxy",
 		"security_control",
+		"firewall",
 		"container",
 		"linux/linux_users",
 		"person"
