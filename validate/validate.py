@@ -112,7 +112,7 @@ def main():
         df.to_json(new_path)
 
         # Check if version is rc2
-        if answers['version'] == 'ocsf_schema_1.0.0-rc.2'
+        if answers['version'] == 'ocsf_schema_1.0.0-rc.2':
             # Write JSON object data to empty json file
             with open(new_path, 'r') as testData:
                 testData = json.load(testData)
@@ -288,7 +288,7 @@ def main():
             output = []
 
         #check if version is ocsf 1.1
-        if answers['version'] == 'ocsf_schema_1.1.0
+        if answers['version'] == 'ocsf_schema_1.1.0:
             # Write JSON object data to empty json file
             with open(new_path, 'r') as testData:
                 testData = json.load(testData)
