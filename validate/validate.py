@@ -288,7 +288,7 @@ def main():
             output = []
 
         #check if version is ocsf 1.1
-        if answers['version'] == 'ocsf_schema_1.1.0:
+        if answers['version'] == 'ocsf_schema_1.1.0':
             # Write JSON object data to empty json file
             with open(new_path, 'r') as testData:
                 testData = json.load(testData)
