@@ -1,0 +1,44 @@
+{
+	"eventVersion": "1.08",
+	"userIdentity": {
+		"type": "AssumedRole",
+		"principalId": "AROAIOJRFK4IOK6BW5ISY:admin-user",
+		"arn": "arn:aws:sts::112233445566:assumed-role/Admin/admin-user",
+		"accountId": "112233445566",
+		"accessKeyId": "ASIAXTKM3VWIYVEA5XO7",
+		"sessionContext": {
+			"sessionIssuer": {
+				"type": "Role",
+				"principalId": "AROAIOJRFK4IOK6BW5ISY",
+				"arn": "arn:aws:iam::112233445566:role/Admin",
+				"accountId": "112233445566",
+				"userName": "Admin"
+			},
+			"webIdFederationData": {},
+			"attributes": {
+				"creationDate": "2023-02-06T20:57:02Z",
+				"mfaAuthenticated": "false"
+			}
+		},
+		"invokedBy": "cloudformation.amazonaws.com"
+	},
+	"eventTime": "2023-02-06T20:57:47Z",
+	"eventSource": "iam.amazonaws.com",
+	"eventName": "RemoveRoleFromInstanceProfile",
+	"awsRegion": "us-east-1",
+	"sourceIPAddress": "cloudformation.amazonaws.com",
+	"userAgent": "AWS Internal",
+	"requestParameters": {
+		"instanceProfileName": "instance-profile",
+		"roleName": "Role-name"
+	},
+	"responseElements": null,
+	"requestID": "44fe4dff-59cc-4f37-859f-6ff04be1b62b",
+	"eventID": "68128438-c3c3-46e8-974e-ee6de9a70d79",
+	"readOnly": false,
+	"eventType": "AwsApiCall",
+	"managementEvent": true,
+	"recipientAccountId": "112233445566",
+	"eventCategory": "Management",
+	"sessionCredentialFromConsole": "true"
+}

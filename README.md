@@ -1,32 +1,78 @@
-Amazon Security Lake Resources
+Amazon Security Lake Data Validation 
 ========================
 
 ## Table of Contents
 1. [About this Repo](#About)
-2. [License](#License)
-3. [Validation Tool](#Validation)
-4. [AWS OCSF Samples](#samples)
+2. [Usage Guide](#Usage)
+3. [Examples](#Examples)
+4. [License](#License)
+5. [Checksum](#Checksum)
 
 ## About this Repo <a name="About"></a>
 
-This repo is a collection of resources which are supplemental to Amazon Security Lake. Amazon Security Lake automatically centralizes security data from cloud, on-premises, and custom sources into a purpose-built data lake stored in your account. With Security Lake, you can get a more complete understanding of your security data across your entire organization. You can also improve the protection of your workloads, applications, and data. Security Lake has adopted the Open Cybersecurity Schema Framework (OCSF), an open standard. With OCSF support, the service can normalize and combine security data from AWS and a broad range of enterprise security data sources. 
+The following is a simple program which can be used to ensure that user provided parquet data properly maps to the various schema definitions specified within the Open Cyber Security Framework (OCSF) - https://schema.ocsf.io/. 
 
-The resources currently available within this repo are as follows:
-
-1. [OCSF Parquet Data Validation](https://github.com/aws-samples/amazon-security-lake/tree/main/validate_1.0.0-rc.2)
-2. [AWS OCSF Samples](https://github.com/aws-samples/amazon-security-lake/tree/main/AWSLogs_OCSF_1.0.0-rc2_samples)
+This tool was build to provide supplementry validation for Amazon Security Lake which requires data to be in the format specified by OCSF Schema 1.0.0-rc.2. 
 
 We welcome contributions to this repo in the form of fixes to existing examples or addition of new examples. For more information on contributing, please see the [CONTRIBUTING](https://github.com/aws-samples/amazon-security-lake/blob/main/CONTRIBUTING.md) guide.
 
-### Validation Tool <a name="Validation"></a>
 
-The following is a simple program which can be used to ensure that user provided parquet data properly maps to the various schema definitions specified within the Open Cyber Security Framework (OCSF) - https://schema.ocsf.io/.
+## Usage Guide <a name="Usage"></a>
 
-This tool was build to provide supplementry validation for Amazon Security Lake which requires data to be in the format specified by OCSF Schema 1.0.0-rc.2.
+To get started with using this validator please follow the numbered steps below:
 
-### AWS OCSF Samples <a name="samples"></a>
+1. Please place parquet files in: path/to/inputs
+    
+3. Install requirements using 
+        pip install -r requirements.txt
 
-In addition to the tool itself, several common  examples of AWS OCSF samples have been added to this repository under AWSLogs_OCSF_1.0.0-rc2_samples. These are pre-mapped OCSF compliant Amazon Security Lake supported log sources to provide as examples to users interested in mapping to OCSF.
+4. This script will throw error without installation of most current version of packages specified in step 2
+
+5. Run
+
+		python validate.py -i "path/to/inputs" -version ocsf_schema_1.0.0-rc.2
+		
+
+
+
+## Examples <a name="Examples"></a>
+
+Below we can see an expected validation result by executing the script in the samples folder: path/to/samples/sample.py
+
+	python sample.py
+
+The expected output from running the sample is as follows:
+
+		Validating Against Event Class: api_activity (3005)...
+
+		----------------------------------------FILE DATA----------------------------------------
+		{
+		      "activity_id": 2,
+		      "activity_name": "Read",
+		      "api": {
+			    "operation": "PutObject",
+			    "request": {
+				  "uid": "AAAAA1111BBBB222"
+			    },
+			    "service": {
+				  "name": "s3.amazonaws.com"
+			    }
+		      },
+		      "actor": { 
+
+		....
+		....
+		....
+
+		-------------------------------------------------------------------------------------
+
+		VALID OCSF.
+
+## Checksum <a name="Checksum"></a>
+
+To ensure the soundness of the download, you may choose run a checksum against the files in this repository. You can verify the integrity of the validate.py by ensuring the shasum (SHA-256) matches the following:
+
+	cf67afaf295e74651f7de803fc96ee1cab3e5502a9896ceb835aabbf4e14af88
 
 ### Official Resources
 - [Amazon Security Lake Overview](https://aws.amazon.com/security-lake/)
@@ -36,11 +82,3 @@ In addition to the tool itself, several common  examples of AWS OCSF samples hav
 # License <a name="License"></a>
 
 This library is licensed under the MIT-0 License.
-		
-
-
-
-
-
-
-

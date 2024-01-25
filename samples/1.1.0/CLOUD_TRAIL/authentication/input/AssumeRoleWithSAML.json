@@ -1,0 +1,66 @@
+{
+	"awsRegion": "us-east-2",
+	"eventCategory": "Management",
+	"eventID": "dEXAMPLE-265a-41e0-9352-4401bEXAMPLE",
+	"eventName": "AssumeRoleWithSAML",
+	"eventSource": "sts.amazonaws.com",
+	"eventTime": "2019-11-01T19:14:36Z",
+	"eventType": "AwsApiCall",
+	"eventVersion": "1.07",
+	"recipientAccountId": "444455556666",
+	"requestID": "6EXAMPLE-e595-11e5-b2c7-c974fEXAMPLE",
+	"requestParameters": {
+		"durationSeconds": 3600,
+		"principalArn": "arn:aws:iam::444455556666:saml-provider/Shibboleth",
+		"principalTags": {
+			"CostCenter": "987654",
+			"Department": "Engineering",
+			"Project": "Unicorn"
+		},
+		"roleArn": "arn:aws:iam::444455556666:role/SAMLTestRoleShibboleth",
+		"roleSessionName": "MyAssignedRoleSessionName",
+		"sAMLAssertionID": "_c0046cEXAMPLEb9d4b8eEXAMPLE2619aEXAMPLE",
+		"sourceIdentity": "MySAMLUser",
+		"transitiveTagKeys": [
+			"CostCenter",
+			"Project"
+		]
+	},
+	"resources": [
+		{
+			"ARN": "arn:aws:iam::444455556666:role/SAMLTestRoleShibboleth",
+			"accountId": "444455556666",
+			"type": "AWS::IAM::Role"
+		},
+		{
+			"ARN": "arn:aws:iam::444455556666:saml-provider/test-saml-provider",
+			"accountId": "444455556666",
+			"type": "AWS::IAM::SAMLProvider"
+		}
+	],
+	"responseElements": {
+		"assumedRoleUser": {
+			"arn": "arn:aws:sts::444455556666:assumed-role/SAMLTestRoleShibboleth/MyAssignedRoleSessionName",
+			"assumedRoleId": "AROAD35QRSTUVWEXAMPLE:MyAssignedRoleSessionName"
+		},
+		"audience": "https://signin.aws.amazon.com/saml",
+		"credentials": {
+			"accessKeyId": "AKIAIOSFODNN7EXAMPLE",
+			"expiration": "Mar 23, 2016 2:39:57 AM",
+			"sessionToken": "<encoded session token blob>"
+		},
+		"issuer": "https://server.example.com/idp/shibboleth",
+		"nameQualifier": "bdGOnTesti4+ExamplexL/jEvs=",
+		"sourceIdentity": "MySAMLUser",
+		"subject": "SamlExample",
+		"subjectType": "transient"
+	},
+	"sourceIPAddress": "192.0.2.101",
+	"userAgent": "aws-cli/1.16.263 Python/3.4.7 Linux/4.9.184-0.1.ac.235.83.329.metal1.x86_64 botocore/1.12.253",
+	"userIdentity": {
+		"identityProvider": "bdGOnTesti4+ExamplexL/jEvs=",
+		"principalId": "SampleUkh1i4+ExamplexL/jEvs=:SamlExample",
+		"type": "SAMLUser",
+		"userName": "SamlExample"
+	}
+}

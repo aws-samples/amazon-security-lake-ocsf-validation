@@ -1,0 +1,55 @@
+{
+	"awsRegion": "us-east-1",
+	"eventCategory": "Management",
+	"eventID": "7b414d15-cb9b-4bfa-88dd-68b42f1d60e8",
+	"eventName": "CreateRole",
+	"eventSource": "iam.amazonaws.com",
+	"eventTime": "2023-02-03T00:28:34Z",
+	"eventType": "AwsApiCall",
+	"eventVersion": "1.08",
+	"managementEvent": true,
+	"readOnly": false,
+	"recipientAccountId": "112233445566",
+	"requestID": "ab1441af-76c1-4476-9f52-30d070ac4eba",
+	"requestParameters": {
+		"assumeRolePolicyDocument": "{\"Statement\":[{\"Action\":[\"sts:AssumeRole\"],\"Effect\":\"Allow\",\"Principal\":{\"Service\":[\"ec2.amazonaws.com\"]}}]}",
+		"description": "",
+		"path": "/",
+		"roleName": "User-Role-Name"
+	},
+	"responseElements": {
+		"role": {
+			"arn": "arn:aws:iam::112233445566:role/User-Role-Name",
+			"assumeRolePolicyDocument": "%7B%22Statement%22%3A%5B%7B%22Action%22%3A%5B%22sts%3AAssumeRole%22%5D%2C%22Effect%22%3A%22Allow%22%2C%22Principal%22%3A%7B%22Service%22%3A%5B%22ec2.amazonaws.com%22%5D%7D%7D%5D%7D",
+			"createDate": "Feb 3, 2023 12:28:34 AM",
+			"path": "/",
+			"roleId": "AROAXTKM3VWIVSRGSFG7J",
+			"roleName": "User-Role-Name"
+		}
+	},
+	"sessionCredentialFromConsole": "true",
+	"sourceIPAddress": "cloudformation.amazonaws.com",
+	"userAgent": "AWS Internal",
+	"userIdentity": {
+		"accessKeyId": "ASIAXTKM3VWIT242TLUS",
+		"accountId": "112233445566",
+		"arn": "arn:aws:sts::112233445566:assumed-role/Admin/Admin-user",
+		"invokedBy": "cloudformation.amazonaws.com",
+		"principalId": "AROAIOJRFK4IOK6BW5ISY:Admin-user",
+		"sessionContext": {
+			"attributes": {
+				"creationDate": "2023-02-03T00:24:47Z",
+				"mfaAuthenticated": "false"
+			},
+			"sessionIssuer": {
+				"accountId": "112233445566",
+				"arn": "arn:aws:iam::112233445566:role/Admin",
+				"principalId": "AROAIOJRFK4IOK6BW5ISY",
+				"type": "Role",
+				"userName": "Admin"
+			},
+			"webIdFederationData": {}
+		},
+		"type": "AssumedRole"
+	}
+}

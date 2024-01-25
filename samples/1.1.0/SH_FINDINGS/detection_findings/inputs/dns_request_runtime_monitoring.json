@@ -1,0 +1,155 @@
+{
+	"AwsAccountId": "arn:aws:EXAMPLE",
+	"CompanyName": "Amazon",
+	"CreatedAt": "2023-10-31T16:46:42.685Z",
+	"Description": "Process GeneratedFindingProcessName from EC2 instance i-99999999 is querying algorithmically generated domains. Such domains are commonly used by malware and could be an indication of a compromised EC2 instance.",
+	"FindingProviderFields": {
+		"Severity": {
+			"Label": "HIGH"
+		},
+		"Types": [
+			"TTPs/Command and Control/Trojan:Runtime-DGADomainRequest.C!DNS"
+		]
+	},
+	"FirstObservedAt": "2023-10-31T16:46:42.000Z",
+	"GeneratorId": "arn:aws:EXAMPLE",
+	"Id": "arn:aws:EXAMPLE",
+	"LastObservedAt": "2023-10-31T16:46:42.000Z",
+	"ProductArn": "arn:aws:EXAMPLE",
+	"ProductFields": {
+		"aws/guardduty/service/action/actionType": "DNS_REQUEST",
+		"aws/guardduty/service/action/dnsRequestAction/blocked": "false",
+		"aws/guardduty/service/action/dnsRequestAction/domain": "GeneratedFindingDomainName",
+		"aws/guardduty/service/action/dnsRequestAction/domainWithSuffix": "GeneratedFindingSLDwithTLD",
+		"aws/guardduty/service/action/dnsRequestAction/protocol": "UDP",
+		"aws/guardduty/service/additionalInfo/agentDetails/agentId": "GeneratedFindingAgentId",
+		"aws/guardduty/service/additionalInfo/agentDetails/agentVersion": "1",
+		"aws/guardduty/service/additionalInfo/sample": "true",
+		"aws/guardduty/service/additionalInfo/threatListName": "GeneratedFindingThreatListName",
+		"aws/guardduty/service/additionalInfo/type": "default",
+		"aws/guardduty/service/additionalInfo/value": "{\"threatListName\":\"GeneratedFindingThreatListName\",\"sample\":true,\"agentDetails\":{\"agentVersion\":\"1\",\"agentId\":\"GeneratedFindingAgentId\"}}",
+		"aws/guardduty/service/archived": "false",
+		"aws/guardduty/service/count": "1",
+		"aws/guardduty/service/detectorId": "1ac1bfceda6679698215d5d02287e1f6",
+		"aws/guardduty/service/eventFirstSeen": "2023-10-31T16:46:42.000Z",
+		"aws/guardduty/service/eventLastSeen": "2023-10-31T16:46:42.000Z",
+		"aws/guardduty/service/evidence/threatIntelligenceDetails.0_/threatListName": "GeneratedFindingThreatListName",
+		"aws/guardduty/service/evidence/threatIntelligenceDetails.0_/threatNames.0_": "GeneratedFindingThreatName",
+		"aws/guardduty/service/featureName": "RuntimeMonitoring",
+		"aws/guardduty/service/resourceRole": "TARGET",
+		"aws/guardduty/service/runtimeDetails/process/cmdLine": "GeneratedFindingCommandLine",
+		"aws/guardduty/service/runtimeDetails/process/euid": "1000",
+		"aws/guardduty/service/runtimeDetails/process/executablePath": "GeneratedFindingPath/blah.exe",
+		"aws/guardduty/service/runtimeDetails/process/executableSha256": "GeneratedFindingHash",
+		"aws/guardduty/service/runtimeDetails/process/lineage.0_/euid": "1000",
+		"aws/guardduty/service/runtimeDetails/process/lineage.0_/executablePath": "GeneratedFindingPath",
+		"aws/guardduty/service/runtimeDetails/process/lineage.0_/parentUuid": "GeneratedFindingUUId",
+		"aws/guardduty/service/runtimeDetails/process/lineage.0_/pid": "1233",
+		"aws/guardduty/service/runtimeDetails/process/lineage.0_/uuid": "GeneratedFindingUUId",
+		"aws/guardduty/service/runtimeDetails/process/lineage.1_/euid": "1000",
+		"aws/guardduty/service/runtimeDetails/process/lineage.1_/executablePath": "GeneratedFindingPath",
+		"aws/guardduty/service/runtimeDetails/process/lineage.1_/parentUuid": "GeneratedFindingUUId",
+		"aws/guardduty/service/runtimeDetails/process/lineage.1_/pid": "1230",
+		"aws/guardduty/service/runtimeDetails/process/lineage.1_/uuid": "GeneratedFindingUUId",
+		"aws/guardduty/service/runtimeDetails/process/name": "GeneratedFindingProcessName",
+		"aws/guardduty/service/runtimeDetails/process/parentUuid": "GeneratedFindingUUId",
+		"aws/guardduty/service/runtimeDetails/process/pid": "1234",
+		"aws/guardduty/service/runtimeDetails/process/pwd": "GeneratedFindingPath",
+		"aws/guardduty/service/runtimeDetails/process/startTime": "1637012294",
+		"aws/guardduty/service/runtimeDetails/process/user": "ec2-user",
+		"aws/guardduty/service/runtimeDetails/process/userId": "1000",
+		"aws/guardduty/service/runtimeDetails/process/uuid": "GeneratedFindingUUId",
+		"aws/guardduty/service/serviceName": "guardduty",
+		"aws/securityhub/CompanyName": "Amazon",
+		"aws/securityhub/FindingId": "arn:aws:EXAMPLE",
+		"aws/securityhub/ProductName": "GuardDuty"
+	},
+	"ProductName": "GuardDuty",
+	"RecordState": "ACTIVE",
+	"Region": "us-east-2",
+	"Resources": [
+		{
+			"Details": {
+				"AwsEc2Instance": {
+					"ImageId": "ami-99999999",
+					"IpV4Addresses": [
+						"10.0.0.1",
+						"198.51.100.0"
+					],
+					"LaunchedAt": "2016-08-02T02:05:06.000Z",
+					"SubnetId": "GeneratedFindingSubnetId",
+					"Type": "m3.xlarge",
+					"VpcId": "GeneratedFindingVPCId"
+				}
+			},
+			"Id": "arn:aws:EXAMPLE",
+			"Partition": "aws",
+			"Region": "us-east-2",
+			"Tags": {
+				"GeneratedFindingInstanceTag1": "GeneratedFindingInstanceValue1",
+				"GeneratedFindingInstanceTag2": "GeneratedFindingInstanceTagValue2",
+				"GeneratedFindingInstanceTag3": "GeneratedFindingInstanceTagValue3",
+				"GeneratedFindingInstanceTag4": "GeneratedFindingInstanceTagValue4",
+				"GeneratedFindingInstanceTag5": "GeneratedFindingInstanceTagValue5",
+				"GeneratedFindingInstanceTag6": "GeneratedFindingInstanceTagValue6",
+				"GeneratedFindingInstanceTag7": "GeneratedFindingInstanceTagValue7",
+				"GeneratedFindingInstanceTag8": "GeneratedFindingInstanceTagValue8",
+				"GeneratedFindingInstanceTag9": "GeneratedFindingInstanceTagValue9"
+			},
+			"Type": "AwsEc2Instance"
+		},
+		{
+			"Details": {
+				"AwsEksCluster": {
+					"Arn": "GeneratedFindingEKSClusterArn",
+					"ClusterStatus": "ACTIVE",
+					"Name": "GeneratedFindingEKSClusterName"
+				},
+				"Other": {
+					"kubernetesDetails/kubernetesWorkloadDetails/name": "GeneratedFindingKubernetesWorkloadName",
+					"kubernetesDetails/kubernetesWorkloadDetails/namespace": "GeneratedFindingKubernetesWorkloadNamespace",
+					"kubernetesDetails/kubernetesWorkloadDetails/type": "GeneratedFindingKubernetesWorkloadType",
+					"kubernetesDetails/kubernetesWorkloadDetails/uid": "GeneratedFindingKubernetesWorkloadId"
+				}
+			},
+			"Id": "arn:aws:EXAMPLE",
+			"Partition": "aws",
+			"Region": "us-east-2",
+			"Tags": {
+				"GeneratedFindingEKSClusterTag1": "GeneratedFindingEKSClusterTagValue1",
+				"GeneratedFindingEKSClusterTag2": "GeneratedFindingEKSClusterTagValue2",
+				"GeneratedFindingEKSClusterTag3": "GeneratedFindingEKSClusterTagValue3"
+			},
+			"Type": "AwsEksCluster"
+		},
+		{
+			"Details": {
+				"Container": {
+					"ImageName": "GeneratedFindingContainerImage",
+					"Name": "GeneratedFindingContainerName"
+				}
+			},
+			"Id": "GeneratedFindingContainerId",
+			"Partition": "aws",
+			"Region": "us-east-2",
+			"Type": "Container"
+		}
+	],
+	"Sample": true,
+	"SchemaVersion": "2018-10-08",
+	"Severity": {
+		"Label": "HIGH",
+		"Normalized": 60,
+		"Product": 8
+	},
+	"SourceUrl": "https://us-east-2.console.aws.amazon.com/guardduty/home?region=us-east-2#/findings?macros=current&fId=fc1b26ecc9f54f4d87836e0c36825e1c",
+	"Title": "DGA domain name queried by EC2 instance i-99999999.",
+	"Types": [
+		"TTPs/Command and Control/Trojan:Runtime-DGADomainRequest.C!DNS"
+	],
+	"UpdatedAt": "2023-10-31T16:46:42.685Z",
+	"Workflow": {
+		"Status": "NEW"
+	},
+	"WorkflowState": "NEW"
+}
