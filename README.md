@@ -69,8 +69,7 @@ The expected output from running the sample is as follows:
 		VALID OCSF.
 
 6. Additional optional arguments
-
-	python validate.py -i "path/to/inputs" | -version [1.0.0-rc.2/1.1.0] | -verbose true | -eventclass [eventclassname] | -profiles [profile-1, profile-2, profile-n] | -filetype [parquet/json]
+        python validate.py -i "path/to/inputs" | -version [1.0.0-rc.2/1.1.0] | -verbose true | -eventclass [eventclassname] | -profiles [profile-1, profile-2, profile-n] | -filetype [parquet/json]
 
 ## Checksum <a name="Checksum"></a>
 
