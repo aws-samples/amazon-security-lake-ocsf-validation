@@ -44,7 +44,7 @@ Below we can see an example expected validation result by executing the script
 
 The expected output from running the 
 
-python validate.py -i "path/to/sample" -version 1.0.0-rc.2 -verbose true -eventclass api_activity -profiles cloud -filetype parquet
+	python validate.py -i "path/to/sample" -version 1.0.0-rc.2 -verbose true -eventclass api_activity -profiles cloud -filetype parquet
 
 		Validating Against Event Class: api_activity (3005)...
 
