@@ -40,11 +40,9 @@ To get started with using this validator please follow the numbered steps below:
 
 ## Examples <a name="Examples"></a>
 
-Below we can see an example expected validation result by executing the script
+Below we can see an example of an expected validation result ran against an api_activity event:
 
-The expected output from running the 
-
-	python validate.py -i "path/to/sample" -version 1.0.0-rc.2 -verbose true -eventclass api_activity -profiles cloud -filetype parquet
+	python validate.py -i "path/to/records" -version 1.0.0-rc.2 -verbose true -eventclass api_activity -profiles cloud -filetype parquet
 
 		Validating Against Event Class: api_activity (3005)...
 
