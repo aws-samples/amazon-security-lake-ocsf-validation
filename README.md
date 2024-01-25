@@ -30,7 +30,7 @@ To get started with using this validator please follow the numbered steps below:
 
 5. Run
 
-		python validate.py -i "path/to/inputs" -version ocsf_schema_1.0.0-rc.2
+		python validate.py -i "path/to/inputs" -version 1.0.0-rc.2 -verbose true
 		
 
 
@@ -68,6 +68,10 @@ The expected output from running the sample is as follows:
 
 		VALID OCSF.
 
+6. Additional optional arguments
+
+		python validate.py -i "path/to/inputs" | -version [1.0.0-rc.2/1.1.0] | -verbose true | -eventclass [eventclassname] | -profiles [profile-1, profile-2, profile-n] | -filetype [parquet/json]
+
 ## Checksum <a name="Checksum"></a>
 
 To ensure the soundness of the download, you may choose run a checksum against the files in this repository. You can verify the integrity of the validate.py by ensuring the shasum (SHA-256) matches the following:
@@ -76,16 +80,6 @@ To ensure the soundness of the download, you may choose run a checksum against t
 
 
 We welcome contributions to this repo in the form of fixes to existing examples or addition of new examples. For more information on contributing, please see the [CONTRIBUTING](https://github.com/aws-samples/amazon-security-lake/blob/main/CONTRIBUTING.md) guide.
-
-### Validation Tool <a name="Validation"></a>
-
-The following is a simple program which can be used to ensure that user provided parquet data properly maps to the various schema definitions specified within the Open Cyber Security Framework (OCSF) - https://schema.ocsf.io/.
-
-This tool was build to provide supplementry validation for Amazon Security Lake which requires data to be in the format specified by OCSF Schema 1.0.0-rc.2.
-
-### AWS OCSF Samples <a name="samples"></a>
-
-In addition to the tool itself, several common  examples of AWS OCSF samples have been added to this repository under AWSLogs_OCSF_1.0.0-rc2_samples. These are pre-mapped OCSF compliant Amazon Security Lake supported log sources to provide as examples to users interested in mapping to OCSF.
 
 ### Official Resources
 - [Amazon Security Lake Overview](https://aws.amazon.com/security-lake/)
