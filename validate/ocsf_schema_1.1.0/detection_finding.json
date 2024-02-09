@@ -1,0 +1,665 @@
+{
+    "attributes": [
+        {
+            "vulnerabilities": {
+                "type": "object_t",
+                "description": "Describes vulnerabilities reported in a Detection Finding.",
+                "group": "context",
+                "is_array": true,
+                "requirement": "optional",
+                "caption": "Vulnerabilities",
+                "_source": "detection_finding",
+                "object_type": "vulnerability",
+                "object_name": "Vulnerability Details"
+            }
+        },
+        {
+            "start_time": {
+                "type": "timestamp_t",
+                "description": "The time of the least recent event included in the finding.",
+                "group": "occurrence",
+                "requirement": "optional",
+                "caption": "Start Time",
+                "_source": "finding",
+                "type_name": "Timestamp"
+            }
+        },
+        {
+            "impact_score": {
+                "type": "integer_t",
+                "description": "The impact of the finding, valid range 0-100.",
+                "group": "context",
+                "requirement": "optional",
+                "caption": "Impact",
+                "_source": "detection_finding",
+                "type_name": "Integer"
+            }
+        },
+        {
+            "end_time": {
+                "type": "timestamp_t",
+                "description": "The time of the most recent event included in the finding.",
+                "group": "occurrence",
+                "requirement": "optional",
+                "caption": "End Time",
+                "_source": "finding",
+                "type_name": "Timestamp"
+            }
+        },
+        {
+            "resources": {
+                "type": "object_t",
+                "description": "Describes details about resources that were the target of the activity that triggered the finding.",
+                "group": "context",
+                "is_array": true,
+                "requirement": "recommended",
+                "caption": "Affected Resources",
+                "_source": "detection_finding",
+                "object_type": "resource_details",
+                "object_name": "Resource Details"
+            }
+        },
+        {
+            "evidences": {
+                "type": "object_t",
+                "description": "Describes various evidence artifacts associated to the activity/activities that triggered a security detection.",
+                "group": "primary",
+                "is_array": true,
+                "requirement": "recommended",
+                "caption": "Evidence Artifacts",
+                "_source": "detection_finding",
+                "object_type": "evidences",
+                "object_name": "Evidence Artifacts"
+            }
+        },
+        {
+            "activity_id": {
+                "type": "integer_t",
+                "enum": {
+                    "3": {
+                        "description": "A finding was closed.",
+                        "caption": "Close"
+                    },
+                    "99": {
+                        "description": "The event activity is not mapped. See the <code>activity_name</code> attribute, which contains a data source specific value.",
+                        "caption": "Other"
+                    },
+                    "0": {
+                        "description": "The event activity is unknown.",
+                        "caption": "Unknown"
+                    },
+                    "1": {
+                        "description": "A finding was created.",
+                        "caption": "Create"
+                    },
+                    "2": {
+                        "description": "A finding was updated.",
+                        "caption": "Update"
+                    }
+                },
+                "description": "The normalized identifier of the finding activity.",
+                "group": "classification",
+                "requirement": "required",
+                "caption": "Activity ID",
+                "_source": "finding",
+                "type_name": "Integer",
+                "sibling": "activity_name"
+            }
+        },
+        {
+            "timezone_offset": {
+                "type": "integer_t",
+                "description": "The number of minutes that the reported event <code>time</code> is ahead or behind UTC, in the range -1,080 to +1,080.",
+                "group": "occurrence",
+                "requirement": "recommended",
+                "caption": "Timezone Offset",
+                "_source": "base_event",
+                "type_name": "Integer"
+            }
+        },
+        {
+            "risk_level_id": {
+                "type": "integer_t",
+                "enum": {
+                    "3": {
+                        "caption": "High"
+                    },
+                    "0": {
+                        "caption": "Info"
+                    },
+                    "1": {
+                        "caption": "Low"
+                    },
+                    "2": {
+                        "caption": "Medium"
+                    },
+                    "4": {
+                        "caption": "Critical"
+                    }
+                },
+                "description": "The normalized risk level id.",
+                "group": "context",
+                "requirement": "optional",
+                "caption": "Risk Level ID",
+                "_source": "detection_finding",
+                "type_name": "Integer",
+                "sibling": "risk_level"
+            }
+        },
+        {
+            "class_uid": {
+                "type": "integer_t",
+                "enum": {
+                    "2004": {
+                        "description": "A Detection Finding describes detections or alerts generated by security products using correlation engines, detection engines or other methodologies. Note: if the product is a security control, the <code>security_control</code> profile should be applied and its <code>attacks</code> information should be duplicated into the <code>finding_info</code> object.",
+                        "caption": "Detection Finding"
+                    }
+                },
+                "description": "The unique identifier of a class. A Class describes the attributes available in an event.",
+                "group": "classification",
+                "requirement": "required",
+                "caption": "Class ID",
+                "_source": "detection_finding",
+                "type_name": "Integer",
+                "sibling": "class_name"
+            }
+        },
+        {
+            "type_uid": {
+                "type": "long_t",
+                "enum": {
+                    "200403": {
+                        "description": "A finding was closed.",
+                        "caption": "Detection Finding: Close"
+                    },
+                    "200499": {
+                        "caption": "Detection Finding: Other"
+                    },
+                    "200400": {
+                        "caption": "Detection Finding: Unknown"
+                    },
+                    "200401": {
+                        "description": "A finding was created.",
+                        "caption": "Detection Finding: Create"
+                    },
+                    "200402": {
+                        "description": "A finding was updated.",
+                        "caption": "Detection Finding: Update"
+                    }
+                },
+                "description": "The event/finding type ID. It identifies the event's semantics and structure. The value is calculated by the logging system as: <code>class_uid * 100 + activity_id</code>.",
+                "group": "classification",
+                "requirement": "required",
+                "caption": "Type ID",
+                "_source": "detection_finding",
+                "type_name": "Long",
+                "sibling": "type_name"
+            }
+        },
+        {
+            "risk_level": {
+                "type": "string_t",
+                "description": "The risk level, normalized to the caption of the risk_level_id value. In the case of 'Other', it is defined by the event source.",
+                "group": "context",
+                "requirement": "optional",
+                "caption": "Risk Level",
+                "_source": "detection_finding",
+                "type_name": "String"
+            }
+        },
+        {
+            "status_detail": {
+                "type": "string_t",
+                "description": "The status details contains additional information about the event/finding outcome.",
+                "group": "primary",
+                "requirement": "optional",
+                "caption": "Status Details",
+                "_source": "base_event",
+                "type_name": "String"
+            }
+        },
+        {
+            "count": {
+                "type": "integer_t",
+                "description": "The number of times that events in the same logical group occurred during the event <strong>Start Time</strong> to <strong>End Time</strong> period.",
+                "group": "occurrence",
+                "requirement": "optional",
+                "caption": "Count",
+                "_source": "base_event",
+                "type_name": "Integer"
+            }
+        },
+        {
+            "status": {
+                "type": "string_t",
+                "description": "The normalized status of the Finding set by the consumer normalized to the caption of the status_id value. In the case of 'Other', it is defined by the source.",
+                "group": "context",
+                "requirement": "optional",
+                "caption": "Status",
+                "_source": "finding",
+                "type_name": "String"
+            }
+        },
+        {
+            "message": {
+                "type": "string_t",
+                "description": "The description of the event/finding, as defined by the source.",
+                "group": "primary",
+                "requirement": "recommended",
+                "caption": "Message",
+                "_source": "base_event",
+                "type_name": "String"
+            }
+        },
+        {
+            "activity_name": {
+                "type": "string_t",
+                "description": "The finding activity name, as defined by the <code>activity_id</code>.",
+                "group": "classification",
+                "requirement": "optional",
+                "caption": "Activity",
+                "_source": "finding",
+                "type_name": "String"
+            }
+        },
+        {
+            "confidence_id": {
+                "type": "integer_t",
+                "enum": {
+                    "3": {
+                        "caption": "High"
+                    },
+                    "99": {
+                        "description": "The confidence is not mapped to the defined enum values. See the <code>confidence</code> attribute, which contains a data source specific value.",
+                        "caption": "Other"
+                    },
+                    "0": {
+                        "description": "The normalized confidence is unknown.",
+                        "caption": "Unknown"
+                    },
+                    "1": {
+                        "caption": "Low"
+                    },
+                    "2": {
+                        "caption": "Medium"
+                    }
+                },
+                "description": "The normalized confidence refers to the accuracy of the rule that created the finding. A rule with a low confidence means that the finding scope is wide and may create finding reports that may not be malicious in nature.",
+                "group": "context",
+                "requirement": "recommended",
+                "caption": "Confidence Id",
+                "_source": "finding",
+                "type_name": "Integer"
+            }
+        },
+        {
+            "status_id": {
+                "type": "integer_t",
+                "enum": {
+                    "3": {
+                        "description": "The Finding was reviewed, determined to be benign or a false positive and is now suppressed.",
+                        "caption": "Suppressed"
+                    },
+                    "99": {
+                        "description": "The event status is not mapped. See the <code>status</code> attribute, which contains a data source specific value.",
+                        "caption": "Other"
+                    },
+                    "0": {
+                        "description": "The status is unknown.",
+                        "caption": "Unknown"
+                    },
+                    "1": {
+                        "description": "The Finding is new and yet to be reviewed.",
+                        "caption": "New"
+                    },
+                    "2": {
+                        "description": "The Finding is under review.",
+                        "caption": "In Progress"
+                    },
+                    "4": {
+                        "description": "The Finding was reviewed, remediated and is now considered resolved.",
+                        "caption": "Resolved"
+                    }
+                },
+                "description": "The normalized status identifier of the Finding, set by the consumer.",
+                "group": "context",
+                "requirement": "recommended",
+                "caption": "Status ID",
+                "_source": "finding",
+                "type_name": "Integer",
+                "sibling": "status"
+            }
+        },
+        {
+            "confidence_score": {
+                "type": "integer_t",
+                "description": "The confidence score as reported by the event source.",
+                "group": "context",
+                "requirement": "optional",
+                "caption": "Confidence Score",
+                "_source": "finding",
+                "type_name": "Integer"
+            }
+        },
+        {
+            "observables": {
+                "type": "object_t",
+                "description": "The observables associated with the event or a finding.",
+                "group": "primary",
+                "is_array": true,
+                "requirement": "optional",
+                "caption": "Observables",
+                "_source": "base_event",
+                "object_type": "observable",
+                "object_name": "Observable"
+            }
+        },
+        {
+            "status_code": {
+                "type": "string_t",
+                "description": "The event status code, as reported by the event source.<br /><br />For example, in a Windows Failed Authentication event, this would be the value of 'Failure Code', e.g. 0x18.",
+                "group": "primary",
+                "requirement": "optional",
+                "caption": "Status Code",
+                "_source": "base_event",
+                "type_name": "String"
+            }
+        },
+        {
+            "impact_id": {
+                "type": "integer_t",
+                "enum": {
+                    "3": {
+                        "caption": "High"
+                    },
+                    "99": {
+                        "description": "The impact is not mapped. See the <code>impact</code> attribute, which contains a data source specific value.",
+                        "caption": "Other"
+                    },
+                    "0": {
+                        "description": "The normalized impact is unknown.",
+                        "caption": "Unknown"
+                    },
+                    "1": {
+                        "caption": "Low"
+                    },
+                    "2": {
+                        "caption": "Medium"
+                    },
+                    "4": {
+                        "caption": "Critical"
+                    }
+                },
+                "description": "The normalized impact of the finding.",
+                "group": "context",
+                "requirement": "optional",
+                "caption": "Impact ID",
+                "_source": "detection_finding",
+                "type_name": "Integer",
+                "sibling": "impact"
+            }
+        },
+        {
+            "comment": {
+                "type": "string_t",
+                "description": "A user provided comment about the finding.",
+                "group": "context",
+                "requirement": "optional",
+                "caption": "Comment",
+                "_source": "finding",
+                "type_name": "String"
+            }
+        },
+        {
+            "duration": {
+                "type": "integer_t",
+                "description": "The event duration or aggregate time, the amount of time the event covers from <code>start_time</code> to <code>end_time</code> in milliseconds.",
+                "group": "occurrence",
+                "requirement": "optional",
+                "caption": "Duration",
+                "_source": "base_event",
+                "type_name": "Integer"
+            }
+        },
+        {
+            "finding_info": {
+                "type": "object_t",
+                "description": "Describes the supporting information about a generated finding.",
+                "group": "primary",
+                "requirement": "required",
+                "caption": "Finding Information",
+                "_source": "finding",
+                "object_type": "finding_info",
+                "object_name": "Finding Information"
+            }
+        },
+        {
+            "raw_data": {
+                "type": "string_t",
+                "description": "The raw event/finding data as received from the source.",
+                "group": "context",
+                "requirement": "optional",
+                "caption": "Raw Data",
+                "_source": "base_event",
+                "type_name": "String"
+            }
+        },
+        {
+            "enrichments": {
+                "type": "object_t",
+                "description": "The additional information from an external data source, which is associated with the event or a finding. For example add location information for the IP address in the DNS answers:</p><code>[{\"name\": \"answers.ip\", \"value\": \"92.24.47.250\", \"type\": \"location\", \"data\": {\"city\": \"Socotra\", \"continent\": \"Asia\", \"coordinates\": [-25.4153, 17.0743], \"country\": \"YE\", \"desc\": \"Yemen\"}}]</code>",
+                "group": "context",
+                "is_array": true,
+                "requirement": "optional",
+                "caption": "Enrichments",
+                "_source": "base_event",
+                "object_type": "enrichment",
+                "object_name": "Enrichment"
+            }
+        },
+        {
+            "type_name": {
+                "type": "string_t",
+                "description": "The event/finding type name, as defined by the type_uid.",
+                "group": "classification",
+                "requirement": "optional",
+                "caption": "Type Name",
+                "_source": "base_event",
+                "type_name": "String"
+            }
+        },
+        {
+            "confidence": {
+                "type": "string_t",
+                "description": "The confidence, normalized to the caption of the confidence_id value. In the case of 'Other', it is defined by the event source.",
+                "group": "context",
+                "requirement": "optional",
+                "caption": "Confidence",
+                "_source": "finding",
+                "type_name": "String"
+            }
+        },
+        {
+            "severity": {
+                "type": "string_t",
+                "description": "The event/finding severity, normalized to the caption of the severity_id value. In the case of 'Other', it is defined by the source.",
+                "group": "classification",
+                "requirement": "optional",
+                "caption": "Severity",
+                "_source": "base_event",
+                "type_name": "String"
+            }
+        },
+        {
+            "metadata": {
+                "type": "object_t",
+                "description": "The metadata associated with the event or a finding.",
+                "group": "context",
+                "requirement": "required",
+                "caption": "Metadata",
+                "_source": "base_event",
+                "object_type": "metadata",
+                "object_name": "Metadata"
+            }
+        },
+        {
+            "risk_score": {
+                "type": "integer_t",
+                "description": "The risk score as reported by the event source.",
+                "group": "context",
+                "requirement": "optional",
+                "caption": "Risk Score",
+                "_source": "detection_finding",
+                "type_name": "Integer"
+            }
+        },
+        {
+            "time": {
+                "type": "timestamp_t",
+                "description": "The normalized event occurrence time or the finding creation time.",
+                "group": "occurrence",
+                "requirement": "required",
+                "caption": "Event Time",
+                "_source": "base_event",
+                "type_name": "Timestamp"
+            }
+        },
+        {
+            "class_name": {
+                "type": "string_t",
+                "description": "The event class name, as defined by class_uid value: <code>Detection Finding</code>.",
+                "group": "classification",
+                "requirement": "optional",
+                "caption": "Class",
+                "_source": "base_event",
+                "type_name": "String"
+            }
+        },
+        {
+            "severity_id": {
+                "type": "integer_t",
+                "enum": {
+                    "3": {
+                        "description": "Action is required but the situation is not serious at this time.",
+                        "caption": "Medium"
+                    },
+                    "6": {
+                        "description": "An error occurred but it is too late to take remedial action.",
+                        "caption": "Fatal"
+                    },
+                    "99": {
+                        "description": "The event/finding severity is not mapped. See the <code>severity</code> attribute, which contains a data source specific value.",
+                        "caption": "Other"
+                    },
+                    "0": {
+                        "description": "The event/finding severity is unknown.",
+                        "caption": "Unknown"
+                    },
+                    "1": {
+                        "description": "Informational message. No action required.",
+                        "caption": "Informational"
+                    },
+                    "2": {
+                        "description": "The user decides if action is needed.",
+                        "caption": "Low"
+                    },
+                    "4": {
+                        "description": "Action is required immediately.",
+                        "caption": "High"
+                    },
+                    "5": {
+                        "description": "Action is required immediately and the scope is broad.",
+                        "caption": "Critical"
+                    }
+                },
+                "description": "<p>The normalized identifier of the event/finding severity.</p>The normalized severity is a measurement the effort and expense required to manage and resolve an event or incident. Smaller numerical values represent lower impact events, and larger numerical values represent higher impact events.",
+                "group": "classification",
+                "requirement": "required",
+                "caption": "Severity ID",
+                "_source": "base_event",
+                "type_name": "Integer",
+                "sibling": "severity"
+            }
+        },
+        {
+            "remediation": {
+                "type": "object_t",
+                "description": "Describes the recommended remediation steps to address identified issue(s).",
+                "group": "context",
+                "requirement": "optional",
+                "caption": "Remediation Guidance",
+                "_source": "detection_finding",
+                "object_type": "remediation",
+                "object_name": "Remediation"
+            }
+        },
+        {
+            "category_name": {
+                "type": "string_t",
+                "description": "The event category name, as defined by category_uid value: <code>Findings</code>.",
+                "group": "classification",
+                "requirement": "optional",
+                "caption": "Category",
+                "_source": "base_event",
+                "type_name": "String"
+            }
+        },
+        {
+            "unmapped": {
+                "type": "object_t",
+                "description": "The attributes that are not mapped to the event schema. The names and values of those attributes are specific to the event source.",
+                "group": "context",
+                "requirement": "optional",
+                "caption": "Unmapped Data",
+                "_source": "base_event",
+                "object_type": "object",
+                "object_name": "Object"
+            }
+        },
+        {
+            "category_uid": {
+                "type": "integer_t",
+                "enum": {
+                    "2": {
+                        "description": "Findings events report findings, detections, and possible resolutions of malware, anomalies, or other actions performed by security products.",
+                        "uid": 2,
+                        "caption": "Findings"
+                    }
+                },
+                "description": "The category unique identifier of the event.",
+                "group": "classification",
+                "requirement": "required",
+                "caption": "Category ID",
+                "_source": "detection_finding",
+                "type_name": "Integer",
+                "sibling": "category_name"
+            }
+        },
+        {
+            "impact": {
+                "type": "string_t",
+                "description": "The impact , normalized to the caption of the impact_id value. In the case of 'Other', it is defined by the event source.",
+                "group": "context",
+                "requirement": "optional",
+                "caption": "Impact",
+                "_source": "detection_finding",
+                "type_name": "String"
+            }
+        }
+    ],
+    "name": "detection_finding",
+    "description": "A Detection Finding describes detections or alerts generated by security products using correlation engines, detection engines or other methodologies. Note: if the product is a security control, the <code>security_control</code> profile should be applied and its <code>attacks</code> information should be duplicated into the <code>finding_info</code> object.",
+    "uid": 2004,
+    "extends": "finding",
+    "category": "findings",
+    "profiles": [
+        "cloud",
+        "datetime",
+        "host",
+        "security_control",
+        "container",
+        "linux/linux_users"
+    ],
+    "caption": "Detection Finding",
+    "category_name": "Findings"
+}

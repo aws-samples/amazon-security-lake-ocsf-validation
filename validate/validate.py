@@ -217,7 +217,7 @@ def main():
                                                             '1008', 
                                                             '1009', 
                                                             '1010', 
-                                                            '2001', 
+                                                            '2001',
                                                             '3001', 
                                                             '3002', 
                                                             '3003', 
@@ -330,6 +330,9 @@ def main():
                     
                 if str(testData['class_uid']['0']) == '2003':
                     SCHEMA_CLASS = 'compliance_finding'
+                
+                if str(testData['class_uid']['0']) == '2004':
+                    SCHEMA_CLASS = 'detection_finding'
     
                 if str(testData['class_uid']['0']) == '3001':
                     SCHEMA_CLASS = 'account_change'
@@ -419,7 +422,8 @@ def main():
                                                             '1007', 
                                                             '2001', 
                                                             '2002', 
-                                                            '2003', 
+                                                            '2003',
+                                                            '2004', 
                                                             '3001', 
                                                             '3002', 
                                                             '3003', 
