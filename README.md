@@ -41,12 +41,11 @@ To get started with using this validator please follow the numbered steps below:
 
 		required arguments:
 		  -i INPUT, --input INPUT
-								Path to directory containing parquet or json files.
 		
 
 ## Examples <a name="Examples"></a>
 
-Below we can see an expected validation result by executing the script in the samples folder: /path/to/amazon-security-lake-ocsf-validation/samples/1.1.0/EKS
+Below we can see an expected validation result for an INVALID ocsf record by executing the script in the samples folder: /path/to/amazon-security-lake-ocsf-validation/samples/1.1.0/EKS
 
 The expected output from running the sample is as follows:
 
