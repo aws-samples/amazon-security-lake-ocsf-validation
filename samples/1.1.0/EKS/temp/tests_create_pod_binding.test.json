@@ -1,0 +1,169 @@
+{
+    "activity_id": 1,
+    "activity_name": "Create",
+    "actor": {
+        "session": null,
+        "user": {
+            "groups": [
+                {
+                    "name": "system:authenticated"
+                }
+            ],
+            "name": "system:kube-scheduler",
+            "type_id": 0,
+            "uid": null
+        }
+    },
+    "api": {
+        "group": null,
+        "operation": "create",
+        "request": {
+            "containers": null,
+            "uid": "d53cceb3-e385-4b61-8019-16144d8783a5"
+        },
+        "response": {
+            "code": 201,
+            "containers": null,
+            "error": null,
+            "error_message": "Success",
+            "message": null
+        },
+        "version": "v1"
+    },
+    "category_name": "Application Activity",
+    "category_uid": 6,
+    "class_name": "API Activity",
+    "class_uid": 6003,
+    "cloud": {
+        "account": null,
+        "provider": "AWS"
+    },
+    "http_request": {
+        "url": {
+            "path": "/api/v1/namespaces/default/pods/one-container/binding"
+        },
+        "user_agent": "kube-scheduler/v1.21.2 (linux/amd64) kubernetes/8a4e27b/scheduler"
+    },
+    "message": "ResponseComplete",
+    "metadata": {
+        "log_level": "RequestResponse",
+        "product": {
+            "name": "AWS EKS",
+            "vendor_name": "AWS",
+            "version": "audit.k8s.io/v1"
+        },
+        "profiles": [
+            "cloud",
+            "datetime"
+        ],
+        "version": "1.1.0"
+    },
+    "observables": [
+        {
+            "name": "resources[].uid",
+            "type": "Resource UID",
+            "type_id": 10,
+            "value": "d06f9ebe-abef-4885-90ed-15e235c3bd4f"
+        },
+        {
+            "name": "src_endpoint.ip",
+            "type": "IP Address",
+            "type_id": 2,
+            "value": "10.0.119.9"
+        },
+        {
+            "name": "http_request.url.path",
+            "type": "URL String",
+            "type_id": 6,
+            "value": "/api/v1/namespaces/default/pods/one-container/binding"
+        },
+        {
+            "name": "actor.user.name",
+            "type": "User",
+            "type_id": 4,
+            "value": "system:kube-scheduler"
+        }
+    ],
+    "resources": [
+        {
+            "name": "one-container",
+            "namespace": "default",
+            "type": "pods/binding",
+            "uid": "d06f9ebe-abef-4885-90ed-15e235c3bd4f",
+            "version": null
+        }
+    ],
+    "severity": "Informational",
+    "severity_id": 1,
+    "src_endpoint": {
+        "intermediate_ips": null,
+        "ip": "10.0.119.9"
+    },
+    "start_time_dt": "2021-10-11 16:50:11.178000",
+    "time": 1633971011207,
+    "time_dt": "2021-10-11 16:50:11.207000",
+    "type_name": "API Activity: Create",
+    "type_uid": 600301,
+    "unmapped": [
+        [
+            "responseObject.kind",
+            "Status"
+        ],
+        [
+            "responseObject.status",
+            "Success"
+        ],
+        [
+            "annotations.authorization.k8s.io/decision",
+            "allow"
+        ],
+        [
+            "requestObject.apiVersion",
+            "v1"
+        ],
+        [
+            "requestObject.metadata.name",
+            "one-container"
+        ],
+        [
+            "responseObject.code",
+            "201"
+        ],
+        [
+            "kind",
+            "Event"
+        ],
+        [
+            "requestObject.metadata.uid",
+            "d06f9ebe-abef-4885-90ed-15e235c3bd4f"
+        ],
+        [
+            "responseObject.apiVersion",
+            "v1"
+        ],
+        [
+            "annotations.authorization.k8s.io/reason",
+            "RBAC: allowed by ClusterRoleBinding \"system:kube-scheduler\" of ClusterRole \"system:kube-scheduler\" to User \"system:kube-scheduler\""
+        ],
+        [
+            "requestObject.kind",
+            "Binding"
+        ],
+        [
+            "requestObject.metadata.namespace",
+            "default"
+        ],
+        [
+            "requestObject.target.kind",
+            "Node"
+        ],
+        [
+            "requestObject.target.name",
+            "ip-192-168-30-14.ec2.internal"
+        ],
+        [
+            "sourceIPs[]",
+            "10.0.119.9"
+        ]
+    ]
+}
