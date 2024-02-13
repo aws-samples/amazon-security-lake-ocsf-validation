@@ -1,0 +1,450 @@
+{
+    "activity_id": 4,
+    "activity_name": "Delete",
+    "actor": {
+        "session": {
+            "credential_uid": "ASIA3X2Q4EH4S63RMF3Y",
+            "issuer": "arn:aws:iam::807086596601:role/eksctl-exciting-monster-161366663-NodeInstanceRole-16T8Z03UJ56NA",
+            "uid": "i-005363320b44cdd49"
+        },
+        "user": {
+            "groups": [
+                {
+                    "name": "system:bootstrappers"
+                },
+                {
+                    "name": "system:nodes"
+                },
+                {
+                    "name": "system:authenticated"
+                }
+            ],
+            "name": "system:node:ip-192-168-30-14.ec2.internal",
+            "type_id": 0,
+            "uid": "heptio-authenticator-aws:807086596601:AROA3X2Q4EH4V52NAOD7H"
+        }
+    },
+    "api": {
+        "group": null,
+        "operation": "delete",
+        "request": {
+            "containers": null,
+            "uid": "a6658966-6a50-46ed-a372-88bc128a3e1b"
+        },
+        "response": {
+            "code": 200,
+            "containers": [
+                {
+                    "image": {
+                        "name": "nginx:stable",
+                        "path": "/var/run/secrets/kubernetes.io/serviceaccount",
+                        "uid": "nginx:stable-kube-api-access-f5lsj"
+                    },
+                    "name": "nginx"
+                }
+            ],
+            "error": null,
+            "error_message": null,
+            "message": null
+        },
+        "version": "v1"
+    },
+    "category_name": "Application Activity",
+    "category_uid": 6,
+    "class_name": "API Activity",
+    "class_uid": 6003,
+    "cloud": {
+        "account": {
+            "uid": "arn:aws:sts::807086596601:assumed-role/eksctl-exciting-monster-161366663-NodeInstanceRole-16T8Z03UJ56NA/i-005363320b44cdd49"
+        },
+        "provider": "AWS"
+    },
+    "http_request": {
+        "url": {
+            "path": "/api/v1/namespaces/default/pods/one-container"
+        },
+        "user_agent": "kubelet/v1.21.2 (linux/amd64) kubernetes/729bdfc"
+    },
+    "message": "ResponseComplete",
+    "metadata": {
+        "log_level": "RequestResponse",
+        "product": {
+            "name": "AWS EKS",
+            "vendor_name": "AWS",
+            "version": "audit.k8s.io/v1"
+        },
+        "profiles": [
+            "cloud",
+            "datetime"
+        ],
+        "version": "1.1.0"
+    },
+    "observables": [
+        {
+            "name": "http_request.url.path",
+            "type": "URL String",
+            "type_id": 6,
+            "value": "/api/v1/namespaces/default/pods/one-container"
+        },
+        {
+            "name": "api.response.containers[].image.uid",
+            "type": "Resource UID",
+            "type_id": 10,
+            "value": "nginx:stable-kube-api-access-f5lsj"
+        },
+        {
+            "name": "src_endpoint.ip",
+            "type": "IP Address",
+            "type_id": 2,
+            "value": "18.234.211.232"
+        },
+        {
+            "name": "actor.user.name",
+            "type": "User",
+            "type_id": 4,
+            "value": "system:node:ip-192-168-30-14.ec2.internal"
+        }
+    ],
+    "resources": [
+        {
+            "name": "one-container",
+            "namespace": "default",
+            "type": "pods",
+            "uid": null,
+            "version": null
+        }
+    ],
+    "severity": "Informational",
+    "severity_id": 1,
+    "src_endpoint": {
+        "intermediate_ips": null,
+        "ip": "18.234.211.232"
+    },
+    "start_time_dt": "2021-10-11 19:00:22.687000",
+    "time": 1633978822699,
+    "time_dt": "2021-10-11 19:00:22.699000",
+    "type_name": "API Activity: Delete",
+    "type_uid": 600304,
+    "unmapped": [
+        [
+            "responseObject.metadata.annotations.kubectl.kubernetes.io/last-applied-configuration",
+            "{\"apiVersion\":\"v1\",\"kind\":\"Pod\",\"metadata\":{\"annotations\":{},\"name\":\"one-container\",\"namespace\":\"default\"},\"spec\":{\"containers\":[{\"image\":\"nginx\",\"name\":\"nginx\"}]}}\n"
+        ],
+        [
+            "responseObject.spec.dnsPolicy",
+            "ClusterFirst"
+        ],
+        [
+            "responseObject.spec.nodeName",
+            "ip-192-168-30-14.ec2.internal"
+        ],
+        [
+            "responseObject.status.containerStatuses[].image",
+            "nginx:stable"
+        ],
+        [
+            "responseObject.spec.tolerations[].effect",
+            "NoExecute,NoExecute"
+        ],
+        [
+            "annotations.authorization.k8s.io/reason",
+            ""
+        ],
+        [
+            "responseObject.spec.tolerations[].operator",
+            "Exists,Exists"
+        ],
+        [
+            "responseObject.spec.volumes[].projected.sources[].downwardAPI.items[].path",
+            "namespace"
+        ],
+        [
+            "responseObject.metadata.annotations.kubernetes.io/psp",
+            "eks.privileged"
+        ],
+        [
+            "responseObject.spec.containers[].terminationMessagePolicy",
+            "File"
+        ],
+        [
+            "responseObject.spec.schedulerName",
+            "default-scheduler"
+        ],
+        [
+            "responseObject.status.podIP",
+            "192.168.30.98"
+        ],
+        [
+            "responseObject.metadata.managedFields[].time",
+            "2021-10-11T16:50:11Z,2021-10-11T17:27:14Z,2021-10-11T19:00:21Z"
+        ],
+        [
+            "responseObject.spec.volumes[].projected.defaultMode",
+            "420"
+        ],
+        [
+            "responseObject.status.startTime",
+            "2021-10-11T16:50:11Z"
+        ],
+        [
+            "responseObject.metadata.managedFields[].manager",
+            "kubectl-client-side-apply,kubectl-edit,kubelet"
+        ],
+        [
+            "annotations.authorization.k8s.io/decision",
+            "allow"
+        ],
+        [
+            "responseObject.spec.containers[].terminationMessagePath",
+            "/dev/termination-log"
+        ],
+        [
+            "responseObject.metadata.name",
+            "one-container"
+        ],
+        [
+            "responseObject.status.phase",
+            "Running"
+        ],
+        [
+            "responseObject.status.containerStatuses[].state.terminated.finishedAt",
+            "2021-10-11T19:00:20Z"
+        ],
+        [
+            "kind",
+            "Event"
+        ],
+        [
+            "responseObject.apiVersion",
+            "v1"
+        ],
+        [
+            "responseObject.spec.tolerations[].key",
+            "node.kubernetes.io/not-ready,node.kubernetes.io/unreachable"
+        ],
+        [
+            "responseObject.spec.containers[].imagePullPolicy",
+            "Always"
+        ],
+        [
+            "responseObject.spec.volumes[].projected.sources[].serviceAccountToken.path",
+            "token"
+        ],
+        [
+            "responseObject.status.conditions[].status",
+            "True,False,False,True"
+        ],
+        [
+            "responseObject.spec.volumes[].projected.sources[].downwardAPI.items[].fieldRef.apiVersion",
+            "v1"
+        ],
+        [
+            "responseObject.spec.containers[].volumeMounts[].readOnly",
+            "true"
+        ],
+        [
+            "responseObject.spec.volumes[].projected.sources[].configMap.items[].key",
+            "ca.crt"
+        ],
+        [
+            "responseObject.status.containerStatuses[].containerID",
+            "docker://cfb8a90a930b47b5cfac0b36d0cde89d0fd78e724a4bdc81008cc486b17e186d"
+        ],
+        [
+            "responseObject.status.containerStatuses[].state.terminated.reason",
+            "Completed"
+        ],
+        [
+            "responseObject.spec.enableServiceLinks",
+            "true"
+        ],
+        [
+            "responseObject.status.conditions[].reason",
+            "ContainersNotReady,ContainersNotReady"
+        ],
+        [
+            "responseObject.status.containerStatuses[].lastState.terminated.finishedAt",
+            "2021-10-11T17:27:14Z"
+        ],
+        [
+            "requestObject.apiVersion",
+            "v1"
+        ],
+        [
+            "responseObject.spec.volumes[].name",
+            "kube-api-access-f5lsj"
+        ],
+        [
+            "requestObject.kind",
+            "DeleteOptions"
+        ],
+        [
+            "responseObject.metadata.uid",
+            "d06f9ebe-abef-4885-90ed-15e235c3bd4f"
+        ],
+        [
+            "responseObject.status.containerStatuses[].lastState.terminated.reason",
+            "Completed"
+        ],
+        [
+            "responseObject.status.containerStatuses[].state.terminated.exitCode",
+            "0"
+        ],
+        [
+            "responseObject.status.containerStatuses[].started",
+            "false"
+        ],
+        [
+            "responseObject.metadata.managedFields[].fieldsType",
+            "FieldsV1,FieldsV1,FieldsV1"
+        ],
+        [
+            "responseObject.spec.terminationGracePeriodSeconds",
+            "30"
+        ],
+        [
+            "responseObject.spec.tolerations[].tolerationSeconds",
+            "300,300"
+        ],
+        [
+            "responseObject.metadata.managedFields[].apiVersion",
+            "v1,v1,v1"
+        ],
+        [
+            "responseObject.status.containerStatuses[].state.terminated.containerID",
+            "docker://cfb8a90a930b47b5cfac0b36d0cde89d0fd78e724a4bdc81008cc486b17e186d"
+        ],
+        [
+            "responseObject.metadata.resourceVersion",
+            "79266625"
+        ],
+        [
+            "responseObject.metadata.deletionGracePeriodSeconds",
+            "0"
+        ],
+        [
+            "responseObject.status.podIPs[].ip",
+            "192.168.30.98"
+        ],
+        [
+            "responseObject.status.qosClass",
+            "BestEffort"
+        ],
+        [
+            "responseObject.status.conditions[].lastTransitionTime",
+            "2021-10-11T16:50:11Z,2021-10-11T19:00:21Z,2021-10-11T19:00:21Z,2021-10-11T16:50:11Z"
+        ],
+        [
+            "responseObject.status.containerStatuses[].lastState.terminated.startedAt",
+            "2021-10-11T16:50:12Z"
+        ],
+        [
+            "responseObject.metadata.creationTimestamp",
+            "2021-10-11T16:50:11Z"
+        ],
+        [
+            "responseObject.spec.volumes[].projected.sources[].configMap.items[].path",
+            "ca.crt"
+        ],
+        [
+            "responseObject.status.hostIP",
+            "192.168.30.14"
+        ],
+        [
+            "responseObject.status.containerStatuses[].restartCount",
+            "1"
+        ],
+        [
+            "responseObject.spec.restartPolicy",
+            "Always"
+        ],
+        [
+            "responseObject.kind",
+            "Pod"
+        ],
+        [
+            "responseObject.spec.priority",
+            "0"
+        ],
+        [
+            "responseObject.status.containerStatuses[].name",
+            "nginx"
+        ],
+        [
+            "responseObject.metadata.deletionTimestamp",
+            "2021-10-11T19:00:20Z"
+        ],
+        [
+            "responseObject.status.containerStatuses[].lastState.terminated.exitCode",
+            "0"
+        ],
+        [
+            "responseObject.spec.serviceAccountName",
+            "default"
+        ],
+        [
+            "requestObject.gracePeriodSeconds",
+            "0"
+        ],
+        [
+            "responseObject.spec.volumes[].projected.sources[].downwardAPI.items[].fieldRef.fieldPath",
+            "metadata.namespace"
+        ],
+        [
+            "responseObject.status.conditions[].message",
+            "containers with unready status: [nginx],containers with unready status: [nginx]"
+        ],
+        [
+            "responseObject.spec.preemptionPolicy",
+            "PreemptLowerPriority"
+        ],
+        [
+            "requestObject.preconditions.uid",
+            "d06f9ebe-abef-4885-90ed-15e235c3bd4f"
+        ],
+        [
+            "responseObject.status.containerStatuses[].ready",
+            "false"
+        ],
+        [
+            "responseObject.status.containerStatuses[].imageID",
+            "docker-pullable://nginx@sha256:85d6243a660c966c5df7a347abbf1132a7aaa0e7e69ceff086a883a71afc0f22"
+        ],
+        [
+            "responseObject.status.containerStatuses[].lastState.terminated.containerID",
+            "docker://cb286e61605d7b25764932797da606fb2cc4ff835b68f44a3bd33915126b3157"
+        ],
+        [
+            "responseObject.metadata.managedFields[].operation",
+            "Update,Update,Update"
+        ],
+        [
+            "responseObject.spec.volumes[].projected.sources[].serviceAccountToken.expirationSeconds",
+            "3607"
+        ],
+        [
+            "responseObject.status.conditions[].type",
+            "Initialized,Ready,ContainersReady,PodScheduled"
+        ],
+        [
+            "responseObject.metadata.namespace",
+            "default"
+        ],
+        [
+            "responseObject.status.containerStatuses[].state.terminated.startedAt",
+            "2021-10-11T17:27:16Z"
+        ],
+        [
+            "responseObject.spec.serviceAccount",
+            "default"
+        ],
+        [
+            "sourceIPs[]",
+            "18.234.211.232"
+        ],
+        [
+            "responseObject.spec.volumes[].projected.sources[].configMap.name",
+            "kube-root-ca.crt"
+        ]
+    ]
+}

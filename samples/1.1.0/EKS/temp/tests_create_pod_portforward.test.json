@@ -1,0 +1,128 @@
+{
+    "activity_id": 1,
+    "activity_name": "Create",
+    "actor": {
+        "session": {
+            "credential_uid": "ASIA3X2Q4EH4QQ7ZCWMZ",
+            "issuer": "arn:aws:iam::807086596601:role/Admin",
+            "uid": "arizmm-Isengard"
+        },
+        "user": {
+            "groups": [
+                {
+                    "name": "system:masters"
+                },
+                {
+                    "name": "system:authenticated"
+                }
+            ],
+            "name": "kubernetes-admin",
+            "type_id": 0,
+            "uid": "heptio-authenticator-aws:807086596601:AROA3X2Q4EH4RDPVXGXF2"
+        }
+    },
+    "api": {
+        "group": null,
+        "operation": "create",
+        "request": {
+            "containers": null,
+            "uid": "d88fcab0-7b48-47d2-b024-93c8c683b3ee"
+        },
+        "response": {
+            "code": 101,
+            "containers": null,
+            "error": null,
+            "error_message": null,
+            "message": null
+        },
+        "version": "v1"
+    },
+    "category_name": "Application Activity",
+    "category_uid": 6,
+    "class_name": "API Activity",
+    "class_uid": 6003,
+    "cloud": {
+        "account": {
+            "uid": "arn:aws:sts::807086596601:assumed-role/Admin/arizmm-Isengard"
+        },
+        "provider": "AWS"
+    },
+    "http_request": {
+        "url": {
+            "path": "/api/v1/namespaces/default/pods/one-container/portforward"
+        },
+        "user_agent": "kubectl/v1.22.2 (darwin/amd64) kubernetes/8b5a191"
+    },
+    "message": "ResponseComplete",
+    "metadata": {
+        "log_level": "RequestResponse",
+        "product": {
+            "name": "AWS EKS",
+            "vendor_name": "AWS",
+            "version": "audit.k8s.io/v1"
+        },
+        "profiles": [
+            "cloud",
+            "datetime"
+        ],
+        "version": "1.1.0"
+    },
+    "observables": [
+        {
+            "name": "src_endpoint.ip",
+            "type": "IP Address",
+            "type_id": 2,
+            "value": "104.0.44.55"
+        },
+        {
+            "name": "actor.user.name",
+            "type": "User",
+            "type_id": 4,
+            "value": "kubernetes-admin"
+        },
+        {
+            "name": "http_request.url.path",
+            "type": "URL String",
+            "type_id": 6,
+            "value": "/api/v1/namespaces/default/pods/one-container/portforward"
+        }
+    ],
+    "resources": [
+        {
+            "name": "one-container",
+            "namespace": "default",
+            "type": "pods/portforward",
+            "uid": null,
+            "version": null
+        }
+    ],
+    "severity": "Informational",
+    "severity_id": 1,
+    "src_endpoint": {
+        "intermediate_ips": null,
+        "ip": "104.0.44.55"
+    },
+    "start_time_dt": "2021-10-11 17:06:57.436000",
+    "time": 1633972028260,
+    "time_dt": "2021-10-11 17:07:08.260000",
+    "type_name": "API Activity: Create",
+    "type_uid": 600301,
+    "unmapped": [
+        [
+            "annotations.authorization.k8s.io/decision",
+            "allow"
+        ],
+        [
+            "kind",
+            "Event"
+        ],
+        [
+            "annotations.authorization.k8s.io/reason",
+            ""
+        ],
+        [
+            "sourceIPs[]",
+            "104.0.44.55"
+        ]
+    ]
+}
