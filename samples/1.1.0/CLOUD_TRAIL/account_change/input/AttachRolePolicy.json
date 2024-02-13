@@ -1,0 +1,42 @@
+{
+	"awsRegion": "us-east-1",
+	"eventCategory": "Management",
+	"eventID": "1a8308f8-b59f-4257-b150-b287516f375e",
+	"eventName": "AttachRolePolicy",
+	"eventSource": "iam.amazonaws.com",
+	"eventTime": "2023-03-17T16:31:50Z",
+	"eventType": "AwsApiCall",
+	"eventVersion": "1.08",
+	"managementEvent": true,
+	"readOnly": false,
+	"recipientAccountId": "112233445566",
+	"requestID": "e82d2d19-5e02-4c09-8baf-36823b7d4806",
+	"requestParameters": {
+		"policyArn": "arn:aws:iam::aws:policy/AmazonSageMakerFullAccess",
+		"roleName": "AmazonSageMakerServiceCatalogProductsExecutionRole"
+	},
+	"responseElements": null,
+	"sourceIPAddress": "71.192.137.28",
+	"userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0) Gecko/20100101 Firefox/102.0",
+	"userIdentity": {
+		"accessKeyId": "ASIAXTKM3VWISSN75QFU",
+		"accountId": "112233445566",
+		"arn": "arn:aws:sts::112233445566:assumed-role/Admin/Admin-user",
+		"principalId": "AROAIOJRFK4IOK6BW5ISY:Admin-user",
+		"sessionContext": {
+			"attributes": {
+				"creationDate": "2023-03-17T12:52:38Z",
+				"mfaAuthenticated": "false"
+			},
+			"sessionIssuer": {
+				"accountId": "112233445566",
+				"arn": "arn:aws:iam::112233445566:role/Admin",
+				"principalId": "AROAIOJRFK4IOK6BW5ISY",
+				"type": "Role",
+				"userName": "Admin"
+			},
+			"webIdFederationData": {}
+		},
+		"type": "AssumedRole"
+	}
+}

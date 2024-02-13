@@ -6,4 +6,3 @@ requests>=2.28.2
 pathlib>=1.0.1
 inquirer>=3.1.2
 pyarrow>=10.0.1
-flatten-json>=0.1.14

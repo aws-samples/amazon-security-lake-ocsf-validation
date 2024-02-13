@@ -1,0 +1,50 @@
+{
+					"awsRegion": "us-east-1",
+					"eventCategory": "Management",
+					"eventID": "7dd15a89-ae0f-4340-8e6c-d6981246c71b",
+					"eventName": "CreateUser",
+					"eventSource": "iam.amazonaws.com",
+					"eventTime": "2023-03-17T17:07:59Z",
+					"eventType": "AwsApiCall",
+					"eventVersion": "1.08",
+					"managementEvent": true,
+					"readOnly": false,
+					"recipientAccountId": "112233445566",
+					"requestID": "c99bf9da-e0bd-4bf7-bb32-c8be25618afc",
+					"requestParameters": {
+						"userName": "test_user2"
+					},
+					"responseElements": {
+						"user": {
+							"arn": "arn:aws:iam::112233445566:user/test_user2",
+							"createDate": "Mar 17, 2023 5:07:59 PM",
+							"path": "/",
+							"userId": "AIDA2W7SOKHDM47UMJRTX",
+							"userName": "test_user2"
+						}
+					},
+					"sessionCredentialFromConsole": "true",
+					"sourceIPAddress": "52.95.4.21",
+					"userAgent": "AWS Internal",
+					"userIdentity": {
+						"accessKeyId": "ASIA2W7SOKHDHBO4U2HE",
+						"accountId": "112233445566",
+						"arn": "arn:aws:sts::112233445566:assumed-role/Admin/Admin-user",
+						"principalId": "AROA2W7SOKHDLNCOKZNPS:Admin-user",
+						"sessionContext": {
+							"attributes": {
+								"creationDate": "2023-03-17T16:43:57Z",
+								"mfaAuthenticated": "false"
+							},
+							"sessionIssuer": {
+								"accountId": "112233445566",
+								"arn": "arn:aws:iam::112233445566:role/Admin",
+								"principalId": "AROA2W7SOKHDLNCOKZNPS",
+								"type": "Role",
+								"userName": "Admin"
+							},
+							"webIdFederationData": {}
+						},
+						"type": "AssumedRole"
+					}
+				}

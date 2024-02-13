@@ -1,0 +1,187 @@
+{
+	"description": "Tests an IAM Access Analyzer SecHub Finding.",
+	"name": "IAM Access Analyzer Test",
+	"test": {
+		"expected": {
+			"accountid": null,
+			"activity_id": 2,
+			"activity_name": "Update",
+			"asl_version": null,
+			"category_name": "Findings",
+			"category_uid": 2,
+			"class_name": "Detection Finding",
+			"class_uid": 2004,
+			"cloud": {
+				"account": {
+					"uid": "arn:aws:EXAMPLE"
+				},
+				"provider": "AWS",
+				"region": "us-east-2"
+			},
+			"confidence_score": null,
+			"evidences": null,
+			"finding_info": {
+				"created_time_dt": "2023-11-15 20:08:31.325000",
+				"desc": "AWS::IAM::Role/arn:aws:EXAMPLE",
+				"first_seen_time_dt": null,
+				"last_seen_time_dt": null,
+				"modified_time_dt": "2023-11-15 20:08:33.783000",
+				"related_events": null,
+				"src_url": "https://console.aws.amazon.com/access-analyzer/home?region=us-east-2#/findings?resource=arn%3Aaws%3Aiam%3A%3Aarn:aws:EXAMPLE%3Arole%2FCodeGuruProfilerForwardToAmazonProfiler",
+				"title": "AwsIamRole/arn:aws:EXAMPLE",
+				"types": [
+					"Software and Configuration Checks/AWS Security Best Practices/External Access Granted"
+				],
+				"uid": "arn:aws:EXAMPLE"
+			},
+			"message": null,
+			"metadata": {
+				"log_version": "2018-10-08",
+				"processed_time_dt": "2023-11-15 20:08:35.178000",
+				"product": {
+					"feature": {
+						"name": null,
+						"uid": "aws/access-analyzer"
+					},
+					"name": "IAM Access Analyzer",
+					"uid": "arn:aws:EXAMPLE",
+					"vendor_name": "AWS"
+				},
+				"profiles": [
+					"cloud",
+					"datetime",
+					"linux"
+				],
+				"version": "1.1.0-dev"
+			},
+			"region": null,
+			"remediation": {
+				"desc": "If the access isn't intended, it indicates a potential security risk. Use the console for the resource to modify or remove the policy that grants the unintended access. You can use the Rescan button on the Finding details page in the Access Analyzer console to confirm whether the change removed the access. If the access is removed, the status changes to Resolved.",
+				"references": null
+			},
+			"resources": [
+				{
+					"cloud_partition": null,
+					"criticality": null,
+					"data": "Other={\"External Principal Type\":\"AWS\",\"Condition\":\"none\",\"Action Granted\":\"sts:AssumeRole\",\"External Principal\":\"054693081941\"}",
+					"labels": null,
+					"owner": {
+						"account": {
+							"uid": "arn:aws:EXAMPLE"
+						}
+					},
+					"region": null,
+					"type": "AwsIamRole",
+					"uid": "arn:aws:EXAMPLE"
+				}
+			],
+			"severity": "Low",
+			"severity_id": 2,
+			"status": "New",
+			"time": 1700078913783,
+			"time_dt": "2023-11-15 20:08:33.783000",
+			"type_name": "Detection Finding: Update",
+			"type_uid": 200402,
+			"unmapped": [
+				[
+					"Severity.Product",
+					"1"
+				],
+				[
+					"WorkflowState",
+					"NEW"
+				],
+				[
+					"FindingProviderFields.Types[]",
+					"Software and Configuration Checks/AWS Security Best Practices/External Access Granted"
+				],
+				[
+					"ProductFields.aws/securityhub/CompanyName",
+					"AWS"
+				],
+				[
+					"RecordState",
+					"ACTIVE"
+				],
+				[
+					"FindingProviderFields.Severity.Label",
+					"LOW"
+				],
+				[
+					"Severity.Normalized",
+					"1"
+				],
+				[
+					"ProductFields.aws/securityhub/ProductName",
+					"IAM Access Analyzer"
+				],
+				[
+					"ProductFields.aws/securityhub/FindingId",
+					"arn:aws:EXAMPLE"
+				]
+			]
+		},
+		"record": {
+			"SchemaVersion": "2018-10-08",
+			"Id": "arn:aws:EXAMPLE",
+			"ProductArn": "arn:aws:EXAMPLE",
+			"ProductName": "IAM Access Analyzer",
+			"CompanyName": "AWS",
+			"Region": "us-east-2",
+			"GeneratorId": "aws/access-analyzer",
+			"AwsAccountId": "arn:aws:EXAMPLE",
+			"Types": [
+				"Software and Configuration Checks/AWS Security Best Practices/External Access Granted"
+			],
+			"CreatedAt": "2023-11-15T20:08:31.325Z",
+			"UpdatedAt": "2023-11-15T20:08:33.783Z",
+			"Severity": {
+				"Product": 1,
+				"Label": "LOW",
+				"Normalized": 1
+			},
+			"Title": "AwsIamRole/arn:aws:EXAMPLE",
+			"Description": "AWS::IAM::Role/arn:aws:EXAMPLE",
+			"Remediation": {
+				"Recommendation": {
+					"Text": "If the access isn't intended, it indicates a potential security risk. Use the console for the resource to modify or remove the policy that grants the unintended access. You can use the Rescan button on the Finding details page in the Access Analyzer console to confirm whether the change removed the access. If the access is removed, the status changes to Resolved."
+				}
+			},
+			"SourceUrl": "https://console.aws.amazon.com/access-analyzer/home?region=us-east-2#/findings?resource=arn%3Aaws%3Aiam%3A%3Aarn:aws:EXAMPLE%3Arole%2FCodeGuruProfilerForwardToAmazonProfiler",
+			"ProductFields": {
+				"ResourceOwnerAccount": "arn:aws:EXAMPLE",
+				"aws/securityhub/FindingId": "arn:aws:EXAMPLE",
+				"aws/securityhub/ProductName": "IAM Access Analyzer",
+				"aws/securityhub/CompanyName": "AWS"
+			},
+			"Resources": [
+				{
+					"Type": "AwsIamRole",
+					"Id": "arn:aws:EXAMPLE",
+					"Details": {
+						"Other": {
+							"External Principal Type": "AWS",
+							"Condition": "none",
+							"Action Granted": "sts:AssumeRole",
+							"External Principal": "054693081941"
+						}
+					}
+				}
+			],
+			"WorkflowState": "NEW",
+			"Workflow": {
+				"Status": "NEW"
+			},
+			"RecordState": "ACTIVE",
+			"FindingProviderFields": {
+				"Severity": {
+					"Label": "LOW"
+				},
+				"Types": [
+					"Software and Configuration Checks/AWS Security Best Practices/External Access Granted"
+				]
+			},
+			"ProcessedAt": "2023-11-15T20:08:35.178Z"
+		}
+	}
+}

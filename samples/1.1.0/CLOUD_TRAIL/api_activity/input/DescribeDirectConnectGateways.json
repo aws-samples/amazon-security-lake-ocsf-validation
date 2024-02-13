@@ -1,0 +1,25 @@
+{
+	"awsRegion": "us-east-1",
+	"eventID": "71c88be9-ea5c-43c7-8c82-02ecb5ec7f09",
+	"eventName": "DescribeDirectConnectGateways",
+	"eventSource": "directconnect.amazonaws.com",
+	"eventTime": "2020-09-21T22:22:52Z",
+	"eventType": "AwsApiCall",
+	"eventVersion": "1.05",
+	"recipientAccountId": "111122223333",
+	"requestID": "1c8a6220-4263-4763-b526-20c1d1dd012c",
+	"requestParameters": null,
+	"responseElements": {
+		"directConnectGateways": []
+	},
+	"sourceIPAddress": "205.8.181.128",
+	"userAgent": "Boto3/1.15.2 Python/3.8.2 Linux/5.6.3-arch1-1 Botocore/1.18.2",
+	"userIdentity": {
+		"accessKeyId": "AKIA3Z2XBVUDFQ9TU4MD",
+		"accountId": "111122223333",
+		"arn": "arn:aws:iam::111122223333:user/Level6",
+		"principalId": "AIDADO2GQD0K8TEF7KW1V",
+		"type": "IAMUser",
+		"userName": "Level6"
+	}
+}
