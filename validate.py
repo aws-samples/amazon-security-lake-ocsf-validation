@@ -542,6 +542,7 @@ def main():
             sys.exit()
         # Pull OCSF Schema from browser
         url = ('https://schema.ocsf.io/' + str(EVENT['metadata']['version']) + '/schema/classes/' + url_class_name + '?profiles=' + url_profiles)
+        url = url.replace(" ", "%20")
         response = urllib.request.urlopen(url)
         ocsf_schema = response.read().decode('UTF-8')
         ocsf_schema = json.loads(ocsf_schema)
@@ -733,7 +734,7 @@ def main():
     # Create output.txt
     with open(Path(str(runtimePath.parent.absolute()) + '/output.txt'), 'w') as f:
         print('\n', file=f)
-
+    
     for i in targetFiles:
         ext = pathlib.Path(i).suffix
         s_file_name = i.replace(".json", ".source").replace(".parquet", ".source").replace(".ndjson", ".source")
