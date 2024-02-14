@@ -14,6 +14,8 @@ import glob
 from flatten_json import flatten
 import pyarrow.parquet as pq
 import argparse
+import urllib.parse
+from json.decoder import JSONDecodeError
 
 # Take in input arguments from CLI
 parser = argparse.ArgumentParser(add_help=False)
@@ -523,11 +525,10 @@ def main():
         except KeyError:
             print("\nThe version field has not been defined within:", os.path.basename(temp_file))
             sys.exit()
-        try:
-            x = EVENT['metadata']['profiles']
-        except KeyError:
-            print("\nprofiles have not defined within:", os.path.basename(temp_file))
-            sys.exit()
+        if 'profiles' not in EVENT['metadata'].keys():
+            EVENT['metadata']['profiles'] = []
+            
+            
         with open(Path(str(runtimePath.parent.absolute()) + '/output.txt'), 'a') as f:
             print('Validating Against OCSF Event Class: ' + str(EVENT['class_uid']), file=f)
             print('Validating Against OCSF Version: ' + str(EVENT['metadata']['version']), file=f)
@@ -541,8 +542,7 @@ def main():
             print("\nERROR: The \"class_uid:\"", str(EVENT['class_uid']),"is not defined within OCSF", str(EVENT['metadata']['version']))
             sys.exit()
         # Pull OCSF Schema from browser
-        url = ('https://schema.ocsf.io/' + str(EVENT['metadata']['version']) + '/schema/classes/' + url_class_name + '?profiles=' + url_profiles)
-        url = url.replace(" ", "%20")
+        url = ('https://schema.ocsf.io/' + str(EVENT['metadata']['version']) + '/schema/classes/' + url_class_name + '?profiles=' + urllib.parse.quote(url_profiles))
         response = urllib.request.urlopen(url)
         ocsf_schema = response.read().decode('UTF-8')
         ocsf_schema = json.loads(ocsf_schema)
@@ -674,13 +674,17 @@ def main():
                             # Check dropped sources
                             source_path = Path(str(targetPath) + '/inputs/' + str(s_file_name))
                             if os.path.isfile(source_path):
-                                with open(source_path, 'r') as testSource:
-                                    testSource = json.load(testSource)
-                                    if type(testSource) == list:
-                                        for i in testSource:
-                                            measure_dropped_records(i, EVENT)
-                                    if type(testSource) == dict:
-                                        measure_dropped_records(testSource, EVENT)
+                                with open(source_path, 'r', encoding='utf-8') as testSource:
+                                    try:
+                                        testSource = json.load(testSource)
+                                        if type(testSource) == list:
+                                            for i in testSource:
+                                                measure_dropped_records(i, EVENT)
+                                        if type(testSource) == dict:
+                                            measure_dropped_records(testSource, EVENT)
+                                    except JSONDecodeError:  
+                                        with open(Path(str(runtimePath.parent.absolute()) + '/output.txt'), 'a') as f:
+                                          print("WARN: " + "THE FILE WITH NAME", str(s_file_name), "IN", str(Path(str(targetPath) + '/inputs/')), "- IS NOT A JSON FILE. SKIPPING METRICS FOR DROPPED RECORDS.\n", file=f)
                             else:
                                 with open(Path(str(runtimePath.parent.absolute()) + '/output.txt'), 'a') as f:
                                     print("WARN: " + "THERE IS NO FILE WITH NAME", str(s_file_name), "IN", str(Path(str(targetPath) + '/inputs/')), "- SKIPPING METRICS FOR DROPPED RECORDS.\n", file=f)
@@ -704,15 +708,20 @@ def main():
                                 source_path = Path(str(targetPath) + '/inputs/' + str(s_file_name))
                                 if os.path.isfile(source_path):
                                     with open(source_path, 'r') as testSource:
-                                        testSource = json.load(testSource)
-                                        if type(testSource) == list:
-                                            try:
-                                                measure_dropped_records(testSource[x], EVENT)
-                                            except IndexError:
-                                                with open(Path(str(runtimePath.parent.absolute()) + '/output.txt'), 'a') as f:
-                                                    print("WARN: " + str(s_file_name) + " IN " + str(Path(str(targetPath) + '/inputs/')) + " HAS EXCEEDED THE LENGTH OF THE TEST DATA AND WAS SKIPPED.", file=f)
-                                        if type(testSource) == dict:
-                                            measure_dropped_records(testSource, EVENT)
+                                        try:
+                                          testSource = json.load(testSource)
+                                        except JSONDecodeError:  
+                                          with open(Path(str(runtimePath.parent.absolute()) + '/output.txt'), 'a') as f:
+                                            print("WARN: " + "THE FILE WITH NAME", str(s_file_name), "IN", str(Path(str(targetPath) + '/inputs/')), "- IS NOT A JSON FILE. SKIPPING METRICS FOR DROPPED RECORDS.\n", file=f)
+                                        else:
+                                          if type(testSource) == list:
+                                              try:
+                                                  measure_dropped_records(testSource[x], EVENT)
+                                              except IndexError:
+                                                  with open(Path(str(runtimePath.parent.absolute()) + '/output.txt'), 'a') as f:
+                                                      print("WARN: " + str(s_file_name) + " IN " + str(Path(str(targetPath) + '/inputs/')) + " HAS EXCEEDED THE LENGTH OF THE TEST DATA AND WAS SKIPPED.", file=f)
+                                          if type(testSource) == dict:
+                                              measure_dropped_records(testSource, EVENT)
                                 else:
                                     with open(Path(str(runtimePath.parent.absolute()) + '/output.txt'), 'a') as f:
                                         print("WARN: " + "THERE IS NO FILE WITH NAME", str(s_file_name), "IN", str(Path(str(targetPath) + '/inputs/')), "- SKIPPING METRICS FOR DROPPED RECORDS.\n", file=f)
