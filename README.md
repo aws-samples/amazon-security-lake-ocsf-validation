@@ -19,7 +19,7 @@ We welcome contributions to this repo in the form of fixes to existing examples 
 
 ## Usage Guide <a name="Usage"></a>
 
-### Important Information for MacOs Users:
+### Important Information for MacOS Users:
 For users attempting to run this tool using MacOS please ensure that you are not using the default system version of Python. MacOS system python is incompatibile with the required urllib dependency within this tool.
 
 ### Getting Started:
