@@ -19,7 +19,7 @@ We welcome contributions to this repo in the form of fixes to existing examples 
 
 ## Usage Guide <a name="Usage"></a>
 
-## Important Information for MacOs:
+# Important Information for MacOs:
 For users attempting to run this tool using MacOS please ensure that you are not using the default system version of Python. MacOS system python is incompatibile with the required urllib dependency within this tool.
 
 To get started with using this validator please follow the numbered steps below:
