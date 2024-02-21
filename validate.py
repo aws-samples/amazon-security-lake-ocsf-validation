@@ -501,7 +501,7 @@ def main():
             return result
         return item
 
-    def produce_event_and_shchema(EVENT, temp_file, targetPath):
+    def produce_event_and_schema(EVENT, temp_file, targetPath):
 
         '''
         This function takes in an event and a file path containg files
@@ -666,7 +666,7 @@ def main():
                                     new_unmapped[i] = j
                                 EVENT['unmapped'] = new_unmapped
                             # Produce event record and generate OCSF schema
-                            EVENT, ocsf_schema = produce_event_and_shchema(EVENT, temp_file, targetPath)
+                            EVENT, ocsf_schema = produce_event_and_schema(EVENT, temp_file, targetPath)
                             # Instatiate and run JSON validator and generate schema errors
                             validator = jsonschema.Draft7Validator(ocsf_schema)
                             errors = validator.iter_errors(EVENT)
@@ -699,7 +699,7 @@ def main():
                                         new_unmapped[i] = j
                                     EVENT['unmapped'] = new_unmapped
                                 # Produce clean event and ocsf schema
-                                EVENT, ocsf_schema = produce_event_and_shchema(EVENT, temp_file, targetPath)
+                                EVENT, ocsf_schema = produce_event_and_schema(EVENT, temp_file, targetPath)
                                 # Instatiate and run JSON validator and generate schema errors
                                 validator = jsonschema.Draft7Validator(ocsf_schema)
                                 errors = validator.iter_errors(EVENT)
