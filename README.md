@@ -28,7 +28,7 @@ To get started with using this validator please follow the numbered steps below:
 
 1. Please place .parquet or .json files in: path/to/directory
 
-2. OPTIONAL: Place .source files in path/to/directory/inputs/. These source files should be the json formatted records formatted in their original schema before OCSF. All source files must contain a the same name as the input file with a .source extension such as <inputfilename>.source to be used in metrics output. 
+2. OPTIONAL: Place .source files in path/to/directory/inputs/. These source files must be the JSON formatted records formatted in their original schema prior to OCSF transformation. All source files must contain the same name as the input file with a .source extension such as <inputfilename>.source to be used in metrics output. 
     
 3. Install requirements using 
         pip install -r requirements.txt
