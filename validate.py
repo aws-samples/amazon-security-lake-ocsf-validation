@@ -6,7 +6,6 @@ import pandas as pd
 import json
 import os
 import sys
-import urllib.request
 import requests
 from pathlib import Path
 import pathlib
@@ -501,7 +500,7 @@ def main():
             return result
         return item
 
-    def produce_event_and_schema(EVENT, temp_file, targetPath):
+    def produce_event_and_shchema(EVENT, temp_file, targetPath):
 
         '''
         This function takes in an event and a file path containg files
@@ -543,9 +542,8 @@ def main():
             sys.exit()
         # Pull OCSF Schema from browser
         url = ('https://schema.ocsf.io/' + str(EVENT['metadata']['version']) + '/schema/classes/' + url_class_name + '?profiles=' + urllib.parse.quote(url_profiles))
-        response = urllib.request.urlopen(url)
-        ocsf_schema = response.read().decode('UTF-8')
-        ocsf_schema = json.loads(ocsf_schema)
+        response = requests.get(url)
+        ocsf_schema = json.loads(json.dumps(response.json()))
         # Write OCSF Schema to file
         with open(str(targetPath) + "/schemas/" + str(EVENT['class_uid']) + "-" + url_profiles + "-" + str(EVENT['metadata']['version']) + ".json", 'w') as f:
             json.dump(ocsf_schema, f, ensure_ascii=False)
@@ -666,7 +664,7 @@ def main():
                                     new_unmapped[i] = j
                                 EVENT['unmapped'] = new_unmapped
                             # Produce event record and generate OCSF schema
-                            EVENT, ocsf_schema = produce_event_and_schema(EVENT, temp_file, targetPath)
+                            EVENT, ocsf_schema = produce_event_and_shchema(EVENT, temp_file, targetPath)
                             # Instatiate and run JSON validator and generate schema errors
                             validator = jsonschema.Draft7Validator(ocsf_schema)
                             errors = validator.iter_errors(EVENT)
@@ -699,7 +697,7 @@ def main():
                                         new_unmapped[i] = j
                                     EVENT['unmapped'] = new_unmapped
                                 # Produce clean event and ocsf schema
-                                EVENT, ocsf_schema = produce_event_and_schema(EVENT, temp_file, targetPath)
+                                EVENT, ocsf_schema = produce_event_and_shchema(EVENT, temp_file, targetPath)
                                 # Instatiate and run JSON validator and generate schema errors
                                 validator = jsonschema.Draft7Validator(ocsf_schema)
                                 errors = validator.iter_errors(EVENT)
