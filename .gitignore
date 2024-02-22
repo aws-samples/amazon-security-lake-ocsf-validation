@@ -1,0 +1,5 @@
+.DS_Store
+.venv
+output.txt
+samples/**/temp
+samples/**/schemas

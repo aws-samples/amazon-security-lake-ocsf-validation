@@ -218,5 +218,5 @@ VALID OCSF.
 --------------------------------- METRICS ---------------------------------
 
 WARN: The OCSF log has: 49.25% of its keys in unmapped.
-WARN: THERE IS NO FILE WITH NAME tests_create_pod.test.source IN C:\Users\adplotzk\Desktop\amazon-security-lake-ocsf-validation\samples\1.1.0\EKS\inputs - SKIPPING METRICS FOR DROPPED RECORDS.
+WARN: THERE IS NO FILE WITH NAME tests_create_pod.test.source IN samples/1.1.0/EKS/inputs - SKIPPING METRICS FOR DROPPED RECORDS.
 
