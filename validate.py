@@ -655,7 +655,11 @@ def main():
 
     def control_function(testData):
         with open(temp_file, 'r') as testData:
-                        testData = json.load(testData)
+                        try:
+                            testData = json.load(testData)
+                        except JSONDecodeError:  
+                            print("\nERROR: THE FILE " + str(temp_file) + " IS NOT A PROPERLY FORMATTED JSON OR PARQUET.")
+                            sys.exit()
                         # Code for scenario where testData is single record
                         if type(testData) == dict:
                             EVENT = testData
