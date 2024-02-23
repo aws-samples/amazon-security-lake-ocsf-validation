@@ -535,6 +535,9 @@ def main():
 
         # define parameters for OCSF schema call
         url_profiles = ','.join(str(x) for x in EVENT['metadata']['profiles'])
+        if str(EVENT['metadata']['version']) not in ["1.1.0", "1.0.0-rc.2"]:
+            print("\nERROR: " + EVENT['metadata']['version'] + " is not a supported OCSF schema version. Please ensure the schema version is one of the following: 1.1.0, 1.0.0-rc.2.")
+            sys.exit()
         try:
             url_class_name = ocsf_class_dictionary[str(EVENT['metadata']['version'])][str(EVENT['class_uid'])]['url']
         except KeyError:
