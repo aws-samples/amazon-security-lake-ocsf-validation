@@ -558,9 +558,10 @@ def main():
         This function takes in a list of JSON errors, an event and a runtime path
         and returns the printed errors to the output file
         '''
-        if EVENT['class_name'] != ocsf_class_dictionary[str(EVENT['metadata']['version'])][str(EVENT['class_uid'])]['class_name']:
-            print("\nERROR: The input contains the \"class name\" value:", str(EVENT['class_name']) + ".", "Using the OCSF class uid", str(EVENT['class_uid']), "requires the \"class name\" value:", ocsf_class_dictionary[str(EVENT['metadata']['version'])][str(EVENT['class_uid'])]['class_name'])
-            sys.exit()            
+        if 'class_name' in EVENT.keys():
+            if EVENT['class_name'] != ocsf_class_dictionary[str(EVENT['metadata']['version'])][str(EVENT['class_uid'])]['class_name']:
+                print("\nERROR: The input contains the \"class name\" value:", str(EVENT['class_name']) + ".", "Using the OCSF class uid", str(EVENT['class_uid']), "requires the \"class name\" value:", ocsf_class_dictionary[str(EVENT['metadata']['version'])][str(EVENT['class_uid'])]['class_name'])
+                sys.exit()
             
         if EVENT['category_name'] != ocsf_class_dictionary[str(EVENT['metadata']['version'])][str(EVENT['class_uid'])]['category_name']:
             print("\nERROR:The input contains the \"category name\" value:", str(EVENT['category_name']) + ".", "Using the OCSF class uid", str(EVENT['class_uid']), "requires the \"category name\" value:", ocsf_class_dictionary[str(EVENT['metadata']['version'])][str(EVENT['class_uid'])]['category_name'])
