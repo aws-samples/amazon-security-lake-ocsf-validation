@@ -766,13 +766,16 @@ def main():
             
             table = pq.read_table(read_file)
             pythonified = table.to_pylist()
+            pq_array = []
             with open(temp_file, 'w') as tempData:
                 for record in pythonified:
-                    print(json.dumps(record, indent=4, sort_keys=True, default=str), file=tempData)
+                    pq_array.append(record)
+                print(json.dumps(pq_array, indent=4, sort_keys=True, default=str), file=tempData)
             control_function(temp_file)
                                 
         # Run this process for json files
         elif ext == ".json" or ext == ".ndjson":
+            print('\n' + "ATTEMPTING TO VALIDATE FILE:", i)
             with open(Path(str(runtimePath.parent.absolute()) + '/output.txt'), 'a') as f:
                 print('\n' + "--------" + " ATTEMPTING TO VALIDATE FILE: ", i + " --------" + '\n', file=f)
             EVENT = {}
