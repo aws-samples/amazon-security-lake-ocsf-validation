@@ -27,7 +27,9 @@ setup(
         'urllib3',
         'pyarrow',
         'inquirer',
-        'requests'
+        'requests',
+        'flatten-json',
+        'pyarrow'
     ],
     packages=find_packages(exclude=('tests', 'docs'))
 )
