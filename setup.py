@@ -11,7 +11,7 @@ with open('LICENSE') as f:
     
 setup(
     name='Validate OCSF Schema',
-    version='1.0.0',
+    version='2.0.0',
     description='Validation Script For AWS Security Lake - OCSF Versions: 1.0.0-rc.2, 1.1.0',
     long_description=readme,
     author='Adam Plotzker',
