@@ -553,6 +553,7 @@ def main():
         # Grab OCSF Schema file data
         with open(str(targetPath) + "/schemas/" + str(EVENT['class_uid']) + "-" + url_profiles + "-" + str(EVENT['metadata']['version']) + ".json", 'r') as ocsf_schema:
             ocsf_schema = json.load(ocsf_schema)
+            ocsf_schema["additionalProperties"] = False
             return(EVENT, ocsf_schema)
 
     def generate_schema_errors(errors, EVENT, runtimePath):
