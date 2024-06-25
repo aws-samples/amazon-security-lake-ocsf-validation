@@ -522,11 +522,26 @@ def main():
         try:
             x = EVENT['metadata']['version']
         except KeyError:
-            print("\nThe version field has not been defined within:", os.path.basename(temp_file))
+            print("\nThe metadata.version field has not been defined within:", os.path.basename(temp_file))
             sys.exit()
+        try:
+            x = EVENT['class_name']
+        except KeyError:
+            print("\nThe class_name field has not defined within:", os.path.basename(temp_file))
+            sys.exit()
+        try:
+            x = EVENT['category_uid']
+        except KeyError:
+            print("\nThe category_uid field has not defined within:", os.path.basename(temp_file))
+            sys.exit()
+        try:
+            x = EVENT['category_name']
+        except KeyError:
+            print("\nThe category_name field has not defined within:", os.path.basename(temp_file))
+            sys.exit()
+	    
         if 'profiles' not in EVENT['metadata'].keys():
             EVENT['metadata']['profiles'] = []
-            
             
         with open(Path(str(runtimePath.parent.absolute()) + '/output.txt'), 'a') as f:
             print('Validating Against OCSF Event Class: ' + str(EVENT['class_uid']), file=f)
