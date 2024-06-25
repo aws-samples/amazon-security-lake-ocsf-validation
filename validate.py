@@ -527,7 +527,6 @@ def main():
         if 'profiles' not in EVENT['metadata'].keys():
             EVENT['metadata']['profiles'] = []
             
-            
         with open(Path(str(runtimePath.parent.absolute()) + '/output.txt'), 'a') as f:
             print('Validating Against OCSF Event Class: ' + str(EVENT['class_uid']), file=f)
             print('Validating Against OCSF Version: ' + str(EVENT['metadata']['version']), file=f)
