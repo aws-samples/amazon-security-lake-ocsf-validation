@@ -34,8 +34,7 @@ class Bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-ocsf_class_dictionary = {
-	"1.1.0": {
+ocsf_class_dictionary_1_1_0 = {
 		"1001": {
 			"url": "file_activity",
 			"class_name": "File System Activity",
@@ -294,177 +293,168 @@ ocsf_class_dictionary = {
 			"category_name": "Application Activity",
 			"category_uid": 6
 		}
-	},
-	"1.0.0-rc.2": {
-		"1001": {
-			"url": "file_activity",
-			"class_name": "File System Activity",
-			"category_name": "System Activity",
-			"category_uid": 1
-		},
-		"1002": {
-			"url": "kernel_extension",
-			"class_name": "Kernel Extension Activity",
-			"category_name": "System Activity",
-			"category_uid": 1
-		},
-		"1003": {
-			"url": "kernel_activity",
-			"class_name": "Kernel Activity",
-			"category_name": "System Activity",
-			"category_uid": 1
-		},
-		"1004": {
-			"url": "memory_activity",
-			"class_name": "Memory Activity",
-			"category_name": "System Activity",
-			"category_uid": 1
-		},
-		"1005": {
-			"url": "module_activity",
-			"class_name": "Module Activity",
-			"category_name": "System Activity",
-			"category_uid": 1
-		},
-		"1006": {
-			"url": "scheduled_job_activity",
-			"class_name": "Scheduled Job Activity",
-			"category_name": "System Activity",
-			"category_uid": 1
-		},
-		"1007": {
-			"url": "process_activity",
-			"class_name": "Process Activity",
-			"category_name": "System Activity",
-			"category_uid": 1
-		},
-		"1008": {
-			"url": "registry_key_activity",
-			"class_name": "Registry Key Activity",
-			"category_name": "System Activity",
-			"category_uid": 1
-		},
-		"1009": {
-			"url": "registry_value_activity",
-			"class_name": "Registry Value Activity",
-			"category_name": "System Activity",
-			"category_uid": 1
-		},
-		"1010": {
-			"url": "resource_activity",
-			"class_name": "Windows Resource Activity",
-			"category_name": "System Activity",
-			"category_uid": 1
-		},
-		"2001": {
-			"url": "security_finding",
-			"class_name": "Security Finding",
-			"category_name": "Findings",
-			"category_uid": 2
-		},
-		"3001": {
-			"url": "account_change",
-			"class_name": "Account Change",
-			"category_name": "Audit Activity",
-			"category_uid": 3
-		},
-		"3002": {
-			"url": "authentication",
-			"class_name": "Authentication",
-			"category_name": "Audit Activity",
-			"category_uid": 3
-		},
-		"3003": {
-			"url": "authorization",
-			"class_name": "Authorization",
-			"category_name": "Audit Activity",
-			"category_uid": 3
-		},
-		"3004": {
-			"url": "entity_management",
-			"class_name": "Entity Management",
-			"category_name": "Audit Activity",
-			"category_uid": 3
-		},
-		"3005": {
-			"url": "api_activity",
-			"class_name": "",
-			"category_name": "Audit Activity",
-			"category_uid": 3
-		},
-		"3006": {
-			"url": "access_activity",
-			"class_name": "API Activity",
-			"category_name": "Audit Activity",
-			"category_uid": 3
-		},
-		"4001": {
-			"url": "network_activity",
-			"class_name": "Network Activity",
-			"category_name": "Network Activity",
-			"category_uid": 4
-		},
-		"4002": {
-			"url": "http_activity",
-			"class_name": "HTTP Activity",
-			"category_name": "Network Activity",
-			"category_uid": 4
-		},
-		"4003": {
-			"url": "dns_activity",
-			"class_name": "DNS Activity",
-			"category_name": "Network Activity",
-			"category_uid": 4
-		},
-		"4004": {
-			"url": "dhcp_activity",
-			"class_name": "DHCP Activity",
-			"category_name": "Network Activity",
-			"category_uid": 4
-		},
-		"4005": {
-			"url": "rdp_activity",
-			"class_name": "RDP Activity",
-			"category_name": "Network Activity",
-			"category_uid": 4
-		},
-		"4006": {
-			"url": "smb_activity",
-			"class_name": "SMB Activity",
-			"category_name": "Network Activity",
-			"category_uid": 4
-		},
-		"4007": {
-			"url": "ssh_activity",
-			"class_name": "SSH Activity",
-			"category_name": "Network Activity",
-			"category_uid": 4
-		},
-		"4008": {
-			"url": "ftp_activity",
-			"class_name": "FTP Activity",
-			"category_name": "Network Activity",
-			"category_uid": 4
-		},
-		"4009": {
-			"url": "email_activity",
-			"class_name": "Email Activity",
-			"category_name": "Network Activity",
-			"category_uid": 4
-		},
-		"5001": {
-			"url": "inventory_info",
-			"class_name": "Device Inventory Info",
-			"category_name": "Configuration/Inventory",
-			"category_uid": 5
-		},
-		"5002": {
-			"url": "config_state",
-			"class_name": "Device Config State",
-			"category_name": "Configuration/Inventory",
-			"category_uid": 5
-		}
 	}
+
+ocsf_class_dictionary_1_3_0 = {
+	# Additional classes added in 1.3.0
+	# Based on https://docs.aws.amazon.com/security-lake/latest/userguide/adding-custom-sources.html
+	"1008": {
+		"url": "event_log",
+		"class_name": "Event Log Activity",
+		"category_name": "System Activity",
+		"category_uid": 1
+	},
+	"2006": {
+		"url": "data_security_finding",
+		"class_name": "Data Security Finding",
+		"category_name": "Findings",
+		"category_uid": 2
+	},
+	"4014": {
+		"url": "tunnel_activity",
+		"class_name": "Tunnel Activity",
+		"category_name": "Network Activity",
+		"category_uid": 4
+	},
+	"5006": {
+		"url": "kernel_object_query",
+		"class_name": "Kernel Object Query",
+		"category_name": "Discovery",
+		"category_uid": 5
+	},
+	"5007": {
+		"url": "file_query",
+		"class_name": "File Query",
+		"category_name": "Discovery",
+		"category_uid": 5
+	},
+	"5008": {
+		"url": "folder_query",
+		"class_name": "Folder Query",
+		"category_name": "Discovery",
+		"category_uid": 5
+	},
+	"5009": {
+		"url": "admin_group_query",
+		"class_name": "Admin Group Query",
+		"category_name": "Discovery",
+		"category_uid": 5
+	},
+	"5010": {
+		"url": "job_query",
+		"class_name": "Job Query",
+		"category_name": "Discovery",
+		"category_uid": 5
+	},
+	"5011": {
+		"url": "module_query",
+		"class_name": "Module Query",
+		"category_name": "Discovery",
+		"category_uid": 5
+	},
+	"5012": {
+		"url": "network_connection_query",
+		"class_name": "Network Connection Query",
+		"category_name": "Discovery",
+		"category_uid": 5
+	},
+	"5013": {
+		"url": "networks_query",
+		"class_name": "Networks Query",
+		"category_name": "Discovery",
+		"category_uid": 5
+	},
+	"5014": {
+		"url": "peripheral_device_query",
+		"class_name": "Peripheral Device Query",
+		"category_name": "Discovery",
+		"category_uid": 5
+	},
+	"5015": {
+		"url": "process_query",
+		"class_name": "Process Query",
+		"category_name": "Discovery",
+		"category_uid": 5
+	},
+	"5016": {
+		"url": "service_query",
+		"class_name": "Service Query",
+		"category_name": "Discovery",
+		"category_uid": 5
+	},
+	"5017": {
+		"url": "session_query",
+		"class_name": "User Session Query",
+		"category_name": "Discovery",
+		"category_uid": 5
+	},
+	"5018": {
+		"url": "user_query",
+		"class_name": "User Query",
+		"category_name": "Discovery",
+		"category_uid": 5
+	},
+	"5020": {
+		"url": "software_info",
+		"class_name": "Software Inventory Info",
+		"category_name": "Discovery",
+		"category_uid": 5
+	},
+	"7001": {
+		"url": "remediation_activity",
+		"class_name": "Remediation Activity",
+		"category_name": "Remediation",
+		"category_uid": 7
+	},
+	"7002": {
+		"url": "file_remediation_activity",
+		"class_name": "File Remediation Activity",
+		"category_name": "Remediation",
+		"category_uid": 7
+	},
+	"7003": {
+		"url": "process_remediation_activity",
+		"class_name": "Process Remediation Activity",
+		"category_name": "Remediation",
+		"category_uid": 7
+	},
+	"7004": {
+		"url": "network_remediation_activity",
+		"class_name": "Network Remediation Activity",
+		"category_name": "Remediation",
+		"category_uid": 7
+	},
+
+	# Windows
+	"201004": {
+		"url": "win_service_activity",
+		"class_name": "Windows Service Activity",
+		"category_name": "System Activity",
+		"category_uid": 1
+	},
+	"205004": {
+		"url": "registry_key_query",
+		"class_name": "Registry Key Query",
+		"category_name": "Discovery",
+		"category_uid": 5
+	},
+	"205005": {
+		"url": "registry_value_query",
+		"class_name": "Registry Value Query",
+		"category_name": "Discovery",
+		"category_uid": 5
+	},
+	"205019": {
+		"url": "prefetch_query",
+		"class_name": "Prefetch Query",
+		"category_name": "Discovery",
+		"category_uid": 5
+	},
+}
+
+ocsf_class_dictionary = {
+	"1.1.0": ocsf_class_dictionary_1_1_0,
+	"1.3.0": ocsf_class_dictionary_1_1_0 | ocsf_class_dictionary_1_3_0,
 }
 
 
@@ -526,8 +516,8 @@ def main():
             sys.exit()
         if 'profiles' not in EVENT['metadata'].keys():
             EVENT['metadata']['profiles'] = []
-            
-            
+
+
         with open(Path(str(runtimePath.parent.absolute()) + '/output.txt'), 'a') as f:
             print('Validating Against OCSF Event Class: ' + str(EVENT['class_uid']), file=f)
             print('Validating Against OCSF Version: ' + str(EVENT['metadata']['version']), file=f)
@@ -535,8 +525,8 @@ def main():
 
         # define parameters for OCSF schema call
         url_profiles = ','.join(str(x) for x in EVENT['metadata']['profiles'])
-        if str(EVENT['metadata']['version']) not in ["1.1.0", "1.0.0-rc.2"]:
-            print("\nERROR: " + EVENT['metadata']['version'] + " is not a supported OCSF schema version. Please ensure the schema version is one of the following: 1.1.0, 1.0.0-rc.2.")
+        if str(EVENT['metadata']['version']) not in ["1.3.0", "1.1.0"]:
+            print("\nERROR: " + EVENT['metadata']['version'] + " is not a supported OCSF schema version. Please ensure the schema version is one of the following: 1.1.0, 1.3.0.")
             sys.exit()
         try:
             url_class_name = ocsf_class_dictionary[str(EVENT['metadata']['version'])][str(EVENT['class_uid'])]['url']
@@ -591,6 +581,8 @@ def main():
                     print("WARN: " + "OCSF event class: Security Findings (2001) is deprecated!", file=f)
                 if str(EVENT['class_uid']) == '4010':
                     print("WARN: " + "OCSF event class: Network File Activity (4010) is deprecated!", file=f)
+                if str(EVENT['class_uid']) == '6004':
+                    print("WARN: " + "OCSF event class: Web Resource Access Activity (6004) is deprecated!", file=f)
             print('\nVALID OCSF.')
         else:
             with open(Path(str(runtimePath.parent.absolute()) + '/output.txt'), 'a') as f:
@@ -600,6 +592,8 @@ def main():
                     print("WARN: " + "OCSF event class: Security Findings (2001) is deprecated!", file=f)
                 if str(EVENT['class_uid']) == '4010':
                     print("WARN: " + "OCSF event class: Network File Activity (4010) is deprecated!", file=f)
+                if str(EVENT['class_uid']) == '6004':
+                    print("WARN: " + "OCSF event class: Web Resource Access Activity (6004) is deprecated!", file=f)
                 for i in output:
                     print("\n---------------------------------------------------------------------------\n", file=f)
                     print(i, file=f)

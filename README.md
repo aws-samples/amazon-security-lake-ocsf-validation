@@ -12,7 +12,7 @@ Amazon Security Lake Resources
 
 The following is a simple program which can be used to ensure that user provided parquet data properly maps to the various schema definitions specified within the Open Cyber Security Framework (OCSF) - https://schema.ocsf.io/. 
 
-This tool was build to provide supplementry validation for Amazon Security Lake which requires data to be in the format specified by OCSF Schema 1.0.0-rc.2 or 1.1.0.
+This tool was build to provide supplementary validation for Amazon Security Lake which requires data to be in the format specified by OCSF Schema 1.3.0 or 1.1.0.
 
 We welcome contributions to this repo in the form of fixes to existing examples or addition of new examples. For more information on contributing, please see the [CONTRIBUTING](https://github.com/aws-samples/amazon-security-lake/blob/main/CONTRIBUTING.md) guide.
 
@@ -20,7 +20,7 @@ We welcome contributions to this repo in the form of fixes to existing examples 
 ## Usage Guide <a name="Usage"></a>
 
 ### Important Information for MacOS Users:
-For users attempting to run this tool using MacOS please ensure that you are not using the default system version of Python. MacOS system python is incompatibile with the required urllib dependency within this tool. To download the newest version of Python for MacOS please visit - https://www.python.org/downloads/macos/
+For users attempting to run this tool using MacOS please ensure that you are not using the default system version of Python. MacOS system python is incompatible with the required urllib dependency within this tool. To download the newest version of Python for MacOS please visit - https://www.python.org/downloads/macos/
 
 ### Getting Started:
 
@@ -163,7 +163,7 @@ The expected output from running the sample is as follows:
 
 To ensure the soundness of the download, you may choose run a checksum against the files in this repository. You can verify the integrity of the validate.py by ensuring the shasum (SHA-256) matches the following:
 
-	cf67afaf295e74651f7de803fc96ee1cab3e5502a9896ceb835aabbf4e14af88
+	fb273d8176a769d2052f92749519181495f53d0ebf76348a4715b66e23777375
 
 
 We welcome contributions to this repo in the form of fixes to existing examples or addition of new examples. For more information on contributing, please see the [CONTRIBUTING](https://github.com/aws-samples/amazon-security-lake/blob/main/CONTRIBUTING.md) guide.
@@ -172,11 +172,11 @@ We welcome contributions to this repo in the form of fixes to existing examples 
 
 The following is a simple program which can be used to ensure that user provided parquet data properly maps to the various schema definitions specified within the Open Cyber Security Framework (OCSF) - https://schema.ocsf.io/.
 
-This tool was build to provide supplementry validation for Amazon Security Lake which requires data to be in the format specified by OCSF Schema 1.0.0-rc.2.
+This tool was build to provide supplementary validation for Amazon Security Lake which requires data to be in the format specified by OCSF Schema 1.1.0 or 1.3.0.
 
 ### AWS OCSF Samples <a name="samples"></a>
 
-In addition to the tool itself, several common  examples of AWS OCSF samples have been added to this repository under AWSLogs_OCSF_1.0.0-rc2_samples. These are pre-mapped OCSF compliant Amazon Security Lake supported log sources to provide as examples to users interested in mapping to OCSF.
+In addition to the tool itself, several common  examples of AWS OCSF samples have been added to this repository under samples. These are pre-mapped OCSF compliant Amazon Security Lake supported log sources to provide as examples to users interested in mapping to OCSF.
 
 ### Official Resources
 - [Amazon Security Lake Overview](https://aws.amazon.com/security-lake/)
